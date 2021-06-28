@@ -488,13 +488,13 @@ export default function Page({ recipeRef, defaultValues, preview }) {
 													updateSteps(event.target.value, steps.indexOf(step))}
 												rows="3"
 												// name={`step${steps.indexOf(step) + 1}`}
-												name="step"
-												innerRef={register({
-													required : {
-														value   : true,
-														message : 'Bitte beschreib wie man dein Rezept zubereitet'
-													}
-												})}
+												// name="step"
+												// innerRef={register({
+												// 	required : {
+												// 		value   : true,
+												// 		message : 'Bitte beschreib wie man dein Rezept zubereitet'
+												// 	}
+												// })}
 												type="textarea"
 											/>
 											{errors.step && (
