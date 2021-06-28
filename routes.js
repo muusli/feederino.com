@@ -18,7 +18,7 @@ const routes = [
 	{
 		collapse : false,
 
-		icon     : 'ni ni-single-copy-04 text-success',
+		icon     : 'far fa-newspaper text-success',
 		state    : 'formsCollapse',
 
 		path     : '/recipes',
