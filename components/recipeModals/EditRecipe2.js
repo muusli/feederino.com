@@ -559,7 +559,7 @@ export default function Page({ recipeRef, defaultValues, preview }) {
 										name="published"
 										type="checkbox"
 										ref={register}
-										disabled={!isDirty || !isValid}
+										disabled={isDirty || !isValid}
 									/>
 									<span
 										className="custom-toggle-slider rounded-circle"
