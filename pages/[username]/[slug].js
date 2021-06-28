@@ -110,7 +110,8 @@ export default function Post(props) {
 			 // onClick={(e) => e.preventDefault()}
 			 size="sm"
 		   >
-			 Bearbeiten
+			         <i class="far fa-edit"></i>
+
 		   </Button>)
 }
               </Col>
