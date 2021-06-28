@@ -46,14 +46,14 @@ function CollectionsHeader({ name, parentName }) {
                   listClassName="breadcrumb-links breadcrumb-dark"
                 >
                   <BreadcrumbItem>
-                    <Link href="/" onClick={(e) => e.preventDefault()}>
+                    <a href="/" onClick={(e) => e.preventDefault()}>
                       <i className="fas fa-home" />
-                    </Link>
+                    </a>
                   </BreadcrumbItem>
                   <BreadcrumbItem>
-                    <Link href="/">
+                    <a href="/">
                       {parentName}
-                    </Link>
+                    </a>
                   </BreadcrumbItem>
                   <BreadcrumbItem aria-current="page" className="active">
                     {name}
