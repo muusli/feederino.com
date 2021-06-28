@@ -2,34 +2,21 @@
 // import TagsInput from 'components/TagsInput/TagsInput.js';
 import RecipeContent from '../../components/RecipeContent';
 import HeartButton from '../../components/HeartButton';
-// import AuthCheck from '../../components/AuthCheck';
 import Metatags from '../../components/Metatags';
 import AuthCheck from '../../components/AuthCheck'
-// import RecipeHeader from '../../components/Headers/RecipesHeader';
 import { UserContext } from '../../lib/context';
 import { firestore, getUserWithUsername, postToJSON } from '../../lib/firebase';
 import {
 	Row,
-	UncontrolledCarousel,
 	Col,
 	Button,
-	Form,
-	FormGroup,
-	ListGroup,
-	ListGroupItem,
-	Media,
 	Container,
-	Card,
-	CardBody,
-	Input,
 	Breadcrumb,
 	BreadcrumbItem,
 } from 'reactstrap';
-// import Link from 'next/link';
-// import { useDocumentData } from 'react-firebase-hooks/firestore';
-// import { useContext } from 'react';
+
 import Default from '../../layouts/Default.js';
-// import Link from 'next/link';
+
 import { useDocumentData } from 'react-firebase-hooks/firestore';
 import { useContext } from 'react';
 

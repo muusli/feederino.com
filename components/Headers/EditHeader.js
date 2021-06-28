@@ -29,9 +29,7 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import Link from 'next/link'
-import AddRecipe from '../recipeModals/AddRecipe'
-import AuthCheck from '../AuthCheck';
+
 function CollectionsHeader({ name, parentName, buttonName, buttonAction, href }) {
   return (
     <>

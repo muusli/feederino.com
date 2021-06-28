@@ -21,17 +21,13 @@ import PropTypes from "prop-types";
 import {
   Breadcrumb,
   BreadcrumbItem,
-  Button,
-  Card,
-  CardBody,
-  CardTitle,
+  
   Container,
   Row,
   Col,
 } from "reactstrap";
 import AddRecipe from '../recipeModals/AddRecipe'
-import AuthCheck from '../AuthCheck';
-import Link from 'next/link'
+
 function CollectionsHeader({ name, parentName }) {
   return (
     <>
