@@ -26,8 +26,10 @@ import {
   Col,
 } from "reactstrap";
 import AddRecipe from '../recipeModals/AddRecipe'
-
+import { UserContext } from '../../lib/context';
+import { useContext } from 'react';
 function CollectionsHeader({ name, parentName,  }) {
+  const { user: currentUser } = useContext(UserContext);
   return (
     <>
       <div className="header bg-dark pb-6">
@@ -56,7 +58,7 @@ function CollectionsHeader({ name, parentName,  }) {
                 </Breadcrumb>
               </Col>
               <Col className="text-right" lg="6" xs="5">
-                <AddRecipe></AddRecipe>
+              {currentUser &&  <AddRecipe></AddRecipe>}
                 {/* {currentUser?.uid == authorId && (  <Button
                   className="btn-neutral"
                   color="default"

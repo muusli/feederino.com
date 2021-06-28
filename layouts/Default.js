@@ -9,7 +9,7 @@ import routes from 'routes.js';
 import { useUserData } from '../lib/hooks';
 import { UserContext } from '../lib/context';
 function Default({ router, children }) {
-	const [ sidenavOpen, setSidenavOpen ] = React.useState(true);
+	const [ sidenavOpen, setSidenavOpen ] = React.useState(false);
 	const userData = useUserData();
 	const getRoutes = (routes) => {
 		return routes.map((prop, key) => {

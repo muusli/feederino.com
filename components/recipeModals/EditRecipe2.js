@@ -313,9 +313,15 @@ export default function Page({ recipeRef, defaultValues, preview }) {
 										defaultValue={defaultValues.description}
 										id=""
 										innerRef={register({
-											maxLength : { value: 300, message: 'Die Beschreibung ist zu lang' },
-											minLength : { value: 20, message: 'Die Beschreibung ist zu kurz' },
-											required  : { value: true, message: 'content is required' }
+											maxLength : {
+												value: 180,
+												message: 'Die Beschreibung ist zu lang (max. 180 Zeichen)'
+											},
+											minLength : {
+												value: 20,
+												message: 'Die Beschreibung ist zu kurz (min. 20 Zeichen'
+											},
+											required  : { value: true, message: 'Bitte gib eine kurze Beschreibung an' }
 										})}
 										rows="3"
 										name="description"
