@@ -240,7 +240,7 @@ function Sidebar({
 Sidebar.defaultProps = {
   routes: [{}],
   toggleSidenav: () => {},
-  sidenavOpen: true,
+  sidenavOpen: false,
   rtlActive: false,
 };
 
