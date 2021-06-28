@@ -1,47 +1,43 @@
 import Link from 'next/link';
-import {Card, CardImg,CardHeader, Row, CardBody,UncontrolledTooltip, CardTitle, Button, Col, CardText} from 'reactstrap'
+import {
+	Card,
+	CardImg,
+	CardHeader,
+	Row,
+	CardBody,
+	UncontrolledTooltip,
+	CardTitle,
+	Button,
+	Col,
+	CardText
+} from 'reactstrap';
 export default function PostFeed({ posts, admin, postRef }) {
-  return posts ? posts.map((post) => <PostItem post={post} key={post.slug} admin={admin} />) : null;
+	return posts ? posts.map((post) => <PostItem post={post} key={post.slug} admin={admin} />) : null;
 }
 
 function PostItem({ post, admin = false }) {
-  // Naive method to calc word count and read time
-  const wordCount = post?.content.trim().split(/\s+/g).length;
-  const minutesToRead = (wordCount / 100 + 1).toFixed(0);
-  // const postRef = 
-  return (
-   
-      <Col md="4" justify-self="center">
-     <Card>
-             
-              
-              <CardBody>
-              {/* <Link href={`/${post.author.username}/${post.slug}`}> */}
-              <h5 className="h3 mb-0">{post.title}</h5>
-                <p className="mb-4">
-                  {post.description}
-                </p> 
-                <Link href={`/${post.username}/${post.slug}`}>
-                <img
-                
-                  alt="..."
-                  className="img-fluid rounded"
-                  src={post.image}
-                />
-                </Link>
-            
-                <Row className="align-items-center my-3 pb-3 border-bottom">
-                  <Col sm="6">
-                    <div className="icon-actions">
-                      <a
-                        className="like active"
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
-                      >
-                        <i className="far fa-heart text-danger" />
-                        <span className="text-muted">{post.heartCount || 0}</span>
-                      </a> 
-                      {/* <a href="#pablo" onClick={(e) => e.preventDefault()}>
+	// Naive method to calc word count and read time
+
+	// const postRef =
+	return (
+		<Col md="4" justify-self="center">
+			<Card>
+				<CardBody>
+					{/* <Link href={`/${post.author.username}/${post.slug}`}> */}
+					<h5 className="h3 mb-0">{post.title}</h5>
+					<p className="mb-4">{post.description}</p>
+					<Link href={`/${post.username}/${post.slug}`}>
+						<img alt="..." className="img-fluid rounded" src={post.image} />
+					</Link>
+
+					<Row className="align-items-center my-3 pb-3 border-bottom">
+						<Col sm="6">
+							<div className="icon-actions">
+								<a className="like active" href="#pablo" onClick={(e) => e.preventDefault()}>
+									<i className="far fa-heart text-danger" />
+									<span className="text-muted">{post.heartCount || 0}</span>
+								</a>
+								{/* <a href="#pablo" onClick={(e) => e.preventDefault()}>
                         <i className="ni ni-chat-round" />
                         <span className="text-muted">36</span>
                       </a>
@@ -117,13 +113,13 @@ function PostItem({ post, admin = false }) {
                       <small className="pl-2 font-weight-bold">
                         and 30+ more
                       </small>*/}
-                    </div> 
-                  </Col>
-                </Row>
-                </CardBody>
-                </Card>
+							</div>
+						</Col>
+					</Row>
+				</CardBody>
+			</Card>
 
-    {/* <div className="card">
+			{/* <div className="card">
       <Link href={`/${post.username}`}>
         <a>
           <strong>By @{post.username}</strong>
@@ -136,9 +132,7 @@ function PostItem({ post, admin = false }) {
         </h2>
       </Link> */}
 
-      
-    {/* </div> */}
-    </Col>
-   
-  );
+			{/* </div> */}
+		</Col>
+	);
 }
