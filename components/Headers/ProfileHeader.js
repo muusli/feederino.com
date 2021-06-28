@@ -18,6 +18,7 @@ import React from "react";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
 // reactstrap components
+import Link from 'next/link'
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -45,14 +46,14 @@ function CollectionsHeader({ name, parentName }) {
                   listClassName="breadcrumb-links breadcrumb-dark"
                 >
                   <BreadcrumbItem>
-                    <a href="/" onClick={(e) => e.preventDefault()}>
+                    <Link href="/" onClick={(e) => e.preventDefault()}>
                       <i className="fas fa-home" />
-                    </a>
+                    </Link>
                   </BreadcrumbItem>
                   <BreadcrumbItem>
-                    <a href="/">
+                    <Link href="/">
                       {parentName}
-                    </a>
+                    </Link>
                   </BreadcrumbItem>
                   <BreadcrumbItem aria-current="page" className="active">
                     {name}

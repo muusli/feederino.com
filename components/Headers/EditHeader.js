@@ -29,6 +29,7 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import Link from 'next/link'
 import AddRecipe from '../recipeModals/AddRecipe'
 import AuthCheck from '../AuthCheck';
 function CollectionsHeader({ name, parentName, buttonName, buttonAction, href }) {
@@ -45,14 +46,14 @@ function CollectionsHeader({ name, parentName, buttonName, buttonAction, href })
                   listClassName="breadcrumb-links breadcrumb-dark"
                 >
                   <BreadcrumbItem>
-                    <a href="/recipes" onClick={(e) => e.preventDefault()}>
+                    <Link href="/recipes" onClick={(e) => e.preventDefault()}>
                       <i className="fas fa-home" />
-                    </a>
+                    </Link>
                   </BreadcrumbItem>
                   <BreadcrumbItem>
-                    <a href="/recipes">
+                    <Link href="/recipes">
                       {parentName}
-                    </a>
+                    </Link>
                   </BreadcrumbItem>
                   <BreadcrumbItem aria-current="page" className="active">
                     {name}
