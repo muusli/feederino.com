@@ -62,33 +62,12 @@ export default function RecipeContent({recipe, recipeRef}) {
 							</p>
 							<hr />
 							<Row>
-								<Col xs='4' sm='4'md="4"className='text-center'><h3>{recipe.duration} min</h3><p>Dauer</p>  </Col>
+								<Col xs='4' sm='4'md="3"className='text-center'><h3>{recipe.duration} min</h3><p>Dauer</p>  </Col>
 								<Col xs='4' sm='4'md="4"className='text-center'><h3>{recipe.activeTime} min</h3><p>Arbeitszeit</p>  </Col>
-								<Col xs='4' sm='4'md="4" className='text-center'><h3>{recipe.difficulty}</h3><p>Schwierigkeit</p></Col>
+								<Col xs='4' sm='4'md="5" className='text-center'><h3>{recipe.difficulty}</h3><p>Schwierigkeit</p></Col>
 							</Row>
 
 							<hr />
-
-							<Card>
-								<CardBody className="p-0">
-									<ListGroup data-toggle="checklist" flush>
-									<Row>
-                                    { recipe.ingredients ? recipe.ingredients.map((ingredient) => <Col xs='6' sm='6' md='6' key={ingredient.id} ><div className="checklist-entry flex-column align-items-start py-4 px-4">
-											<div className="checklist-item checklist-item-success">
-												<div className="checklist-info">
-													<h5 key={ingredient.name}className="checklist-title mb-0">{ingredient.name}</h5>
-													<small key={recipe.ingredients.indexOf(ingredient)}>{ingredient.quantity} {ingredient.unit}</small>
-												</div>
-											</div>
-										</div>
-										</Col>
-                            ) : null}
-							
-							</Row>
-										
-									</ListGroup>
-								</CardBody>
-							</Card>
 							
 							
 							{/* <Form onSubmit={addMeal}>
@@ -118,10 +97,32 @@ export default function RecipeContent({recipe, recipeRef}) {
 			{/*</Form> */}
 		</Col>
 					</Row>
-					<hr />
+				
 					
-					<Row className='align-items-center'>
-						<Col md="8" >
+					<Row style={{paddingTop: 50 }} >
+					<Col xs='12'md="6" >
+					<Card >
+								<CardBody className="p-0">
+									<ListGroup data-toggle="checklist" flush>
+									<Row>
+                                    { recipe.ingredients ? recipe.ingredients.map((ingredient) => <Col xs='6' sm='6' md='12' key={ingredient.id} ><div className="checklist-entry flex-column align-items-start py-4 px-4">
+											<div className="checklist-item checklist-item-success">
+												<div className="checklist-info">
+													<h5 key={ingredient.name}className="checklist-title mb-0">{ingredient.name}</h5>
+													<small key={recipe.ingredients.indexOf(ingredient)}>{ingredient.quantity} {ingredient.unit}</small>
+												</div>
+											</div>
+										</div>
+										</Col>
+                            ) : null}
+							
+							</Row>
+										
+									</ListGroup>
+								</CardBody>
+							</Card>
+					</Col>
+						<Col xs='12' md="6" >
                        { recipe.steps ? recipe.steps.map((step) => <ListGroupItem key={recipe.steps.indexOf(step)}><label className="form-control-label" htmlFor="Schritt 1">
 								Schritt {recipe.steps.indexOf(step) + 1}
 							</label>
