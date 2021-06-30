@@ -60,9 +60,9 @@ export default function RecipeContent({recipe, recipeRef}) {
 							</p>
 							<hr />
 							<Row>
-								<Col sm='4'md="4"className='text-center'><h3>{recipe.duration} min</h3><p>Dauer</p>  </Col>
-								<Col sm='4'md="4"className='text-center'><h3>{recipe.activeTime} min</h3><p>Arbeitszeit</p>  </Col>
-								<Col sm='4'md="4" className='text-center'><h3>{recipe.difficulty}</h3><p>Schwierigkeit</p></Col>
+								<Col xs='4' sm='4'md="4"className='text-center'><h3>{recipe.duration} min</h3><p>Dauer</p>  </Col>
+								<Col xs='4' sm='4'md="4"className='text-center'><h3>{recipe.activeTime} min</h3><p>Arbeitszeit</p>  </Col>
+								<Col xs='4' sm='4'md="4" className='text-center'><h3>{recipe.difficulty}</h3><p>Schwierigkeit</p></Col>
 							</Row>
 							<hr />
 							<Col className="text-right text-bottom"><small>@</small><Link href={`/${recipe.username}`}>{`${recipe.username}`}</Link></Col>

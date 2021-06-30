@@ -43,10 +43,10 @@ export default function UserProfile({ user }) {
 									<span className="heading">22</span>
 									<span className="description">Friends</span>
 								</div> */}
-								<div>
+								{/* <div>
 									<span className="heading">10</span>
 									<span className="description">Rezepte</span>
-								</div>
+								</div> */}
 								{/* <div>
 									<span className="heading">89</span>
 									<span className="description">Comments</span>
