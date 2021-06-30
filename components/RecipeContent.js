@@ -1,5 +1,6 @@
 import ReactDatetime from 'react-datetime';
 import TagsInput from './TagsInput/TagsInput.js';
+import Link from 'next/link'
 // import PostContent from './PostContent';
 // import HeartButton from './HeartButton';
 // import AuthCheck from './AuthCheck';
@@ -59,11 +60,12 @@ export default function RecipeContent({recipe, recipeRef}) {
 							</p>
 							<hr />
 							<Row>
-								<Col md="4"className='text-center'><h3>{recipe.duration} min</h3><p>Dauer</p>  </Col>
-								<Col md="4"className='text-center'><h3>{recipe.activeTime} min</h3><p>Arbeitszeit</p>  </Col>
-								<Col md="4" className='text-center'><h3>{recipe.difficulty}</h3><p>Schwierigkeit</p></Col>
+								<Col sm='4'md="4"className='text-center'><h3>{recipe.duration} min</h3><p>Dauer</p>  </Col>
+								<Col sm='4'md="4"className='text-center'><h3>{recipe.activeTime} min</h3><p>Arbeitszeit</p>  </Col>
+								<Col sm='4'md="4" className='text-center'><h3>{recipe.difficulty}</h3><p>Schwierigkeit</p></Col>
 							</Row>
 							<hr />
+							<Col className="text-right text-bottom"><small>@</small><Link href={`/${recipe.username}`}>{`${recipe.username}`}</Link></Col>
 							{/* <Form onSubmit={addMeal}>
 								<FormGroup className="row">
 									<Col md="5">
