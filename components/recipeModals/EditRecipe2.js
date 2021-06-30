@@ -53,9 +53,9 @@ export default function Page({ recipeRef, defaultValues, preview }) {
 	if (!ingredients) {
 		setIngredients([]);
 	}
-	if (!steps) {
-		setSteps([]);
-	}
+	// if (!steps) {
+	// 	setSteps([]);
+	// }
 
 	const updateRecipe = async ({
 		image,
@@ -235,6 +235,7 @@ export default function Page({ recipeRef, defaultValues, preview }) {
 		event.preventDefault();
 
 		const updatedSteps = [ ...steps, document.querySelector('#stepInput').value ];
+		console.log(updatedSteps);
 		setSteps(updatedSteps);
 		document.querySelector('#stepInput').value = '';
 	};
@@ -314,12 +315,12 @@ export default function Page({ recipeRef, defaultValues, preview }) {
 										id=""
 										innerRef={register({
 											maxLength : {
-												value: 180,
-												message: 'Die Beschreibung ist zu lang (max. 180 Zeichen)'
+												value   : 180,
+												message : 'Die Beschreibung ist zu lang (max. 180 Zeichen)'
 											},
 											minLength : {
-												value: 20,
-												message: 'Die Beschreibung ist zu kurz (min. 20 Zeichen'
+												value   : 20,
+												message : 'Die Beschreibung ist zu kurz (min. 20 Zeichen'
 											},
 											required  : { value: true, message: 'Bitte gib eine kurze Beschreibung an' }
 										})}
@@ -493,14 +494,16 @@ export default function Page({ recipeRef, defaultValues, preview }) {
 												onChange={(event) =>
 													updateSteps(event.target.value, steps.indexOf(step))}
 												rows="3"
-												// name={`step${steps.indexOf(step) + 1}`}
+												name={`step${steps.indexOf(step) + 1}`}
 												// name="step"
-												// innerRef={register({
-												// 	required : {
-												// 		value   : true,
-												// 		message : 'Bitte beschreib wie man dein Rezept zubereitet'
-												// 	}
-												// })}
+												innerRef={register(
+													{
+														// required : {
+														// 	value   : true,
+														// 	message : 'Bitte beschreib wie man dein Rezept zubereitet'
+														// }
+													}
+												)}
 												type="textarea"
 											/>
 											{errors.step && (
@@ -525,7 +528,9 @@ export default function Page({ recipeRef, defaultValues, preview }) {
 								setDownloadURL={setDownloadURL}
 							/>
 							<Input
-								innerRef={register({ required: { value: true, message: 'Bitte füge ein Bild hinzu' } })}
+								innerRef={register()
+								// { required: { value: true, message: 'Bitte füge ein Bild hinzu' } }
+								}
 								name="image"
 								defaultValue={image}
 								hidden
@@ -554,28 +559,27 @@ export default function Page({ recipeRef, defaultValues, preview }) {
 							</div>
 						</Col>
 					</Row> */}
-					<Row>
-						<Col md="12">
-							<label className="form-control-label" htmlFor="exampleFormControlTextarea1">
-								Öffentlich teilen
-							</label>
-							<div>
-								<label className="custom-toggle custom-toggle-warning mr-1">
-									<input
-										name="published"
-										type="checkbox"
-										ref={register}
-										disabled={isDirty || !isValid}
-									/>
-									<span
-										className="custom-toggle-slider rounded-circle"
-										data-label-off="No"
-										data-label-on="Yes"
-									/>
+					{!isDirty || isValid ? (
+						<Row>
+							<Col md="12">
+								<label className="form-control-label" htmlFor="exampleFormControlTextarea1">
+									Öffentlich teilen
 								</label>
-							</div>
-						</Col>
-					</Row>
+								<div>
+									<label className="custom-toggle custom-toggle-warning mr-1">
+										<input name="published" type="checkbox" disabled={!isValid} ref={register} />
+										<span
+											className="custom-toggle-slider rounded-circle"
+											data-label-off="No"
+											data-label-on="Yes"
+										/>
+									</label>
+								</div>
+							</Col>
+						</Row>
+					) : (
+						''
+					)}
 				</ModalBody>
 				<ModalFooter>
 					<Button color="secondary" type="button" onClick={() => setModalOpen(!modalOpen)}>

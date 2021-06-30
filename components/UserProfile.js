@@ -59,7 +59,7 @@ export default function UserProfile({ user }) {
 							<i>@{user.username}</i>
 						</h5>
 
-						<h1 className="font-weight-light">{user.displayName || 'Anonymous User'}</h1>
+						{/* <h1 className="font-weight-light">{user.displayName || 'Anonymous User'}</h1> */}
 					</div>
 				</CardBody>
 			</Card>

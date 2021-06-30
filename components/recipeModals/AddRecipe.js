@@ -31,7 +31,7 @@ export default function Page({}) {
 			authorPhotoURL : photoURL,
 			ingredients    : [],
 			steps          : [],
-			categories     : [],
+			categories     : null,
 			published      : false,
 
 			createdAt      : serverTimestamp(),
