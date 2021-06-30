@@ -50,10 +50,12 @@ export default function RecipeContent({recipe, recipeRef}) {
 	
 						</Col>
 						<Col md="6" className="mx-auto" justify-self="center">
-							
+							<Row><Col>
 							<h5 className=" modal-title" id="exampleModalLabel">
 								{recipe.title}
-							</h5>
+							</h5>	</Col>						<Col className="text-right text-bottom">						
+<small>@</small><Link href={`/${recipe.username}`}>{`${recipe.username}`}</Link></Col>
+</Row>
 							<hr />
 							<p>
                             {recipe.description}
@@ -64,8 +66,31 @@ export default function RecipeContent({recipe, recipeRef}) {
 								<Col xs='4' sm='4'md="4"className='text-center'><h3>{recipe.activeTime} min</h3><p>Arbeitszeit</p>  </Col>
 								<Col xs='4' sm='4'md="4" className='text-center'><h3>{recipe.difficulty}</h3><p>Schwierigkeit</p></Col>
 							</Row>
+
 							<hr />
-							<Col className="text-right text-bottom"><small>@</small><Link href={`/${recipe.username}`}>{`${recipe.username}`}</Link></Col>
+
+							<Card>
+								<CardBody className="p-0">
+									<ListGroup data-toggle="checklist" flush>
+									<Row>
+                                    { recipe.ingredients ? recipe.ingredients.map((ingredient) => <Col xs='6' sm='6' md='6' key={ingredient.id} ><div className="checklist-entry flex-column align-items-start py-4 px-4">
+											<div className="checklist-item checklist-item-success">
+												<div className="checklist-info">
+													<h5 key={ingredient.name}className="checklist-title mb-0">{ingredient.name}</h5>
+													<small key={recipe.ingredients.indexOf(ingredient)}>{ingredient.quantity} {ingredient.unit}</small>
+												</div>
+											</div>
+										</div>
+										</Col>
+                            ) : null}
+							
+							</Row>
+										
+									</ListGroup>
+								</CardBody>
+							</Card>
+							
+							
 							{/* <Form onSubmit={addMeal}>
 								<FormGroup className="row">
 									<Col md="5">
@@ -94,8 +119,9 @@ export default function RecipeContent({recipe, recipeRef}) {
 		</Col>
 					</Row>
 					<hr />
-					<Row>
-						<Col md="6">
+					
+					<Row className='align-items-center'>
+						<Col md="8" >
                        { recipe.steps ? recipe.steps.map((step) => <ListGroupItem key={recipe.steps.indexOf(step)}><label className="form-control-label" htmlFor="Schritt 1">
 								Schritt {recipe.steps.indexOf(step) + 1}
 							</label>
@@ -105,7 +131,7 @@ export default function RecipeContent({recipe, recipeRef}) {
                             ) : (null)}
 							
 						</Col>
-						<Col md="6">
+						{/* <Col md="6">
 							<Card>
 								<CardBody className="p-0">
 									<ListGroup data-toggle="checklist" flush>
@@ -124,7 +150,7 @@ export default function RecipeContent({recipe, recipeRef}) {
 										
 									</ListGroup>
 								</CardBody>
-							</Card>
+							</Card> */}
                             {/* {recipe.categorie?
 							<TagsInput
 								onlyUnique
@@ -138,7 +164,13 @@ export default function RecipeContent({recipe, recipeRef}) {
 									placeholder : ''
 								}}
 							/>:''} */}
-						</Col>
+						{/* </Col> */}
+
+
+
+
+
+
 						{/* <Col md="12">
 							<div className="mb-1">
 								<Media className="media-comment">

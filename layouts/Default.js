@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'next/router';
-import Toaster from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 // core components
 import DefaultNavbar from '../components/Navbars/DefaultNavbar';
 import Sidebar from '../components/Sidebar/Sidebar.js';
@@ -9,7 +9,7 @@ import routes from 'routes.js';
 import { useUserData } from '../lib/hooks';
 import { UserContext } from '../lib/context';
 function Default({ router, children }) {
-	const [ sidenavOpen, setSidenavOpen ] = React.useState(true);
+	const [ sidenavOpen, setSidenavOpen ] = React.useState(false);
 	const userData = useUserData();
 	const getRoutes = (routes) => {
 		return routes.map((prop, key) => {
@@ -53,7 +53,7 @@ function Default({ router, children }) {
 				<Sidebar
 					routes={routes}
 					toggleSidenav={toggleSidenav}
-					sidenavOpen={sidenavOpen}
+					sidenavOpen={!sidenavOpen}
 					logo={{
 						innerLink : '/',
 						imgSrc    : require('assets/img/brand/nextjs_argon_black.png'),
@@ -64,14 +64,15 @@ function Default({ router, children }) {
 					<DefaultNavbar
 						theme={getNavbarTheme()}
 						toggleSidenav={toggleSidenav}
-						sidenavOpen={sidenavOpen}
+						sidenavOpen={!sidenavOpen}
 						brandText={getBrandText(router.pathname)}
 					/>
 
 					{children}
+					<Toaster />
 					<AuthFooter />
 				</div>
-				{sidenavOpen ? <div className="backdrop d-xl-none" onClick={toggleSidenav} /> : null}
+				{!sidenavOpen ? <div className="backdrop d-xl-none" onClick={toggleSidenav} /> : null}
 			</UserContext.Provider>
 		</div>
 	);

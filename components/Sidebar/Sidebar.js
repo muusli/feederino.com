@@ -99,7 +99,7 @@ function Sidebar({
   // this is used on mobile devices, when a user navigates
   // the sidebar will autoclose
   const closeSidenav = () => {
-    if (windowWidth < 1200) {
+    if (windowWidth < 1800) {
       toggleSidenav();
     }
   };
