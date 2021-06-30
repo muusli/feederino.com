@@ -14,7 +14,7 @@ const favoriteRef = firestore.collection('users').doc(auth.currentUser.uid).coll
   const addHeart = async () => {
     const uid = auth.currentUser.uid;
     const batch = firestore.batch();
-    batch.set(favoriteRef, {slug:recipe.slug,author:recipe.username,
+    batch.set(favoriteRef, {slug:recipe.slug,username:recipe.username,
     title:recipe.title,image:recipe.image, duration: recipe.duration
   })
     batch.update(postRef, { heartCount: increment(1) });

@@ -72,7 +72,7 @@ function RecipeItem({ recipe, admin = false }) {
 					</Card>
 				</a>
 			) : (
-				<a href={`/${recipe.author}/${recipe.slug}`}>
+				<a href={`/${recipe.username}/${recipe.slug}`}>
 					<Card
 					// onClick={() => setRecipeOpen(!recipeOpen)}
 					>
