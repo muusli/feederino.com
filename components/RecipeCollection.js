@@ -31,22 +31,22 @@ export default function RecipeFeed({ recipes, admin }) {
 }
 
 function RecipeItem({ recipe, admin = false }) {
-	const userData = useUserData();
-	const addMeal = (event) => {
-		event.preventDefault();
-		let meal = {
-			title  : recipe.title,
-			start  : event.target.start.value,
-			allDay : true,
-			author : {
-				id       : userData.user.uid,
-				username : userData.username
-			},
-			recipe : { id: recipe._id }
-		};
-		console.log(meal);
-		axios.post('http://localhost:5000/meal/add', meal).then((res) => console.log(res.data));
-	};
+	// const userData = useUserData();
+	// const addMeal = (event) => {
+	// 	event.preventDefault();
+	// 	let meal = {
+	// 		title  : recipe.title,
+	// 		start  : event.target.start.value,
+	// 		allDay : true,
+	// 		author : {
+	// 			id       : userData.user.uid,
+	// 			username : userData.username
+	// 		},
+	// 		recipe : { id: recipe._id }
+	// 	};
+	// 	console.log(meal);
+	// 	axios.post('http://localhost:5000/meal/add', meal).then((res) => console.log(res.data));
+	// };
 
 	return (
 		<Col md="3">
@@ -72,7 +72,7 @@ function RecipeItem({ recipe, admin = false }) {
 					</Card>
 				</a>
 			) : (
-				<a href={`/${userData.username}/${recipe.slug}`}>
+				<a href={`/${recipe.author}/${recipe.slug}`}>
 					<Card
 					// onClick={() => setRecipeOpen(!recipeOpen)}
 					>

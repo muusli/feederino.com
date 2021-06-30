@@ -4,7 +4,7 @@ import classnames from 'classnames';
 
 import TagsInput from 'components/TagsInput/TagsInput.js';
 import ImageInput from 'components/Inputs/ImageInput';
-
+import Link from 'next/link';
 import 'assets/vendor/nucleo/css/nucleo.css';
 import { useContext } from 'react';
 import { useRouter } from 'next/router';
@@ -582,9 +582,11 @@ export default function Page({ recipeRef, defaultValues, preview }) {
 					)}
 				</ModalBody>
 				<ModalFooter>
-					<Button color="secondary" type="button" onClick={() => setModalOpen(!modalOpen)}>
-						Schließen
-					</Button>
+					<Link href="/recipes/myRecipes">
+						<Button color="secondary" type="button">
+							Schließen
+						</Button>
+					</Link>
 					<Button type="submit" color="primary">
 						Speichern
 					</Button>
