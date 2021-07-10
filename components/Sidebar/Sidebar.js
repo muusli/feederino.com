@@ -172,7 +172,7 @@ function Sidebar({
   const scrollBarInner = (
     <div className="scrollbar-inner">
       <div className="sidenav-header d-flex align-items-center">
-        {/* {logo && logo.innerLink ? (
+        {logo && logo.innerLink ? (
           <Link href={logo.innerLink}>
             <span>
               <NavbarBrand href="#pablo">
@@ -184,8 +184,8 @@ function Sidebar({
               </NavbarBrand>
             </span>
           </Link>
-        ) : null} */}
-        {/* {logo && logo.outterLink ? (
+        ) : null}
+        {logo && logo.outterLink ? (
           <NavbarBrand href={logo.outterLink} target="_blank">
             <img
               alt={logo.imgAlt}
@@ -193,7 +193,7 @@ function Sidebar({
               src={logo.imgSrc}
             />
           </NavbarBrand>
-        ) : null} */}
+        ) : null}
         <div className="ml-auto">
           <div
             className={classnames("sidenav-toggler d-none d-xl-block", {

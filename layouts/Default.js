@@ -55,8 +55,8 @@ function Default({ router, children }) {
 					toggleSidenav={toggleSidenav}
 					sidenavOpen={!sidenavOpen}
 					logo={{
-						innerLink : '/',
-						imgSrc    : require('assets/img/brand/nextjs_argon_black.png'),
+						innerLink : '/recipes',
+						imgSrc    : require('assets/img/brand/muusli.png'),
 						imgAlt    : '...'
 					}}
 				/>
