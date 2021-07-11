@@ -54,7 +54,7 @@ export default function Home(props) {
 
 	return (
 		<main>
-			<Metatags title="Home Page" description="Get the latest recipe on our site" />
+			<Metatags title="Feed" description="Get the latest recipe on our site" />
 			<RecipesHeader name="Rezepte" parentName="Home" style={{ position: 'center' }} />
 			<Container justify="center">
 				<Card style={{ position: 'relative', bottom: '4.5rem' }}>
@@ -62,7 +62,7 @@ export default function Home(props) {
 						<Row className="justify-content-md-center">
 							<PostFeed posts={recipes} />
 						</Row>
-						<Row className="justify-content-md-center" style={{ position: 'relative', bottom: '4.5rem' }}>
+						<Row className="justify-content-md-center">
 							<Col md="2" className="justify-content-md-center">
 								{!loading &&
 								!recipesEnd && (
@@ -71,7 +71,7 @@ export default function Home(props) {
 										className="justify-content-md-center"
 										onClick={getMorePosts}
 									>
-										Load more
+										Mehr laden
 									</Button>
 								)}
 								{recipesEnd && 'Du hast das Ende erreicht!'}
