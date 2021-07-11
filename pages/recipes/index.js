@@ -57,20 +57,28 @@ export default function Home(props) {
 			<Metatags title="Home Page" description="Get the latest recipe on our site" />
 			<RecipesHeader name="Rezepte" parentName="Home" style={{ position: 'center' }} />
 			<Container justify="center">
-				<Row className="justify-content-md-center" style={{ position: 'relative', bottom: '4.5rem' }}>
-					<PostFeed posts={recipes} />
-				</Row>
-				<Row className="justify-content-md-center" style={{ position: 'relative', bottom: '4.5rem' }}>
-					<Col md="2" className="justify-content-md-center">
-						{!loading &&
-						!recipesEnd && (
-							<Button justify-self="center" className="justify-content-md-center" onClick={getMorePosts}>
-								Load more
-							</Button>
-						)}
-						{recipesEnd && 'Du hast das Ende erreicht!'}
-					</Col>
-				</Row>
+				<Card style={{ position: 'relative', bottom: '4.5rem' }}>
+					<CardBody>
+						<Row className="justify-content-md-center">
+							<PostFeed posts={recipes} />
+						</Row>
+						<Row className="justify-content-md-center" style={{ position: 'relative', bottom: '4.5rem' }}>
+							<Col md="2" className="justify-content-md-center">
+								{!loading &&
+								!recipesEnd && (
+									<Button
+										justify-self="center"
+										className="justify-content-md-center"
+										onClick={getMorePosts}
+									>
+										Load more
+									</Button>
+								)}
+								{recipesEnd && 'Du hast das Ende erreicht!'}
+							</Col>
+						</Row>
+					</CardBody>
+				</Card>
 			</Container>
 		</main>
 	);
