@@ -1,10 +1,10 @@
 
-import RecipeCollection from '../../../components/RecipeCollection';
+import RecipeCollection from '../../../components/recipes/RecipeCollection';
 import Default from '../../../layouts/Default.js';
 import { Container, Card, CardBody } from 'reactstrap';
 import RecipesHeader from '../../../components/Headers/RecipesHeader';
 import { firestore, auth,} from '../../../lib/firebase';
-import AuthCheck from '../../../components/AuthCheck';
+import AuthCheck from '../../../components/auth/AuthCheck';
 import { useCollection } from 'react-firebase-hooks/firestore';
 
 export default function MyRecipesPage(props) {

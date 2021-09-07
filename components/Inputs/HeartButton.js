@@ -1,7 +1,7 @@
-import { firestore, auth, increment } from '../lib/firebase';
+import { firestore, auth, increment } from '../../lib/firebase';
 import { useDocument } from 'react-firebase-hooks/firestore';
 import { useContext } from 'react';
-import { UserContext } from '../lib/context';
+import { UserContext } from '../../lib/context';
 import {Button} from 'reactstrap'
 // Allows user to heart or like a post
 export default function Heart({ postRef ,recipe}) {

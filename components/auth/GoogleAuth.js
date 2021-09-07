@@ -1,9 +1,9 @@
-import { auth, firestore, googleAuthProvider } from '../lib/firebase';
-import { UserContext } from '../lib/context';
+import { auth, firestore, googleAuthProvider } from '../../lib/firebase';
+import { UserContext } from '../../lib/context';
 import 'assets/scss/nextjs-argon-dashboard-pro.scss?v1.1.0';
 import { useEffect, useState, useCallback, useContext } from 'react';
 import debounce from 'lodash.debounce';
-import Default from '../layouts/Default.js';
+import Default from '../../layouts/Default.js';
 import { Button, Input } from 'reactstrap';
 export default function Enter(props) {
 	const { user, username } = useContext(UserContext);

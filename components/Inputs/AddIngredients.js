@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {functions} from '../lib/firebase'
+import {functions} from '../../lib/firebase'
 import { Input, Col, Row, FormGroup } from 'reactstrap';
 
 

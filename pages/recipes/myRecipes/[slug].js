@@ -1,9 +1,9 @@
 
 import Default from '../../../layouts/Default'
-import EditRecipe from '../../../components/recipeModals/EditRecipe2'
+import EditRecipe from '../../../components/recipes/EditRecipe2'
 import EditHeader from '../../../components/Headers/EditHeader'
 import { Row, Container, Card, CardBody,Col } from 'reactstrap';
-import AuthCheck from '../../../components/AuthCheck';
+import AuthCheck from '../../../components/auth/AuthCheck';
 import { firestore, auth, } from '../../../lib/firebase';
 import { useState } from 'react';
 import { useRouter } from 'next/router';

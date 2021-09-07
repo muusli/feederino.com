@@ -26,7 +26,7 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import AddRecipe from '../recipeModals/AddRecipe'
+import AddRecipe from '../recipes/AddRecipe'
 import { UserContext } from '../../lib/context';
 import { useContext } from 'react';
 function CollectionsHeader({ name, parentName }) {

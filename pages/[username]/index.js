@@ -1,7 +1,7 @@
 import { getUserWithUsername, recipeToJSON } from '../../lib/firebase';
-import UserProfile from '../../components/UserProfile';
+import UserProfile from '../../components/auth/UserProfile';
 import ProfileHeader from '../../components/Headers/ProfileHeader';
-import RecipeFeed from '../../components/RecipeFeed';
+import RecipeFeed from '../../components/recipes/RecipeFeed';
 import Default from '../../layouts/Default.js';
 import { Row, Container, Card, CardBody } from 'reactstrap';
 export async function getServerSideProps({ query }) {

@@ -1,8 +1,8 @@
-import PostFeed from '../../components/RecipeFeed';
-import Metatags from '../../components/Metatags';
+import RecipeFeed from '../../components/recipes/RecipeFeed';
+import Metatags from '../../components/PageChange/Metatags';
 import Default from '../../layouts/Default.js';
 import { firestore, fromMillis, recipeToJSON } from '../../lib/firebase';
-import RecipesHeader from '../../components/Headers/NewsHeader';
+import NewsHeader from '../../components/Headers/NewsHeader';
 import { useState } from 'react';
 import { Row, Container, Card, CardBody, CardHeader, Button, Col } from 'reactstrap';
 // Max recipe to query per page
@@ -55,12 +55,12 @@ export default function Home(props) {
 	return (
 		<main>
 			<Metatags title="Feed" description="Get the latest recipe on our site" />
-			<RecipesHeader name="Rezepte" parentName="Home" style={{ position: 'center' }} />
+			<NewsHeader name="Rezepte" parentName="Home" style={{ position: 'center' }} />
 			<Container justify="center">
 				<Card style={{ position: 'relative', bottom: '4.5rem' }}>
 					<CardBody>
 						<Row className="justify-content-md-center">
-							<PostFeed posts={recipes} />
+							<RecipeFeed posts={recipes} />
 						</Row>
 						<Row className="justify-content-md-center">
 							<Col md="2" className="justify-content-md-center">

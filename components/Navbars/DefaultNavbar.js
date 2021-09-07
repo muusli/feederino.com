@@ -44,12 +44,12 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import AddModal from '../recipeModals/AddRecipe';
+import AddModal from '../recipes/AddRecipe';
 import { useContext } from 'react';
 import { UserContext } from '../../lib/context';
 import { auth } from '../../lib/firebase';
-import LoginModal from 'components/LoginModal'
-import SearchRecipe from 'components/SearchRecipe'
+import LoginModal from 'components/auth/LoginModal'
+import SearchRecipe from 'components/recipes/SearchRecipe'
 function DefaultNavbar({ theme, sidenavOpen, toggleSidenav }) {
   	// function that on mobile devices makes the search open
 	const openSearch = () => {

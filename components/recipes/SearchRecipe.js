@@ -1,9 +1,9 @@
 import React from 'react';
 import classnames from 'classnames';
-import { useUserData } from '../lib/hooks';
+import { useUserData } from '../../lib/hooks';
 import axios from 'axios';
 import ReactDatetime from 'react-datetime';
-import TagsInput from 'components/TagsInput/TagsInput.js';
+import TagsInput from 'components/Inputs/TagsInput.js';
 import {  Dropdown, DropdownToggle,  DropdownItem, DropdownMenu, Input, InputGroupAddon, InputGroupText, FormGroup, Form, InputGroup ,Card,
 	
 	CardBody,

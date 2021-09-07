@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import HeartButton from '../Inputs/HeartButton';
+import { firestore, getUserWithUsername } from '../../lib/firebase';
 import {
 	Card,
 	CardImg,
@@ -18,18 +20,20 @@ export default function PostFeed({ posts, admin, postRef }) {
 function PostItem({ post, admin = false }) {
 	// Naive method to calc word count and read time
 
+	// const postRef = post.uid.collection('recipes').doc(post.slug);
 	// const postRef =
 	return (
 		<Col md="4" justify-self="center">
 			<Card>
 				<CardBody>
 					{/* <Link href={`/${post.author.username}/${post.slug}`}> */}
+
 					<h5 className="h3 mb-0">{post.title}</h5>
+
 					<p className="mb-4">{post.description}</p>
 					<Link href={`/${post.username}/${post.slug}`}>
 						<img alt="..." className="img-fluid rounded" src={post.image} />
 					</Link>
-
 					<Row className="align-items-center my-3 pb-3 border-bottom">
 						<Col sm="6">
 							<div className="icon-actions">
@@ -37,28 +41,29 @@ function PostItem({ post, admin = false }) {
 									<i className="far fa-heart text-danger" />
 									<span className="text-muted">{post.heartCount || 0}</span>
 								</a>
+								{/* <HeartButton recipe={post} postRef={postRef} /> */}
 								{/* <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                        <i className="ni ni-chat-round" />
-                        <span className="text-muted">36</span>
-                      </a>
-                      <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                        <i className="ni ni-curved-next" />
-                        <span className="text-muted">12</span>
-                      </a>
-                    </div>
-                  </Col>
-                  <Col className="d-none d-sm-block" sm="6">
-                     <div className="d-flex align-items-center justify-content-sm-end">
-                     
-                     <small className="text-muted">
-        by <Link href={`/${post.username}`}>
-        <a>
-          <strong>@{post.username}</strong>
-        </a>
-      </Link>
-      </small>
-                     
-                     {/* <div className="avatar-group">
+									<i className="ni ni-chat-round" />
+									<span className="text-muted">36</span>
+								</a>
+								<a href="#pablo" onClick={(e) => e.preventDefault()}>
+									<i className="ni ni-curved-next" />
+									<span className="text-muted">12</span>
+  </a>*/}
+							</div>
+						</Col>
+						<Col className="d-none d-sm-block" sm="6">
+							<div className="d-flex align-items-center justify-content-sm-end">
+								<small className="text-muted">
+									by{' '}
+									<Link href={`/${post.username}`}>
+										<a>
+											<strong>@{post.username}</strong>
+										</a>
+									</Link>
+								</small>
+
+								{/* <div className="avatar-group">
                         <a
                           className="avatar avatar-xs rounded-circle"
                           href="#pablo"

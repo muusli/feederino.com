@@ -1,5 +1,5 @@
 import ReactDatetime from 'react-datetime';
-import TagsInput from './TagsInput/TagsInput.js';
+import TagsInput from '../Inputs/TagsInput.js';
 import Link from 'next/link'
 // import PostContent from './PostContent';
 // import HeartButton from './HeartButton';

@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { auth, storage, STATE_CHANGED } from '../lib/firebase';
-import PageChange from './PageChange/PageChange';
+import { auth, storage, STATE_CHANGED } from '../../lib/firebase';
+import PageChange from '../PageChange/PageChange';
 
 // Uploads images to Firebase Storage
 export default function ImageUpload() {

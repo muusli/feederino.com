@@ -21,6 +21,7 @@ import PropTypes from "prop-types";
 import {
   Breadcrumb,
   BreadcrumbItem,
+  Button,
   Container,
   Row,
   Col,
@@ -28,7 +29,7 @@ import {
 import AddRecipe from '../recipes/AddRecipe'
 import { UserContext } from '../../lib/context';
 import { useContext } from 'react';
-function CollectionsHeader({ name, parentName,  }) {
+function ContactHeader({ name, parentName,btnName ,link}) {
   const { user: currentUser } = useContext(UserContext);
   return (
     <>
@@ -47,30 +48,24 @@ function CollectionsHeader({ name, parentName,  }) {
                       <i className="fas fa-home" />
                     </a>
                   </BreadcrumbItem>
-                  <BreadcrumbItem>
-                    <a href="/recipes">
-                      {parentName}
-                    </a>
-                  </BreadcrumbItem>
+                  
                   <BreadcrumbItem aria-current="page" className="active">
                     {name}
                   </BreadcrumbItem>
                 </Breadcrumb>
               </Col>
               <Col className="text-right" lg="6" xs="5">
-              {currentUser &&  <AddRecipe></AddRecipe>}
-                {/* {currentUser?.uid == authorId && (  <Button
+              {/* {currentUser &&<AddRecipe></AddRecipe>} */}
+              <Button
                   className="btn-neutral"
                   color="default"
-                  href={`/recipes/myRecipes/${slug}`}
-                  // onClick={(e) => e.preventDefault()}
+                  href={link}
+                
                   size="sm"
                 >
-                  Bearbeiten
-                </Button> */}
-                
-         
-      
+                  {btnName}
+                </Button>
+               
               </Col>
             </Row>
 
@@ -82,9 +77,9 @@ function CollectionsHeader({ name, parentName,  }) {
   );
 }
 
-CollectionsHeader.propTypes = {
+ContactHeader.propTypes = {
   name: PropTypes.string,
   parentName: PropTypes.string,
 };
 
-export default CollectionsHeader;
+export default ContactHeader;

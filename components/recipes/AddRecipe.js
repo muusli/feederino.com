@@ -33,12 +33,13 @@ export default function Page({}) {
 			steps          : [],
 			categories     : null,
 			published      : false,
-
+			image          :
+				'https://firebasestorage.googleapis.com/v0/b/muusli.appspot.com/o/uploads%2FgQwzcfIqJ6g7pAd3SU5jaaYeNK92%2F1630736988712.png?alt=media&token=9ec3080f-824f-46a4-b1a9-b7b0766b2a65',
 			createdAt      : serverTimestamp(),
 			updatedAt      : serverTimestamp(),
 			heartCount     : 0
 		};
-		console.log(data);
+
 		await ref.set(data);
 		setModalOpen(!modalOpen);
 		toast.success('Rezeptentwurf hinzugefügt!');
@@ -49,7 +50,7 @@ export default function Page({}) {
 	return (
 		<main>
 			<Button className="btn-neutral" color="default" onClick={() => setModalOpen(!modalOpen)} size="sm">
-				Neues Rezept
+				Rezept hinzufügen
 			</Button>
 			<Modal toggle={() => setModalOpen(!modalOpen)} isOpen={modalOpen}>
 				<div className=" modal-header">

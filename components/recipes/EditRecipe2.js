@@ -2,14 +2,14 @@ import React from 'react';
 
 import classnames from 'classnames';
 
-import TagsInput from 'components/TagsInput/TagsInput.js';
+import TagsInput from 'components/Inputs/TagsInput.js';
 import ImageInput from 'components/Inputs/ImageInput';
 import Link from 'next/link';
 import 'assets/vendor/nucleo/css/nucleo.css';
 import { useContext } from 'react';
 import { useRouter } from 'next/router';
 import { UserContext } from '../../lib/context';
-import AddIngredients from '../AddIngredients';
+import AddIngredients from '../Inputs/AddIngredients';
 import { serverTimestamp } from '../../lib/firebase';
 
 import toast from 'react-hot-toast';
@@ -58,7 +58,7 @@ export default function Page({ recipeRef, defaultValues, preview }) {
 	// }
 
 	const updateRecipe = async ({
-		image,
+		image        : downloadURL,
 		title,
 		published,
 		duration,

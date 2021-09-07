@@ -1,9 +1,9 @@
 // import ReactDatetime from 'react-datetime';
 // import TagsInput from 'components/TagsInput/TagsInput.js';
-import RecipeContent from '../../components/RecipeContent';
-import HeartButton from '../../components/HeartButton';
-import Metatags from '../../components/Metatags';
-import AuthCheck from '../../components/AuthCheck'
+import RecipeContent from '../../components/recipes/RecipeContent';
+import HeartButton from '../../components/Inputs/HeartButton';
+import Metatags from '../../components/PageChange/Metatags';
+import AuthCheck from '../../components/auth/AuthCheck'
 import { UserContext } from '../../lib/context';
 import { firestore, getUserWithUsername, postToJSON } from '../../lib/firebase';
 import {

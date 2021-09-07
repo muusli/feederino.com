@@ -30,8 +30,8 @@ function AuthFooter() {
                 © {new Date().getFullYear()}{" "}
                 <a
                   className="font-weight-bold ml-1"
-                  href="http://localhost:3000/aboutus"
-                  target="_blank"
+                  href="/aboutus"
+                  // target="_blank"
                 >
                   Muusli
                 </a>
@@ -39,11 +39,26 @@ function AuthFooter() {
             </Col>
             <Col xl="6">
               <Nav className="nav-footer justify-content-center justify-content-xl-end">
-                
+              <NavItem>
+                  <NavLink
+                    href="/contact"
+                    // target="_blank"
+                  >
+                    Contact
+                  </NavLink>
+                </NavItem>
                 <NavItem>
                   <NavLink
-                    href="https://www.creative-tim.com/license?ref=adpr-auth-footer"
-                    target="_blank"
+                    href="/changelog"
+                    // target="_blank"
+                  >
+                    Changelog
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    href="/license"
+                    // target="_blank"
                   >
                     License
                   </NavLink>

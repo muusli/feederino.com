@@ -8,7 +8,7 @@ import {  Input,
     InputGroupText,
     InputGroup,
    Form,FormGroup, Button, Modal, ModalBody, ModalFooter,CardHeader, CardBody} from "reactstrap";
-import GoogleAuth from 'components/GoogleAuth'
+import GoogleAuth from './GoogleAuth'
 function LoginModal() {
   const [modalOpen, setModalOpen] = React.useState(false);
   // const { register, handleSubmit, reset, watch, formState, errors} = useForm({

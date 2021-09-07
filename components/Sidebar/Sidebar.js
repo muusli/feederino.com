@@ -115,7 +115,7 @@ function Sidebar({
         return (
           <NavItem key={key}>
             <NavLink
-              href="#pablo"
+              href="/"
               data-toggle="collapse"
               aria-expanded={state[prop.state]}
               className={classnames({
@@ -175,7 +175,7 @@ function Sidebar({
         {logo && logo.innerLink ? (
           <Link href={logo.innerLink}>
             <span>
-              <NavbarBrand href="#pablo">
+              <NavbarBrand href="/">
                 <img
                   alt={logo.imgAlt}
                   className="navbar-brand-img"
