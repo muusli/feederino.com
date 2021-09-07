@@ -275,18 +275,16 @@ function Index() {
                 <div className="btn-wrapper">
                   <Button
                     color="info"
-                    href="https://www.creative-tim.com/learning-lab/nextjs/icons/argon-dashboard?ref=njsadp-index-page"
-                    target="_blank"
+                    href="/recipes"
                   >
-                    View demo icons
+                    Rezeptfeed
                   </Button>
                   <Button
                     className="mt-3 mt-md-0"
                     color="default"
-                    href="https://nucleoapp.com/?ref=1712"
-                    target="_blank"
+                    href="/recipes/myRecipes"
                   >
-                    View all icons
+                    Meine Rezepte
                   </Button>
                 </div>
               </Col>

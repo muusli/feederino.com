@@ -18,6 +18,9 @@ function changelog() {
 			<Container justify="center">
 				<Card style={{ position: 'relative', bottom: '4.5rem' }}>
 					<CardBody>
+						<p>Add Aboutus template</p>
+						<p>Add ContactUs</p>
+						<p>Add Index Page template</p>
 						<p>Placeholder Image hinzugefügt für Rezeptupload</p>
 						<p>Bild Reupload Bugfix</p>
 						<p>Author wird im Feed erwähnt</p>

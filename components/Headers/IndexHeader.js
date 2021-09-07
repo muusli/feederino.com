@@ -29,7 +29,7 @@ function IndexHeader() {
               <Col lg="6">
                 <div className="pr-5">
                   <h1 className="display-2 text-white font-weight-bold mb-0">
-                    Muslimedia
+                    Muusli
                   </h1>
                   <h2 className="display-4 text-white font-weight-light">
                     {/* Dein Community-Ernährungsassistent.
@@ -48,7 +48,7 @@ function IndexHeader() {
                     <Button
                       className="my-2"
                       color="default"
-                      href="/signup"
+                      href="/enter"
                     >
                       Registrieren
                     </Button>
