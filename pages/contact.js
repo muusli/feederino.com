@@ -47,6 +47,7 @@ function contact() {
 			name           : e.target.name.value,
 			message        : e.target.message.value,
 			email          : e.target.email.value,
+			status         : 'unsolved',
 			uid,
 			username,
 			authorPhotoURL : photoURL,
