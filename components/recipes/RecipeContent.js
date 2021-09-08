@@ -7,6 +7,7 @@ import Link from 'next/link'
 // import Metatags from './Metatags';
 // import { UserContext } from '../lib/context';
 // import { firestore, getUserWithUsername, recipeToJSON } from '../lib/firebase';
+import CommentFeed from '../comments/CommentFeed.js';
 import {
 	Row,
 	UncontrolledCarousel,
@@ -25,10 +26,11 @@ import {
 // import Link from 'next/link';
 // import { useDocumentData } from 'react-firebase-hooks/firestore';
 // import { useContext } from 'react';
+import NewComment from '../comments/NewComment.js';
 
-
-export default function RecipeContent({recipe, recipeRef}) {
+export default function RecipeContent({recipe,comments, recipeRef}) {
     const createdAt = typeof recipe?.createdAt === 'number' ? new Date(recipe.createdAt) : recipe.createdAt.toDate();
+	
 	return (
 		<main>
 			
@@ -172,84 +174,10 @@ export default function RecipeContent({recipe, recipeRef}) {
 
 
 
-						{/* <Col md="12">
-							<div className="mb-1">
-								<Media className="media-comment">
-									<img
-										alt="..."
-										className="avatar avatar-lg media-comment-avatar rounded-circle"
-										src={require('assets/img/theme/team-1.jpg')}
-									/>
-									<Media>
-										<div className="media-comment-text">
-											<h6 className="h5 mt-0">Michael Lewis</h6>
-											<p className="text-sm lh-160">
-												Cras sit amet nibh libero nulla vel metus scelerisque ante sollicitudin.
-												Cras purus odio vestibulum in vulputate viverra turpis.
-											</p>
-											<div className="icon-actions">
-												<a
-													className="like active"
-													href="#pablo"
-													onClick={(e) => e.preventDefault()}
-												>
-													<i className="ni ni-like-2" />
-													<span className="text-muted">3 likes</span>
-												</a>
-												<a href="#pablo" onClick={(e) => e.preventDefault()}>
-													<i className="ni ni-curved-next" />
-													<span className="text-muted">2 shares</span>
-												</a>
-											</div>
-										</div>
-									</Media>
-								</Media>
-								<Media className="media-comment">
-									<img
-										alt="..."
-										className="avatar avatar-lg media-comment-avatar rounded-circle"
-										src={require('assets/img/theme/team-2.jpg')}
-									/>
-									<Media>
-										<div className="media-comment-text">
-											<h6 className="h5 mt-0">Jessica Stones</h6>
-											<p className="text-sm lh-160">
-												Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque
-												ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus
-												viverra turpis.
-											</p>
-											<div className="icon-actions">
-												<a
-													className="like active"
-													href="#pablo"
-													onClick={(e) => e.preventDefault()}
-												>
-													<i className="ni ni-like-2" />
-													<span className="text-muted">10 likes</span>
-												</a>
-												<a href="#pablo" onClick={(e) => e.preventDefault()}>
-													<i className="ni ni-curved-next" />
-													<span className="text-muted">1 share</span>
-												</a>
-											</div>
-										</div>
-									</Media>
-								</Media>
-								<hr />
-								<Media className="align-items-center">
-									<img
-										alt="..."
-										className="avatar avatar-lg rounded-circle mr-4"
-										src={require('assets/img/theme/team-3.jpg')}
-									/>
-									<Media body>
-										<Form>
-											<Input placeholder="Write your comment" rows="1" type="textarea" />
-										</Form>
-									</Media>
-								</Media>
-							</div>
-						</Col>{' '} */}
+						<Col md="12"className="mx-auto"><hr/>
+						<CommentFeed comments={comments} slug={recipe.slug}></CommentFeed><hr/></Col><Col md="12"><NewComment authorId={recipe.uid} username={recipe.username}slug={recipe.slug} />
+						</Col>
+						
 					</Row> </CardBody></Card></Container> 
 
 	

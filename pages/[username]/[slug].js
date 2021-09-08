@@ -6,6 +6,7 @@ import Metatags from '../../components/PageChange/Metatags';
 import AuthCheck from '../../components/auth/AuthCheck'
 import { UserContext } from '../../lib/context';
 import { firestore, getUserWithUsername, postToJSON } from '../../lib/firebase';
+import CommentFeed from '../../components/comments/CommentFeed';
 import {
 	Row,
 	Col,
@@ -18,7 +19,9 @@ import {
 import Default from '../../layouts/Default.js';
 
 import { useDocumentData } from 'react-firebase-hooks/firestore';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
+
+const LIMIT =3
 
 export async function getStaticProps({ params }) {
 	const { username, slug } = params;
@@ -26,18 +29,27 @@ export async function getStaticProps({ params }) {
 
 	let post;
 	let path;
+	let comments;
 
 	if (userDoc) {
 		const postRef = userDoc.ref.collection('recipes').doc(slug);
 		if(!postRef) {post = null 
-		path = null} else {
+		path = null 
+		comments = null;} else {
 		post = postToJSON(await postRef.get());
 		
 		path = postRef.path;
-		}
+
+		const commentQuery = postRef
+		.collection('comments')
+		.limit(LIMIT);
+
+		comments = (await commentQuery.get()).docs.map(postToJSON);
+
+		}	
 	}
 return {
-	props      : { post, path },
+	props      : { post, path, comments},
 	revalidate : 100
 
 }}
@@ -66,6 +78,35 @@ export default function Post(props) {
 	const recipe = realtimePost || props.post;
 
 	const { user: currentUser } = useContext(UserContext);
+
+	const [ comments, setComments ] = useState(props.comments);
+	const [ loading, setLoading ] = useState(false);
+
+	const [ commentsEnd, setCommentsEnd ] = useState(false);
+
+	// Get next page in pagination query
+	const getMoreComments = async () => {
+		setLoading(true);
+		const last = comments[comments.length - 1];
+
+		const cursor = typeof last.createdAt === 'number' ? fromMillis(last.createdAt) : last.createdAt;
+
+		const query = firestore
+			.collection('comments')
+			.startAfter(cursor)
+			.limit(LIMIT);
+
+		const newComments = (await query.get()).docs.map((doc) => doc.data());
+
+		setComments(comments.concat(newComments));
+		setLoading(false);
+
+		if (newComments.length < LIMIT) {
+			setCommentsEnd(true);
+		}
+	};
+
+
 	return (
 		<main>
 			<Metatags title={recipe.title} description={recipe.title}/>
@@ -123,7 +164,8 @@ export default function Post(props) {
       </div>
 			<section>
 				{/* <HeartButton postRef={postRef}></HeartButton> */}
-				<RecipeContent recipe={recipe} recipeRef={postRef}/>
+				<RecipeContent getMoreComments={getMoreComments}recipe={recipe} comments={props.comments}recipeRef={postRef}/>
+				
 			</section>
 		</main>
 	);
