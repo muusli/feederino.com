@@ -16,7 +16,7 @@ function Default({ router, children }) {
 			if (prop.collapse) {
 				return getRoutes(prop.views);
 			}
-			if (prop.layout === '/admin') {
+			if (prop.layout === '/recipes') {
 				return <Route path={prop.layout + prop.path} component={prop.component} key={key} />;
 			}
 			else {
@@ -55,7 +55,7 @@ function Default({ router, children }) {
 					toggleSidenav={toggleSidenav}
 					sidenavOpen={!sidenavOpen}
 					logo={{
-						innerLink : '/recipes',
+						innerLink : '/',
 						imgSrc    : require('assets/img/brand/muusli.png'),
 						imgAlt    : '...'
 					}}

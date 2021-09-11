@@ -40,7 +40,7 @@ function IndexHeader() {
                    Muuslimedia soll ein Beginn sein.
                   </p>
                   <div className="mt-5">
-                    <Link href="/recipes">
+                    <Link href="/auth/login">
                       <Button className="btn-neutral my-2" color="default">
                         Erkunde den Feed
                       </Button>
@@ -48,7 +48,7 @@ function IndexHeader() {
                     <Button
                       className="my-2"
                       color="default"
-                      href="/enter"
+                      href="/auth/register"
                     >
                       Registrieren
                     </Button>

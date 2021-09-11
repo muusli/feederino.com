@@ -1,8 +1,9 @@
-import { auth, firestore, googleAuthProvider } from '../../lib/firebase';
+import { auth, firestore, googleAuthProvider, serverTimestamp } from '../../lib/firebase';
 import { UserContext } from '../../lib/context';
 import 'assets/scss/nextjs-argon-dashboard-pro.scss?v1.1.0';
 import { useEffect, useState, useCallback, useContext } from 'react';
 import debounce from 'lodash.debounce';
+import router from 'next/router';
 import Default from '../../layouts/Default.js';
 import { Button, Input } from 'reactstrap';
 export default function Enter(props) {
@@ -62,8 +63,14 @@ function UsernameForm() {
 		const batch = firestore.batch();
 		batch.set(userDoc, { username: formValue, photoURL: user.photoURL, displayName: user.displayName });
 		batch.set(usernameDoc, { uid: user.uid });
+		const mealplanDoc = firestore.doc(`users/${user.uid}/mealplans/currentMealplan`);
+		batch.set(mealplanDoc, {
+			uid       : user.uid,
+			createdAt : serverTimestamp(),
+			updatedAt : serverTimestamp()
+		});
 
-		await batch.commit();
+		await batch.commit().then(router.push('/recipes'));
 	};
 
 	const onChange = (e) => {

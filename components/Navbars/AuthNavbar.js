@@ -45,7 +45,7 @@ function AdminNavbar() {
               <NavbarBrand href="#pablo">
                 <img
                   alt="..."
-                  src={require("assets/img/brand/nextjs_argon_white.png")}
+                  src={require("assets/img/brand/muusli.png")}
                 />
               </NavbarBrand>
             </span>
@@ -94,23 +94,30 @@ function AdminNavbar() {
             <Nav className="mr-auto" navbar>
               
               <NavItem>
-                <Link href="/">
+                <Link href="/recipes">
                   <NavLink href="#pablo">
-                    <span className="nav-link-inner--text">Landing</span>
+                    <span className="nav-link-inner--text">Rezeptvielfalt</span>
                   </NavLink>
                 </Link>
               </NavItem>
               <NavItem>
-                <Link href="/mealplanner">
+                <Link href="/aboutus">
                   <NavLink href="#pablo">
-                    <span className="nav-link-inner--text">Planer</span>
+                    <span className="nav-link-inner--text">About</span>
                   </NavLink>
                 </Link>
               </NavItem>
               <NavItem>
-                <Link href="/vision">
+                <Link href="/license">
                   <NavLink href="#pablo">
-                    <span className="nav-link-inner--text">Vision</span>
+                    <span className="nav-link-inner--text">AGB</span>
+                  </NavLink>
+                </Link>
+              </NavItem>
+              <NavItem>
+                <Link href="/auth/login">
+                  <NavLink href="#pablo">
+                    <span className="nav-link-inner--text">Login</span>
                   </NavLink>
                 </Link>
               </NavItem>
@@ -125,6 +132,7 @@ function AdminNavbar() {
             </Nav>
             <hr className="d-lg-none" />
             <Nav className="align-items-lg-center ml-lg-auto" navbar>
+            
               <NavItem>
                 <NavLink
                   className="nav-link-icon"
@@ -132,13 +140,13 @@ function AdminNavbar() {
                   id="tooltip601201423"
                   target="_blank"
                 >
-                  <i className="fab fa-facebook-square" />
+                  <i className="fab fa-pinterest" />
                   <span className="nav-link-inner--text d-lg-none">
-                    Facebook
+                    Pinterest
                   </span>
                 </NavLink>
                 <UncontrolledTooltip delay={0} target="tooltip601201423">
-                  Like us on Facebook
+                  Like us on Pinterest
                 </UncontrolledTooltip>
               </NavItem>
               <NavItem>
@@ -156,22 +164,7 @@ function AdminNavbar() {
                 <UncontrolledTooltip delay={0} target="tooltip871243015">
                   Follow us on Instagram
                 </UncontrolledTooltip>
-              </NavItem>
-              <NavItem>
-                <NavLink
-                  className="nav-link-icon"
-                  href="https://twitter.com/creativetim?ref=creative-tim"
-                  id="tooltip366258619"
-                  target="_blank"
-                >
-                  <i className="fab fa-twitter-square" />
-                  <span className="nav-link-inner--text d-lg-none">
-                    Twitter
-                  </span>
-                </NavLink>
-                <UncontrolledTooltip delay={0} target="tooltip366258619">
-                  Follow us on Twitter
-                </UncontrolledTooltip>
+                
               </NavItem>
               {/* <NavItem>
                 <NavLink
@@ -191,8 +184,7 @@ function AdminNavbar() {
                 <Button
                   className="btn-neutral btn-icon"
                   color="default"
-                  href="https://www.creative-tim.com/product/nextjs-argon-dashboard-pro?ref=njsadp-auth-navbar"
-                  target="_blank"
+                  href="/contact"
                 >
                   <span className="btn-inner--icon">
                     <i className="fas fa-shopping-cart mr-2" />

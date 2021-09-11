@@ -21,6 +21,7 @@ import classnames from "classnames";
 import { Calendar } from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interaction from "@fullcalendar/interaction";
+
 // react component used to create sweet alerts
 import ReactBSAlert from "react-bootstrap-sweetalert";
 // reactstrap components
@@ -43,44 +44,19 @@ import {
   BreadcrumbItem,
 } from "reactstrap";
 import axios from 'axios';
+import {serverTimestamp, mealToJSON, getUserWithUsername} from '../../lib/firebase'
 // layout for this page
 // import Admin from "layouts/Admin.js";
 // core components
 
 // import { events as eventsVariables } from "variables/general.js";
 
-let calendar;
+let calendar
 
-function CalendarView(props) {
+function CalendarView (props) {
   const [ recipeOpen, setRecipeOpen ] = React.useState(false);
 	const [ recipe, setRecipe ] = React.useState([]);
-	const recipeImages = [
-		{
-			src     :
-				'https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Zm9vZHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-			altText : 'Slide 1',
-			caption : '',
-			header  : '',
-			key     : '1'
-		},
-		{
-			src     :
-				'https://images.unsplash.com/photo-1482049016688-2d3e1b311543?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Zm9vZHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-			altText : 'Slide 2',
-			caption : '',
-			header  : '',
-			key     : '2'
-		},
-		{
-			src     :
-				'https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8Zm9vZHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-			altText : 'Slide 3',
-			caption : '',
-			header  : '',
-			key     : '3'
-		}
-	];
-  const [events, setEvents] = React.useState();
+  const [events, setEvents] = React.useState(props.meals);
   const [alert, setAlert] = React.useState(null);
   const [modalAdd, setModalAdd] = React.useState(false);
   const [modalChange, setModalChange] = React.useState(false);
@@ -94,10 +70,55 @@ function CalendarView(props) {
   const [event, setEvent] = React.useState(null);
   const [currentDate, setCurrentDate] = React.useState(null);
   const calendarRef = React.useRef(null);
+
+ 
+
   React.useEffect(() => {
     createCalendar();
+    
     // eslint-disable-next-line
   }, []);
+  
+  const createCalendar = () => {
+ 
+      console.log(events)
+     calendar = new Calendar(calendarRef.current, {
+      plugins: [interaction, dayGridPlugin],
+      initialView: "dayGridWeek",
+      selectable: true,
+      editable: true,
+      events: events,
+      headerToolbar: "",
+      // Add new event
+      select: (info) => {
+        setModalAdd(true);
+        setStartDate(info.startStr);
+        setEndDate(info.endStr);
+        setRadios("bg-info");
+      // },
+      // Edit calendar event action
+      eventClick: ({ event }) => {
+        setEventId(event.id);
+        setEventTitle(event.title);
+        setEventDescription(event.extendedProps.description);
+        setRadios("bg-info");
+        setEvent(event);
+        setModalChange(true);
+        
+      }
+     }}
+    );
+    calendar.render();
+    setCurrentDate(calendar.view.title);
+    // )
+  
+  //  console.log(meals)
+    
+  };
+  const changeView = (newView) => {
+    calendar.changeView(newView);
+    setCurrentDate(calendar.view.title);
+  };
   const items = [
 		{
 			src     :
@@ -124,48 +145,8 @@ function CalendarView(props) {
 			key     : '3'
 		}
 	];
-  const createCalendar = () => {
-    // const meals =
-    // axios.get('http://localhost:5000/meal').then((res) => 
-    // {
-      console.log(props)
-     const calendar = new Calendar(calendarRef.current, {
-      plugins: [interaction, dayGridPlugin],
-      initialView: "dayGridWeek",
-      selectable: true,
-      editable: true,
-      events: props.meals,
-      headerToolbar: "",
-      // Add new event
-      select: (info) => {
-        setModalAdd(true);
-        setStartDate(info.startStr);
-        setEndDate(info.endStr);
-        setRadios("bg-info");
-      // },
-      // Edit calendar event action
-      eventClick: ({ event }) => {
-        setEventId(event.id);
-        setEventTitle(event.title);
-        setEventDescription(event.extendedProps.description);
-        setRadios("bg-info");
-        setEvent(event);
-        setModalChange(true);
-      }
-     }}
-    );
-    calendar.render();
-    setCurrentDate(calendar.view.title);
-    // )
-  
-  //  console.log(meals)
+  const addNewEvent = async () => {
     
-  };
-  const changeView = (newView) => {
-    calendar.changeView(newView);
-    setCurrentDate(calendar.view.title);
-  };
-  const addNewEvent = () => {
     var newEvents = events;
     newEvents.push({
       title: eventTitle,
@@ -181,6 +162,31 @@ function CalendarView(props) {
       className: radios,
       id: events[events.length - 1] + 1,
     });
+   
+  
+  
+    const data = {
+      title: eventTitle,
+      start: startDate,
+      end: endDate,
+      className: radios,
+      createdAt      : serverTimestamp(),
+      updatedAt      : serverTimestamp(),
+      id: events[events.length - 1] + 1
+    
+    }
+    console.log(data)
+      const userDoc = await getUserWithUsername(props.username);
+   
+    if (userDoc) {
+      const mealsRef = userDoc.ref.collection('calendar');
+      if (!mealsRef) {
+        
+      }
+      else {
+        await mealsRef.add(data);
+        
+    }};
     setModalAdd(false);
     setEvents(newEvents);
     setStartDate(undefined);
@@ -189,9 +195,11 @@ function CalendarView(props) {
     setEventTitle(undefined);
   };
   const changeEvent = () => {
+   
     var newEvents = events.map((prop, key) => {
       if (prop.id + "" === eventId + "") {
         setEvent(undefined);
+        console.log(eventId)
         calendar.getEventById(eventId).remove();
         let saveNewEvent = {
           ...prop,
@@ -199,6 +207,7 @@ function CalendarView(props) {
           className: radios,
           description: eventDescription,
         };
+        // saveToFirestore(saveNewEvent)
         calendar.addEvent(saveNewEvent);
         return {
           ...prop,
@@ -210,6 +219,7 @@ function CalendarView(props) {
         return prop;
       }
     });
+    
     setModalChange(false);
     setEvents(newEvents);
     setRadios("bg-info");
@@ -218,6 +228,19 @@ function CalendarView(props) {
     setEventId(undefined);
     setEvent(undefined);
   };
+  const saveToFirestore= async (data)=>{
+    const userDoc = await getUserWithUsername(props.username);
+   
+    if (userDoc) {
+      const mealsRef = userDoc.ref.collection('calendar').doc(data.id);
+      if (!mealsRef) {
+        
+      }
+      else {
+        await mealsRef.set(data);
+        
+    }};
+  }
   const deleteEventSweetAlert = () => {
     setAlert(
       <ReactBSAlert
@@ -447,13 +470,13 @@ function CalendarView(props) {
                 </Button>
               </div>
             </Modal>
-            <Modal
+            {/* <Modal
               isOpen={modalChange}
               toggle={() => setModalChange(false)}
               className="modal-dialog-centered modal-secondary"
             >
               <div className="modal-body">
-                {/* <Form className="edit-event--form">
+                <Form className="edit-event--form">
                   <FormGroup>
                     <label className="form-control-label">Event title</label>
                     <Input
@@ -534,8 +557,8 @@ function CalendarView(props) {
                     <i className="form-group--bar" />
                   </FormGroup>
                   <input className="edit-event--id" type="hidden" />
-                </Form> */}
-                {/* <ModalBody>
+                </Form> 
+                <ModalBody>
 					<Row>
 						<Col md="6" className="mx-auto">
 							<UncontrolledCarousel items={items} />
@@ -701,7 +724,7 @@ function CalendarView(props) {
 							</div>
 						</Col>{' '}
 					</Row>
-				</ModalBody> */}
+				</ModalBody>
               </div>
               <div className="modal-footer">
                 <Button color="primary" onClick={changeEvent}>
@@ -724,7 +747,7 @@ function CalendarView(props) {
                   Close
                 </Button>
               </div>
-            </Modal>
+            </Modal> */}
         </div>
             {/* </div>
         </Row>

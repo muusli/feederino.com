@@ -95,7 +95,21 @@ function AdminNavbar() {
               <NavItem>
                 <Link href="/recipes">
                   <NavLink href="#pablo">
-                    <span className="nav-link-inner--text">Rezepte</span>
+                    <span className="nav-link-inner--text">Rezeptvielfalt</span>
+                  </NavLink>
+                </Link>
+              </NavItem>
+              <NavItem>
+                <Link href="/aboutus">
+                  <NavLink href="#pablo">
+                    <span className="nav-link-inner--text">About</span>
+                  </NavLink>
+                </Link>
+              </NavItem>
+              <NavItem>
+                <Link href="/license">
+                  <NavLink href="#pablo">
+                    <span className="nav-link-inner--text">AGB</span>
                   </NavLink>
                 </Link>
               </NavItem>
@@ -159,8 +173,8 @@ function AdminNavbar() {
                   Follow us on Twitter
                 </UncontrolledTooltip>
               </NavItem> */}
-              <NavItem>
-                <NavLink
+              {/* <NavItem> */}
+                {/* <NavLink
                   className="nav-link-icon"
                   href="https://github.com/creativetimofficial?ref=creative-tim"
                   id="tooltip931502898"
@@ -172,18 +186,18 @@ function AdminNavbar() {
                 <UncontrolledTooltip delay={0} target="tooltip931502898">
                   Abonniere uns auf Youtube
                 </UncontrolledTooltip>
-              </NavItem> 
+              </NavItem>  */}
               <NavItem className="d-none d-lg-block ml-lg-4">
                 <Button
                   className="btn-neutral btn-icon"
                   color="default"
-                  href="/auth/register"
-                  target="_blank"
+                  href="/contact"
+                  
                 >
                   <span className="btn-inner--icon">
                     <i className="fas fa-shopping-cart mr-2" />
                   </span>
-                  <span className="nav-link-inner--text">Registrieren</span>
+                  <span className="nav-link-inner--text">Kontakt</span>
                 </Button>
               </NavItem>
             </Nav>

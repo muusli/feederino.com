@@ -71,15 +71,15 @@ function contact() {
 			<ContactHeader
 				name="Kontakt"
 				parentName="Home"
-				btnName="Unterstütze uns"
+				// btnName="Unterstütze uns"
 				link=""
 				style={{ position: 'center' }}
 			/>
 			<Container justify="center">
 				<Card style={{ position: 'relative', bottom: '4.5rem' }}>
 					<CardBody>
-						<AuthCheck>
-							{/* <Row>
+						{/* <AuthCheck> */}
+						{/* <Row>
 							<Col md="4">Kontaktdaten</Col>
 							<Col md="8">
 								{' '}
@@ -134,113 +134,113 @@ function contact() {
 						<p>Kontaktdaten </p>
 						<p> EMAIL/Username Nachrichtkategorie Nachricht</p> */}
 
-							{/* <div className="main"> */}
-							<Row>
-								<Col className="ml-auto mr-auto text-center " md="12">
-									<Badge color="info">Feedback</Badge>
-									<h1 className="title">
-										Erzähl ein bisschen über <b>dich</b>
-									</h1>
-									<h4 className="desc">
-										Egal ob Frage, Annekdote, Vorschlag, Bugreport oder Sonstiges, melde dich gerne.
-									</h4>
-								</Col>
-							</Row>
-							<Row>
-								<Col className="mx-auto" md="8">
-									<Card
-									// className="bg-secondary p-3"
-									// id="contact-form"
-									// // method="post"
-									// role="form"
-									// tag="form"
-									>
-										<CardBody>
-											<Form onSubmit={createPost}>
-												<Row>
-													<Col md="6">
-														<FormGroup className={firstNameFocus}>
-															<label>Vorname</label>
-															<InputGroup className="input-group-alternative">
-																<InputGroupAddon addonType="prepend">
-																	<InputGroupText>
-																		<i className="ni ni-circle-08" />
-																	</InputGroupText>
-																</InputGroupAddon>
-																<Input
-																	aria-label="Vorname"
-																	placeholder="Vorname"
-																	type="text"
-																	name="prename"
-																	onFocus={() => setFirstNameFocus('focused')}
-																	onBlur={() => setFirstNameFocus('')}
-																/>
-															</InputGroup>
-														</FormGroup>
-													</Col>
-													<Col md="6">
-														<FormGroup className={lastNameFocus}>
-															<label>Nachname</label>
-															<InputGroup className="input-group-alternative">
-																<InputGroupAddon addonType="prepend">
-																	<InputGroupText>
-																		<i className="ni ni-tag" />
-																	</InputGroupText>
-																</InputGroupAddon>
-																<Input
-																	aria-label="Nachname"
-																	placeholder="Nachname"
-																	type="text"
-																	name="name"
-																	onFocus={() => setLastNameFocus('focused')}
-																	onBlur={() => setLastNameFocus('')}
-																/>
-															</InputGroup>
-														</FormGroup>
-													</Col>
-												</Row>
-												<FormGroup className={emailFocus}>
-													<label>Email Adresse</label>
-													<InputGroup className="input-group-alternative">
-														<InputGroupAddon addonType="prepend">
-															<InputGroupText>
-																<i className="ni ni-email-83" />
-															</InputGroupText>
-														</InputGroupAddon>
-														<Input
-															placeholder="Email ..."
-															type="text"
-															name="email"
-															onFocus={() => setEmailFocus('focused')}
-															onBlur={() => setEmailFocus('')}
-														/>
-													</InputGroup>
-												</FormGroup>
-
-												<FormGroup>
-													<label>Deine Nachricht</label>
+						{/* <div className="main"> */}
+						<Row>
+							<Col className="ml-auto mr-auto text-center " md="12">
+								<Badge color="info">Feedback</Badge>
+								<h1 className="title">
+									Erzähl ein bisschen über <b>dich</b>
+								</h1>
+								<h4 className="desc">
+									Egal ob Frage, Annekdote, Vorschlag, Bugreport oder Sonstiges, melde dich gerne.
+								</h4>
+							</Col>
+						</Row>
+						<Row>
+							<Col className="mx-auto" md="8">
+								<Card
+								// className="bg-secondary p-3"
+								// id="contact-form"
+								// // method="post"
+								// role="form"
+								// tag="form"
+								>
+									<CardBody>
+										<Form onSubmit={createPost}>
+											<Row>
+												<Col md="6">
+													<FormGroup className={firstNameFocus}>
+														<label>Vorname</label>
+														<InputGroup className="input-group-alternative">
+															<InputGroupAddon addonType="prepend">
+																<InputGroupText>
+																	<i className="ni ni-circle-08" />
+																</InputGroupText>
+															</InputGroupAddon>
+															<Input
+																aria-label="Vorname"
+																placeholder="Vorname"
+																type="text"
+																name="prename"
+																onFocus={() => setFirstNameFocus('focused')}
+																onBlur={() => setFirstNameFocus('')}
+															/>
+														</InputGroup>
+													</FormGroup>
+												</Col>
+												<Col md="6">
+													<FormGroup className={lastNameFocus}>
+														<label>Nachname</label>
+														<InputGroup className="input-group-alternative">
+															<InputGroupAddon addonType="prepend">
+																<InputGroupText>
+																	<i className="ni ni-tag" />
+																</InputGroupText>
+															</InputGroupAddon>
+															<Input
+																aria-label="Nachname"
+																placeholder="Nachname"
+																type="text"
+																name="name"
+																onFocus={() => setLastNameFocus('focused')}
+																onBlur={() => setLastNameFocus('')}
+															/>
+														</InputGroup>
+													</FormGroup>
+												</Col>
+											</Row>
+											<FormGroup className={emailFocus}>
+												<label>Email Adresse</label>
+												<InputGroup className="input-group-alternative">
+													<InputGroupAddon addonType="prepend">
+														<InputGroupText>
+															<i className="ni ni-email-83" />
+														</InputGroupText>
+													</InputGroupAddon>
 													<Input
-														className="form-control-alternative"
-														id="message"
-														name="message"
-														rows="6"
-														name="message"
-														type="textarea"
+														placeholder="Email ..."
+														type="text"
+														name="email"
+														onFocus={() => setEmailFocus('focused')}
+														onBlur={() => setEmailFocus('')}
 													/>
-												</FormGroup>
-												<Row className="justify-content-end">
-													<Col className="text-right" md="6">
-														<Button color="primary" type="submit">
-															Nachricht senden
-														</Button>
-													</Col>
-												</Row>
-											</Form>
-										</CardBody>
-									</Card>
-								</Col>
-							</Row>
-						</AuthCheck>
+												</InputGroup>
+											</FormGroup>
+
+											<FormGroup>
+												<label>Deine Nachricht</label>
+												<Input
+													className="form-control-alternative"
+													id="message"
+													name="message"
+													rows="6"
+													name="message"
+													type="textarea"
+												/>
+											</FormGroup>
+											<Row className="justify-content-end">
+												<Col className="text-right" md="6">
+													<Button color="primary" type="submit">
+														Nachricht senden
+													</Button>
+												</Col>
+											</Row>
+										</Form>
+									</CardBody>
+								</Card>
+							</Col>
+						</Row>
+						{/* </AuthCheck> */}
 						{/* </div> */}
 					</CardBody>
 				</Card>

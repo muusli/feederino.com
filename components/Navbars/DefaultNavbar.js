@@ -19,6 +19,7 @@ import React from "react";
 import classnames from "classnames";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
+import Link from "next/link";
 // reactstrap components
 import {
   Collapse,
@@ -285,12 +286,13 @@ function DefaultNavbar({ theme, sidenavOpen, toggleSidenav }) {
               <UncontrolledDropdown nav>
                 <DropdownToggle className="nav-link pr-0" color="" tag="a">
                   <Media className="align-items-center">
-                    <span className="avatar avatar-sm rounded-circle">
+                    {user?.photoURL&&( <span className="avatar avatar-sm rounded-circle">
                       <img
                         alt="..."
                         src={user?.photoURL}
                       />
-                    </span>
+                    </span>)}
+                   
                     <Media className="ml-2 d-none d-lg-block">
                       <span className="mb-0 text-sm font-weight-bold">
                         {username}
@@ -347,7 +349,19 @@ function DefaultNavbar({ theme, sidenavOpen, toggleSidenav }) {
             {/* user is not signed OR has not created username */}
             {!username && (
         <>
-        <LoginModal></LoginModal>
+      <Link href="/auth/login">
+                      <Button className="btn-neutral my-2" size="sm"color="white">
+                        Login
+                      </Button>
+                    </Link>
+                    <Button
+                      className="my-2"
+                      size="sm"
+                      color="primary"
+                      href="/auth/register"
+                    >
+                      Registrieren
+                    </Button>
             {/* <Button href="/enter" outline color="primary" type="button">
         Log In
       </Button> */}

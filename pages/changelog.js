@@ -18,6 +18,9 @@ function changelog() {
 			<Container justify="center">
 				<Card style={{ position: 'relative', bottom: '4.5rem' }}>
 					<CardBody>
+						<p>Add Login/Register Pages</p>
+						<p>Change AboutUs layout</p>
+						<p> Add Email Login</p>
 						<p> Kommentarfunktion hinzugefügt</p>
 						<p>Add Aboutus template</p>
 						<p>Add ContactUs</p>

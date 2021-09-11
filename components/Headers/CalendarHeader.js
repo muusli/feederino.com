@@ -54,9 +54,9 @@ function ContactHeader({ name, parentName,btnName ,link}) {
                   </BreadcrumbItem>
                 </Breadcrumb>
               </Col>
-              <Col className="text-right" lg="6" xs="5">
+              {/* <Col className="text-right" lg="6" xs="5"> */}
               {/* {currentUser &&<AddRecipe></AddRecipe>} */}
-              {btnName&&(<Button
+              {/* <Button
                   className="btn-neutral"
                   color="default"
                   href={link}
@@ -64,10 +64,9 @@ function ContactHeader({ name, parentName,btnName ,link}) {
                   size="sm"
                 >
                   {btnName}
-                </Button>)}
-              
+                </Button>
                
-              </Col>
+              </Col> */}
             </Row>
 
            
