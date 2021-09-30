@@ -37,7 +37,7 @@ export default function Page({ recipeRef, defaultValues, preview }) {
 	const { user, username } = useContext(UserContext);
 	const [ modalOpen, setModalOpen ] = React.useState(false);
 	const [ ingredients, setIngredients ] = React.useState(defaultValues.ingredients);
-
+	// React.useEffect(setIngredients(defaultValues));
 	const [ titleFocus, setTitleFocus ] = React.useState(false);
 	const [ description, setDescription ] = React.useState(false);
 	const [ duration, setDuration ] = React.useState(false);
@@ -50,15 +50,15 @@ export default function Page({ recipeRef, defaultValues, preview }) {
 	const [ image, setImage ] = React.useState(defaultValues.image);
 	const [ tagsInput, setTagsinput ] = React.useState([]);
 
-	if (!ingredients) {
-		setIngredients([]);
-	}
+	// if (!ingredients) {
+	// 	setIngredients(defaultValues.ingredients || []);
+	// }
 	// if (!steps) {
 	// 	setSteps([]);
 	// }
 
 	const updateRecipe = async ({
-		image        : downloadURL,
+		image       : downloadURL,
 		title,
 		published,
 		duration,
@@ -66,149 +66,150 @@ export default function Page({ recipeRef, defaultValues, preview }) {
 		activeTime,
 		portion,
 		difficulty,
-		tagsInput,
-		id1,
-		id2,
-		id3,
-		id4,
-		id5,
-		id6,
-		id7,
-		id8,
-		id9,
-		id10,
-		id11,
-		id12,
-		id13,
-		id14,
-		id15,
-		id16,
-		id17,
-		id18,
-		id19,
-		id20,
-		id21,
-		id22,
 
-		unit1,
-		unit2,
-		unit3,
-		unit4,
-		unit5,
-		unit6,
-		unit7,
-		unit8,
-		unit9,
-		unit10,
-		unit11,
-		unit12,
-		unit13,
-		unit14,
-		unit15,
-		unit16,
-		unit17,
-		unit18,
-		unit19,
-		unit20,
-		unit21,
-		unit22,
-		quantity1,
-		quantity2,
-		quantity3,
-		quantity4,
-		quantity5,
-		quantity6,
-		quantity7,
-		quantity8,
-		quantity9,
-		quantity10,
-		quantity11,
-		quantity12,
-		quantity13,
-		quantity14,
-		quantity15,
-		quantity16,
-		quantity17,
-		quantity18,
-		quantity19,
-		quantity20,
-		quantity21,
-		quantity22,
-		ingredient1,
-		ingredient2,
-		ingredient3,
-		ingredient4,
-		ingredient5,
-		ingredient6,
-		ingredient7,
-		ingredient8,
-		ingredient9,
-		ingredient10,
-		ingredient11,
-		ingredient12,
-		ingredient13,
-		ingredient14,
-		ingredient15,
-		ingredient16,
-		ingredient17,
-		ingredient18,
-		ingredient19,
-		ingredient20,
-		ingredient21,
-		ingredient22,
-		url1,
-		url2,
-		url3,
-		url4,
-		url5,
-		url6,
-		url7,
-		url8,
-		url9,
-		url10,
-		url11,
-		url12,
-		url13,
-		url14,
-		url15,
-		url16,
-		url17,
-		url18,
-		url19,
-		url20,
-		url21,
-		url22
+		tagsInput
+		// id1,
+		// id2,
+		// id3,
+		// id4,
+		// id5,
+		// id6,
+		// id7,
+		// id8,
+		// id9,
+		// id10,
+		// id11,
+		// id12,
+		// id13,
+		// id14,
+		// id15,
+		// id16,
+		// id17,
+		// id18,
+		// id19,
+		// id20,
+		// id21,
+		// id22,
+
+		// unit1,
+		// unit2,
+		// unit3,
+		// unit4,
+		// unit5,
+		// unit6,
+		// unit7,
+		// unit8,
+		// unit9,
+		// unit10,
+		// unit11,
+		// unit12,
+		// unit13,
+		// unit14,
+		// unit15,
+		// unit16,
+		// unit17,
+		// unit18,
+		// unit19,
+		// unit20,
+		// unit21,
+		// unit22,
+		// quantity1,
+		// quantity2,
+		// quantity3,
+		// quantity4,
+		// quantity5,
+		// quantity6,
+		// quantity7,
+		// quantity8,
+		// quantity9,
+		// quantity10,
+		// quantity11,
+		// quantity12,
+		// quantity13,
+		// quantity14,
+		// quantity15,
+		// quantity16,
+		// quantity17,
+		// quantity18,
+		// quantity19,
+		// quantity20,
+		// quantity21,
+		// quantity22,
+		// ingredient1,
+		// ingredient2,
+		// ingredient3,
+		// ingredient4,
+		// ingredient5,
+		// ingredient6,
+		// ingredient7,
+		// ingredient8,
+		// ingredient9,
+		// ingredient10,
+		// ingredient11,
+		// ingredient12,
+		// ingredient13,
+		// ingredient14,
+		// ingredient15,
+		// ingredient16,
+		// ingredient17,
+		// ingredient18,
+		// ingredient19,
+		// ingredient20,
+		// ingredient21,
+		// ingredient22,
+		// url1,
+		// url2,
+		// url3,
+		// url4,
+		// url5,
+		// url6,
+		// url7,
+		// url8,
+		// url9,
+		// url10,
+		// url11,
+		// url12,
+		// url13,
+		// url14,
+		// url15,
+		// url16,
+		// url17,
+		// url18,
+		// url19,
+		// url20,
+		// url21,
+		// url22
 	}) => {
-		const ingredientList = [
-			{ id: id1, unit: unit1, quantity: quantity1, name: ingredient1, url: url1 },
-			{ unit: unit2, quantity: quantity2, name: ingredient2, url: url2, id: id2 },
-			{ unit: unit3, quantity: quantity3, name: ingredient3, url: url3, id: id3 },
-			{ unit: unit4, quantity: quantity4, name: ingredient4, url: url4, id: id4 },
-			{ unit: unit5, quantity: quantity5, name: ingredient5, url: url5, id: id5 },
-			{ unit: unit6, quantity: quantity6, name: ingredient6, url: url6, id: id6 },
-			{ unit: unit7, quantity: quantity7, name: ingredient7, url: url7, id: id7 },
-			{ unit: unit8, quantity: quantity8, name: ingredient8, url: url8, id: id8 },
-			{ unit: unit9, quantity: quantity9, name: ingredient9, url: url9, id: id9 },
-			{ unit: unit10, quantity: quantity10, name: ingredient10, url: url10, id: id10 },
-			{ unit: unit11, quantity: quantity11, name: ingredient11, url: url11, id: id11 },
-			{ unit: unit12, quantity: quantity12, name: ingredient12, url: url12, id: id12 },
-			{ unit: unit13, quantity: quantity13, name: ingredient13, url: url13, id: id13 },
-			{ unit: unit14, quantity: quantity14, name: ingredient14, url: url14, id: id14 },
-			{ unit: unit15, quantity: quantity15, name: ingredient15, url: url15, id: id15 },
-			{ unit: unit16, quantity: quantity16, name: ingredient16, url: url16, id: id16 },
-			{ unit: unit17, quantity: quantity17, name: ingredient17, url: url17, id: id17 },
-			{ unit: unit18, quantity: quantity18, name: ingredient18, url: url18, id: id18 },
-			{ unit: unit19, quantity: quantity19, name: ingredient19, url: url19, id: id19 },
-			{ unit: unit20, quantity: quantity20, name: ingredient20, url: url20, id: id20 },
-			{ unit: unit21, quantity: quantity21, name: ingredient21, url: url21, id: id21 },
-			{ unit: unit22, quantity: quantity22, name: ingredient22, url: url22, id: id22 }
-		];
+		// const ingredientList = [
+		// 	{ id: id1, unit: unit1, quantity: quantity1, name: ingredient1, url: url1 },
+		// 	{ unit: unit2, quantity: quantity2, name: ingredient2, url: url2, id: id2 },
+		// 	{ unit: unit3, quantity: quantity3, name: ingredient3, url: url3, id: id3 },
+		// 	{ unit: unit4, quantity: quantity4, name: ingredient4, url: url4, id: id4 },
+		// 	{ unit: unit5, quantity: quantity5, name: ingredient5, url: url5, id: id5 },
+		// 	{ unit: unit6, quantity: quantity6, name: ingredient6, url: url6, id: id6 },
+		// 	{ unit: unit7, quantity: quantity7, name: ingredient7, url: url7, id: id7 },
+		// 	{ unit: unit8, quantity: quantity8, name: ingredient8, url: url8, id: id8 },
+		// 	{ unit: unit9, quantity: quantity9, name: ingredient9, url: url9, id: id9 },
+		// 	{ unit: unit10, quantity: quantity10, name: ingredient10, url: url10, id: id10 },
+		// 	{ unit: unit11, quantity: quantity11, name: ingredient11, url: url11, id: id11 },
+		// 	{ unit: unit12, quantity: quantity12, name: ingredient12, url: url12, id: id12 },
+		// 	{ unit: unit13, quantity: quantity13, name: ingredient13, url: url13, id: id13 },
+		// 	{ unit: unit14, quantity: quantity14, name: ingredient14, url: url14, id: id14 },
+		// 	{ unit: unit15, quantity: quantity15, name: ingredient15, url: url15, id: id15 },
+		// 	{ unit: unit16, quantity: quantity16, name: ingredient16, url: url16, id: id16 },
+		// 	{ unit: unit17, quantity: quantity17, name: ingredient17, url: url17, id: id17 },
+		// 	{ unit: unit18, quantity: quantity18, name: ingredient18, url: url18, id: id18 },
+		// 	{ unit: unit19, quantity: quantity19, name: ingredient19, url: url19, id: id19 },
+		// 	{ unit: unit20, quantity: quantity20, name: ingredient20, url: url20, id: id20 },
+		// 	{ unit: unit21, quantity: quantity21, name: ingredient21, url: url21, id: id21 },
+		// 	{ unit: unit22, quantity: quantity22, name: ingredient22, url: url22, id: id22 }
+		// ];
 
-		for (let i = 0; i < ingredientList.length; i++) {
-			if (ingredientList[i].name == undefined) {
-				ingredientList.splice(i, 22);
-			}
-		}
+		// for (let i = 0; i < ingredientList.length; i++) {
+		// 	if (ingredientList[i].name == undefined) {
+		// 		ingredientList.splice(i, 22);
+		// 	}
+		// }
 
 		await recipeRef.update({
 			// categorie,
@@ -217,11 +218,11 @@ export default function Page({ recipeRef, defaultValues, preview }) {
 			published,
 			duration,
 			description,
+			ingredients,
 			activeTime,
 			portion,
 			// categorie   : tagsInput,
 			steps,
-			ingredients : ingredientList,
 			difficulty,
 			updatedAt   : serverTimestamp()
 		});
@@ -261,6 +262,16 @@ export default function Page({ recipeRef, defaultValues, preview }) {
 		let updatedIngredients = ingredients;
 		updatedIngredients.splice(ingredient.position, 1, ingredient);
 		setIngredients(updatedIngredients);
+		// useFieldArray('ingredients', updatedIngredients);
+	};
+	const deleteIngredient = (ingredient) => {
+		let updatedIngredients = ingredients;
+
+		// updatedIngredients.splice(ingredients.indexOf(ingredient), 1);
+		updatedIngredients.splice(ingredient.position, 1);
+		setIngredients(updatedIngredients);
+		// console.log(ingredients);
+		// return ingredients;
 		// useFieldArray('ingredients', updatedIngredients);
 	};
 	const updateSteps = (string, id) => {
@@ -451,7 +462,8 @@ export default function Page({ recipeRef, defaultValues, preview }) {
 					</Row>
 					{/* <input name="ingredients" ref={register} hidden /> */}
 					<AddIngredients
-						setValue={setValue}
+						deleteIngredient={deleteIngredient}
+						// setValue={setValue}
 						ingredients={ingredients}
 						innerRef={register}
 						setIngredients={setIngredients}
@@ -584,7 +596,7 @@ export default function Page({ recipeRef, defaultValues, preview }) {
 				<ModalFooter>
 					<Link href="/recipes/myRecipes">
 						<Button color="secondary" type="button">
-							Schließen
+							Teilen
 						</Button>
 					</Link>
 					<Button type="submit" color="primary">

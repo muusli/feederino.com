@@ -9,10 +9,12 @@ import routes from 'routes.js';
 import { useUserData } from '../lib/hooks';
 import { UserContext } from '../lib/context';
 function Default({ router, children }) {
-	const [ sidenavOpen, setSidenavOpen ] = React.useState(false);
+	const [ sidenavOpen, setSidenavOpen ] = React.useState(true);
 	const userData = useUserData();
-	const getRoutes = (routes) => {
-		return routes.map((prop, key) => {
+	console.log(userData.username);
+	const routeswithUsername = routes(userData.username);
+	const getRoutes = (routeswithUsername) => {
+		return routeswithUsername.map((prop, key) => {
 			if (prop.collapse) {
 				return getRoutes(prop.views);
 			}
@@ -25,9 +27,9 @@ function Default({ router, children }) {
 		});
 	};
 	const getBrandText = (path) => {
-		for (let i = 0; i < routes.length; i++) {
-			if (router.pathname.indexOf(routes[i].layout + routes[i].path) !== -1) {
-				return routes[i].name;
+		for (let i = 0; i < routeswithUsername.length; i++) {
+			if (router.pathname.indexOf(routeswithUsername[i].layout + routeswithUsername[i].path) !== -1) {
+				return routeswithUsername[i].name;
 			}
 		}
 		return 'Brand';
@@ -51,9 +53,10 @@ function Default({ router, children }) {
 		<div>
 			<UserContext.Provider value={userData}>
 				<Sidebar
-					routes={routes}
+					routes={routeswithUsername}
+					username={userData.username}
 					toggleSidenav={toggleSidenav}
-					sidenavOpen={!sidenavOpen}
+					sidenavOpen={sidenavOpen}
 					logo={{
 						innerLink : '/',
 						imgSrc    : require('assets/img/brand/muusli.png'),
@@ -64,7 +67,7 @@ function Default({ router, children }) {
 					<DefaultNavbar
 						theme={getNavbarTheme()}
 						toggleSidenav={toggleSidenav}
-						sidenavOpen={!sidenavOpen}
+						sidenavOpen={sidenavOpen}
 						brandText={getBrandText(router.pathname)}
 					/>
 
@@ -72,7 +75,7 @@ function Default({ router, children }) {
 					<Toaster />
 					<AuthFooter />
 				</div>
-				{!sidenavOpen ? <div className="backdrop d-xl-none" onClick={toggleSidenav} /> : null}
+				{sidenavOpen ? <div className="backdrop d-xl-none" onClick={toggleSidenav} /> : null}
 			</UserContext.Provider>
 		</div>
 	);

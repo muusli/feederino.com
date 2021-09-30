@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import HeartButton from '../Inputs/HeartButton';
 import { firestore, getUserWithUsername } from '../../lib/firebase';
+import Image from 'next/Image';
 import {
 	Card,
 	CardImg,
@@ -32,7 +33,7 @@ function PostItem({ post, admin = false }) {
 
 					<p className="mb-4">{post.description}</p>
 					<Link href={`/${post.username}/${post.slug}`}>
-						<img alt="..." className="img-fluid rounded" src={post.image} />
+						<img layout="fill" alt="..." className="img-fluid rounded" src={post.image} />
 					</Link>
 					<Row className="align-items-center my-3 pb-3 border-bottom">
 						<Col sm="6">
@@ -70,7 +71,7 @@ function PostItem({ post, admin = false }) {
                           id="tooltip36177092"
                           onClick={(e) => e.preventDefault()}
                         >
-                          <img
+                          <Image
                             alt="..."
                             src={require("assets/img/theme/team-1.jpg")}
                           />
@@ -84,7 +85,7 @@ function PostItem({ post, admin = false }) {
                           id="tooltip857639221"
                           onClick={(e) => e.preventDefault()}
                         >
-                          <img
+                          <Image
                             alt="..."
                             className="rounded-circle"
                             src={require("assets/img/theme/team-2.jpg")}
@@ -102,7 +103,7 @@ function PostItem({ post, admin = false }) {
                           id="tooltip260223080"
                           onClick={(e) => e.preventDefault()}
                         >
-                          <img
+                          <Image
                             alt="..."
                             className="rounded-circle"
                             src={require("assets/img/theme/team-3.jpg")}

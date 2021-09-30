@@ -4,8 +4,10 @@ import 'assets/scss/nextjs-argon-dashboard-pro.scss?v1.1.0';
 import { useEffect, useState, useCallback, useContext } from 'react';
 import debounce from 'lodash.debounce';
 import router from 'next/router';
+import Image from 'next/image';
 import Default from '../../layouts/Default.js';
 import { Button, Input } from 'reactstrap';
+import next from 'next';
 export default function Enter(props) {
 	const { user, username } = useContext(UserContext);
 
@@ -28,11 +30,11 @@ function SignInButton() {
 
 	return (
 		// <button className="btn-google" onClick={signInWithGoogle}>
-		// 	<img src={'/google.jpg'} width="30px" /> Sign in with Google
+		// 	<Image src={'/google.jpg'} width="30px" /> Sign in with Google
 		// </button>
 		<Button className="btn-neutral btn-icon btn-google" color="default" href="#pablo" onClick={signInWithGoogle}>
 			<span className="btn-inner--icon mr-1">
-				<img alt="..." src={require('assets/img/icons/common/google.svg')} />
+				<img layout="fill" src={require('assets/img/icons/common/google.svg')} />
 			</span>
 			<span className="btn-inner--text">Google</span>
 		</Button>

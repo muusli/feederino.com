@@ -18,6 +18,12 @@ function changelog() {
 			<Container justify="center">
 				<Card style={{ position: 'relative', bottom: '4.5rem' }}>
 					<CardBody>
+						<p>Add Mealplanner</p>
+						<p>Add Search Function</p>
+						<p>Add Shoppinglist</p>
+						<p>Add Send ShoppingList</p>
+						<p>Smaller Bugfixes</p>
+						<p>EditRecipe, Ingredients are now deletable</p>
 						<p>Add Login/Register Pages</p>
 						<p>Change AboutUs layout</p>
 						<p> Add Email Login</p>

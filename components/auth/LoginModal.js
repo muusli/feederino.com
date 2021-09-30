@@ -1,5 +1,6 @@
 import React from "react";
 import classnames from "classnames";
+import Image from 'next/image'
 import { useForm } from 'react-hook-form';
 import firebase from 'firebase'
 // reactstrap components
@@ -83,7 +84,7 @@ function LoginModal() {
                     onClick={(e) => e.preventDefault()}
                   >
                     <span className="btn-inner--icon mr-1">
-                      <img
+                      <Image
                         alt="..."
                         src={require("assets/img/icons/common/github.svg")}
                       />
@@ -97,7 +98,7 @@ function LoginModal() {
                     onClick={(e) => e.preventDefault()}
                   >
                     <span className="btn-inner--icon mr-1">
-                      <img
+                      <Image
                         alt="..."
                         src={require("assets/img/icons/common/google.svg")}
                       />

@@ -42,10 +42,9 @@ export default function Page({}) {
 
 		await ref.set(data);
 		setModalOpen(!modalOpen);
-		toast.success('Rezeptentwurf hinzugefügt!');
-		router.push(`/recipes/myRecipes/${slug}`);
 		// Imperative navigation after doc is set
-		//   router.push(`/collection/myrecipes`);
+		toast.success('Rezeptentwurf hinzugefügt!');
+		router.push(`/recipes/myRecipes/${username}/${slug}`);
 	};
 	return (
 		<main>

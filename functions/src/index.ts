@@ -2,16 +2,37 @@
 
 import * as functions from "firebase-functions";
 // import * as admin from 'firebase-admin';
-
-// import * as Twilio from 'twilio';
-// import * as admin from 'firebase-admin';
+import { MeiliSearch } from 'meilisearch'
+import {Twilio} from 'twilio';
+import * as admin from 'firebase-admin';
 import axios from "axios";
-
+admin.initializeApp();
+// const MeiliSearch = require('meilisearch')
+// const { Client } = require('@elastic/elasticsearch');
+const twilioCredentials =functions.config().twilio;
 const credentials = functions.config().spoonacular;
+// const ELASTIC_ID = functions.config().elastic.id;
+// const ELASTIC_USERNAME = functions.config().elastic.username;
+// const ELASTIC_PASSWORD = functions.config().elastic.password;
 
-// const client = new Twilio(credentials.sid, credentials.token);
 
-// const db = admin.firestore();
+
+const client = new MeiliSearch({
+    host: 'http://164.90.175.92/',
+    apiKey: '793c93af9e13c8380ed364b042268dba4466fae33f79d636fbdb2d2275c450dd',
+});
+// const client = new Client({
+// 	cloud : {
+// 		id       : ELASTIC_ID,
+// 		username : ELASTIC_USERNAME,
+// 		password : ELASTIC_PASSWORD,
+   
+// 	}
+// });
+
+const twilioClient = new Twilio(twilioCredentials.sid, twilioCredentials.token);
+
+const db = admin.firestore();
 
 export const autocompleteIngredient = functions.https
 .onCall(async (data, context) => {
@@ -45,48 +66,132 @@ export const searchIngredient = functions.https
   }
 });
 
-// export const sendText = functions.https.onCall(async (data, context) => {
-//   const userId = context.auth.uid;
+// export const onRecipeCreated = functions.firestore
+// 	.document('users/{userId}/recipes/{recipeId}')
+// 	.onCreate(async (snap, context) => {
+// 		// Get the note document
+// 		const recipe = snap.data();
 
-//   const userRef = db.doc(`users/${userId}`);
+// 		// Use the 'nodeId' path segment as the identifier for Elastic
+// 		const id = context.params.recipeId;
 
-//   const userSnap = await userRef.get();
+// 		// Write to the Elastic index
+// 		client.index({
+// 			index : 'recipes',
+// 			id,
+// 			body  : recipe
+// 		});
+// 	});
+//   export const onRecipeUpdated = functions.firestore
+// 	.document('users/{userId}/recipes/{recipeId}')
+// 	.onUpdate(async (snap, context) => {
+// 		// Get the note document
+// 		const recipe = snap.after.data()
 
-//   const number = userSnap.data().phoneNumber;
+// 		// Use the 'nodeId' path segment as the identifier for Elastic
+// 		const id = context.params.recipeId;
 
-//   return client.messages.create({
-//     body: data.message,
-//     to: number, // User's number
-//     from: '+12248084375' // Your Twilio number
-//   });
+// 		// Write to the Elastic index
+// 		client.index({
+// 			index : 'recipes',
+// 			id,
+// 			body  : recipe
+// 		});
+// 	});
+	
+// export const searchRecipes = functions.https.onCall(async (data, context) => {
+// 	const query = data.query;
+
+// 	// Search for any notes where the text field contains the query text.
+// 	// For more search examples see:
+// 	// https://www.elastic.co/guide/en/elasticsearch/client/javascript-api/current/search_examples.html
+// 	const searchRes = await client.search({
+// 		index : 'recipes',
+// 		body  : {
+// 			query : {
+// 				query_string : {
+// 					query  : `*${query}*`,
+// 					fields : [ 'title', 'description'],
+// 					// filter: {username: 'muusli2'}
+					
+// 				},
+// 			// 	filters:{
+				
+// 			// 		// published: ['true']}
+// 			// 	// ,
+// 			// 	// bool: {filter:[{term:{published:'true'}}]}
+// 			},
+			
+			
+// 		}
+// 	});
+
+	// Each entry will have the following properties:
+	//   _score: a score for how well the item matches the search
+	//   _source: the original item data
+// 	const hits = searchRes.body.hits.hits;
+
+// 	// const recipes = hits.map( '_source');
+// 	return {
+// 		recipes : hits
+// 	};
 // });
 
+export const meilisearchIndex = functions.firestore
+  .document('users/{userId}/recipes/{recipeId}')
+  .onCreate(async (snapshot, context) => {
+   	// Get the note document
+		const recipe = snapshot.data();
+		// Use the 'nodeId' path segment as the identifier for meili
+		const id = context.params.recipeId;
+   await client.index('recipes').addDocuments([
+      { id, ...recipe}
+    ]).then(res=> console.log(res))
+  });
 
-// export const sendText = functions.https.onCall(async (data, context) => {
-//   const userId = context.auth.uid;
+  export const meilisearchQuery = functions.https.onCall(async (data, context:any) => {
+	const search = await client.index('recipes').search(data.query, {limit:5,filter:[["published = true", `uid = ${context.auth.uid}`]]});
+  	return {
+    recipes: search};
+  });
+export const sendText = functions.https.onCall(async (data, context:any) => {
+	const StringMessage = data.message.map((e:any) => ` \n${e.quantity} ${e.unit} ${e.name}`).toString();
+  const userId = context.auth.uid;
+  const userRef = db.doc(`users/${userId}`);
+  const userSnap:any = await userRef.get();
+  const number = userSnap.data().phoneNumber;
+  const textMessage = {
+    body: `Hey hier ist deine Einkaufsliste ${StringMessage}`,
+    to: `whatsapp:${number}`, // SMS to this number
+    from: 'whatsapp:+14155238886' // From a valid Twilio number
+  };
 
-//   const userRef = db.doc(`users/${userId}`);
+  twilioClient.messages.create(textMessage)
+    .then((message: any) => {
+      console.log('SMS Sent: ' + message.status);
+      console.log('SMS Sent');
+      return true;
+    })
+    .catch((err: any) => {
+      console.log(err)
+      return false;
+    }); 
 
-//   const userSnap = await userRef.get();
+    return true;}
+  );
+  export const onRecipeUpdated = functions.firestore
+	.document('users/{userId}/recipes/{recipeId}')
+	.onUpdate(async (snap, context) => {
+		// Get the note document
+		const recipe = snap.after.data()
 
-//   const number = userSnap.data().phoneNumber;
+		// Use the 'nodeId' path segment as the identifier for Meili
+		const id = context.params.recipeId;
 
-//   const textMessage = {
-//     body: 'hello',
-//     to: number, // SMS to this number
-//     from: '+12248084375' // From a valid Twilio number
-//   };
-
-//   client.messages.create(textMessage)
-//     .then((message: any) => {
-//       // console.log('SMS Sent: ' + smsMessage + ' to ' + phoneNumber);
-//       console.log('SMS Sent');
-//       return true;
-//     })
-//     .catch((err: any) => {
-//       console.log(err)
-//       return false;
-//     }); 
-
-//     return true;
-//   });
+		// Write to the Meili index
+		client.index('recipes').updateDocuments([{
+        id,
+        ...recipe
+   }])
+	});
+	

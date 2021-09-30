@@ -4,6 +4,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useUserData } from '../../lib/hooks';
+import AuthCheck from '../auth/AuthCheck';
 import {
 	Card,
 	CardImg,
@@ -22,10 +23,15 @@ import {
 	ListGroup,
 	ListGroupItem
 } from 'reactstrap';
+import { auth } from '../../lib/firebase';
 export default function RecipeFeed({ recipes, admin }) {
 	return (
 		<Row>
-			{recipes ? recipes.map((recipe) => <RecipeItem recipe={recipe} key={recipe.slug} admin={admin} />) : null}
+			<AuthCheck>
+				{recipes ? (
+					recipes.map((recipe) => <RecipeItem recipe={recipe} key={recipe.slug} admin={admin} />)
+				) : null}
+			</AuthCheck>
 		</Row>
 	);
 }
@@ -47,11 +53,11 @@ function RecipeItem({ recipe, admin = false }) {
 	// 	console.log(meal);
 	// 	axios.post('http://localhost:5000/meal/add', meal).then((res) => console.log(res.data));
 	// };
-
+	console.log(auth.currentUser);
 	return (
 		<Col md="3">
 			{recipe.published == false ? (
-				<a href={`/recipes/myRecipes/${recipe.slug}`}>
+				<a href={`/recipes/myRecipes/${recipe.username}/${recipe.slug}`}>
 					<Card
 					// body
 					// inverse

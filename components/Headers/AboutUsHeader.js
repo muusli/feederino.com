@@ -14,7 +14,7 @@ import {
   Row,
   Col,
 } from "reactstrap";
-
+import Image from 'next/image'
 // Core Components
 
 function Header5() {
@@ -55,6 +55,7 @@ function Header5() {
               </Col>
               <Col className="pl-0" lg="7" xs="12">
                 <img
+                
                   alt="..."
                   className="ml-lg-5"
                   src={require("assets/img/brand/muusli.png")}

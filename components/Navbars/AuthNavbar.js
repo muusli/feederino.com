@@ -1,4 +1,4 @@
-/*!
+import Image from 'next/image'/*!
 
 =========================================================
 * NextJS Argon Dashboard PRO - v1.1.0
@@ -44,7 +44,9 @@ function AdminNavbar() {
             <span>
               <NavbarBrand href="#pablo">
                 <img
+                // layout="fill"
                   alt="..."
+                  style={{height:'3rem'}}
                   src={require("assets/img/brand/muusli.png")}
                 />
               </NavbarBrand>
@@ -71,7 +73,7 @@ function AdminNavbar() {
               <Row>
                 <Col className="collapse-brand" xs="6">
                   <Link href="/admin/dashboard">
-                    <img alt="..." src={require("assets/img/brand/blue.png")} />
+                    <img alt="..."src={require("assets/img/brand/blue.png")} />
                   </Link>
                 </Col>
                 <Col className="collapse-close" xs="6">
@@ -96,7 +98,7 @@ function AdminNavbar() {
               <NavItem>
                 <Link href="/recipes">
                   <NavLink href="#pablo">
-                    <span className="nav-link-inner--text">Rezeptvielfalt</span>
+                    <span className="nav-link-inner--text">Rezepte</span>
                   </NavLink>
                 </Link>
               </NavItem>
@@ -107,13 +109,13 @@ function AdminNavbar() {
                   </NavLink>
                 </Link>
               </NavItem>
-              <NavItem>
+              {/* <NavItem>
                 <Link href="/license">
                   <NavLink href="#pablo">
                     <span className="nav-link-inner--text">AGB</span>
                   </NavLink>
                 </Link>
-              </NavItem>
+              </NavItem> */}
               <NavItem>
                 <Link href="/auth/login">
                   <NavLink href="#pablo">

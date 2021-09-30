@@ -21,14 +21,21 @@ import PropTypes from "prop-types";
 import {
   Breadcrumb,
   BreadcrumbItem,
+  InputGroupAddon,
   Button,
   Container,
   Row,
+  Input,
+  InputGroup,
+  Modal, ModalBody,
   Col,
+  InputGroupText,
+  ModalFooter,
 } from "reactstrap";
 
-function ContactHeader({ name, parentName,btnName ,link,meals, btnMethod}) {
- 
+function ContactHeader({ name, parentName,btnName ,link,meals, btnMethod, phoneNumber2}) {
+    const [modalOpen, setModalOpen] = React.useState(false)
+    const [phoneNumber, setPhoneNumber] = React.useState(phoneNumber2)
   return (
     <>
       <div className="header bg-dark pb-6">
@@ -54,19 +61,25 @@ function ContactHeader({ name, parentName,btnName ,link,meals, btnMethod}) {
               </Col>
               <Col className="text-right" lg="6" xs="5">
               {/* {currentUser &&<AddRecipe></AddRecipe>} */}
-              <Button
+              {/* <Button
                   className="btn-neutral"
                   color="default"
                   href={link}
-                onClick={btnMethod}
+                onClick={() => setModalOpen(!modalOpen)}
                   size="sm"
                 >
                   {btnName}
-                </Button>
+                </Button> */}
                
               </Col>
             </Row>
-
+<Modal toggle={() => setModalOpen(!modalOpen)} isOpen={modalOpen}><ModalBody><label className="form-control-label" htmlFor="exampleFormControlTextarea1">
+									Wie lautet deine Telefonnummer?
+								</label><InputGroup><Input placeholder="z.B. +491234567889"defaultValue={phoneNumber2} onChange={(e)=>{setPhoneNumber(e.target.value)}}></Input><InputGroupAddon addonType="append">
+                              <InputGroupText>
+                                <i className="fas fa-phone" />
+                              </InputGroupText>
+                            </InputGroupAddon></InputGroup></ModalBody><ModalFooter><Button color="primary" onClick={()=> btnMethod(phoneNumber)}>Senden</Button></ModalFooter></Modal>
            
           </div>
         </Container>

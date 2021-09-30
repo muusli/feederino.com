@@ -1,5 +1,7 @@
 import ReactDatetime from 'react-datetime';
 import TagsInput from '../Inputs/TagsInput.js';
+import {firestore, serverTimestamp } from '../../lib/firebase';
+
 import Link from 'next/link'
 // import PostContent from './PostContent';
 // import HeartButton from './HeartButton';
@@ -27,10 +29,49 @@ import {
 // import { useDocumentData } from 'react-firebase-hooks/firestore';
 // import { useContext } from 'react';
 import NewComment from '../comments/NewComment.js';
-
-export default function RecipeContent({recipe,comments, recipeRef}) {
+import toast from 'react-hot-toast';
+export default function RecipeContent({recipe,comments, recipeRef, currentUser}) {
     const createdAt = typeof recipe?.createdAt === 'number' ? new Date(recipe.createdAt) : recipe.createdAt.toDate();
-	
+	const addMeal = async (event) => {
+		event.preventDefault();
+		let meal = {
+			title : recipe.title,
+			start : event.target.start.value,
+			allDay      : true,
+			author    : currentUser.uid,
+			className: 'bg-info'				,
+			recipe    : {title: recipe.title, updatedAt:'', createdAt:'',image:recipe.image,
+			title:recipe.title,
+			published:recipe.published || "",
+			description:recipe.description || "",
+			ingredients:recipe.ingredients|| "",
+			duration: recipe.duration || "",
+			activeTime:recipe.activeTime|| "",
+			portion:recipe.portion|| "",
+			// categorie   : tagsInput,
+			steps:recipe.steps|| "",
+			difficulty:recipe.difficulty|| "",},
+			createdAt:      serverTimestamp(),
+			updatedAt      : serverTimestamp(),	
+			
+		};
+console.log(meal)
+if (currentUser) {
+	const mealsRef = firestore.collection('users').doc(currentUser.uid).collection('calendar');
+	if (!mealsRef) {
+	  console.log('error')
+	}
+	else {
+	  await mealsRef.add(meal).then((docRef) => {
+		docRef.update({id: docRef.id})
+		toast.success('Rezept zum Kalendar hinzugefügt')
+			})
+	.catch((error) => {
+		console.error("Error adding document: ", error);
+	});;
+	  
+  }};
+	};
 	return (
 		<main>
 			
@@ -68,7 +109,31 @@ export default function RecipeContent({recipe,comments, recipeRef}) {
 								<Col xs='4' sm='4'md="4"className='text-center'><h3>{recipe.activeTime} min</h3><p>Arbeitszeit</p>  </Col>
 								<Col xs='4' sm='4'md="5" className='text-center'><h3>{recipe.difficulty}</h3><p>Schwierigkeit</p></Col>
 							</Row>
-
+							<hr/>
+							<Row><Col>
+							<Form onSubmit={addMeal}>
+								<FormGroup className="row">
+									<Col md="5">
+										<Button type="submit" block size="md" color="success">
+											Zum Plan hinzufügen
+										</Button>
+									</Col>
+									<Col md="7">
+										
+										<ReactDatetime
+											inputProps={{
+												name        : 'start',
+												placeholder : 'Date Picker Here'
+											}}
+											timeFormat={false}
+											dateFormat={"YYYY-MM-DD"}
+											initialViewMode={'days'}
+											initialValue={new Date()}
+										/>
+									</Col>
+								</FormGroup>
+							</Form>
+							</Col></Row>
 							<hr />
 							
 							

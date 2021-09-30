@@ -17,7 +17,7 @@
 import React from "react";
 import Link from "next/link";
 import { withRouter } from "next/router";
-
+import Image from 'next/image'
 // nodejs library that concatenates classes
 import classnames from "classnames";
 // nodejs library to set properties for components
@@ -99,7 +99,7 @@ function Sidebar({
   // this is used on mobile devices, when a user navigates
   // the sidebar will autoclose
   const closeSidenav = () => {
-    if (windowWidth < 1800) {
+    if (windowWidth < 1200) {
       toggleSidenav();
     }
   };
@@ -177,8 +177,10 @@ function Sidebar({
             <span>
               <NavbarBrand href="/">
                 <img
+                // layout="fill"
                   alt={logo.imgAlt}
                   className="navbar-brand-img"
+                  style={{maxHeight:'4rem'}}
                   src={logo.imgSrc}
                 />
               </NavbarBrand>

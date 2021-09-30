@@ -48,6 +48,7 @@ import {
 import AddModal from '../recipes/AddRecipe';
 import { useContext } from 'react';
 import { UserContext } from '../../lib/context';
+import Image from 'next/image'
 import { auth } from '../../lib/firebase';
 import LoginModal from 'components/auth/LoginModal'
 import SearchRecipe from 'components/recipes/SearchRecipe'
@@ -94,7 +95,7 @@ function DefaultNavbar({ theme, sidenavOpen, toggleSidenav }) {
         <Container>
           <Collapse navbar isOpen={true}>
             {/* <SearchRecipe theme={theme} openSearch={openSearch} closeSearch={closeSearch}></SearchRecipe> */}
-
+            <SearchRecipe theme={theme} openSearch={openSearch} closeSearch={closeSearch}></SearchRecipe>
             <Nav className="align-items-center ml-md-auto" navbar>
               <NavItem className="d-xl-none">
                 <div
@@ -125,8 +126,8 @@ function DefaultNavbar({ theme, sidenavOpen, toggleSidenav }) {
 
 
 
-
-
+{/* 
+<SearchRecipe></SearchRecipe> */}
 
 
               {/* <UncontrolledDropdown nav>
@@ -153,7 +154,7 @@ function DefaultNavbar({ theme, sidenavOpen, toggleSidenav }) {
                     >
                       <Row className="align-items-center">
                         <Col className="col-auto">
-                          <img
+                          <Image
                             alt="..."
                             className="avatar rounded-circle"
                             src={require("assets/img/theme/team-1.jpg")}
@@ -288,6 +289,7 @@ function DefaultNavbar({ theme, sidenavOpen, toggleSidenav }) {
                   <Media className="align-items-center">
                     {user?.photoURL&&( <span className="avatar avatar-sm rounded-circle">
                       <img
+                      layout="fill"
                         alt="..."
                         src={user?.photoURL}
                       />

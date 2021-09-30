@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import HeartButton from '../Inputs/HeartButton';
 import { firestore, getUserWithUsername } from '../../lib/firebase';
 import {
@@ -27,6 +28,7 @@ function PostItem({ comment, admin = false }) {
 			<Media className="media-comment">
 				<img
 					alt="..."
+					layout="fill"
 					className="avatar avatar-lg media-comment-avatar rounded-circle"
 					src={comment.authorPhotoURL}
 				/>

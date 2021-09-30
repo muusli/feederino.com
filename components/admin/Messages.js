@@ -28,7 +28,7 @@ function PostItem({ post, admin = false }) {
 					</small>
 					<p className="mb-4">{post.message}</p>
 					{/* <Link href={`/${post.username}/${post.slug}`}>
-						<img alt="..." className="img-fluid rounded" src={post.image} />
+						<Image alt="..." className="img-fluid rounded" src={post.image} />
 					</Link>
 					<Row className="align-items-center my-3 pb-3 border-bottom">
 						<Col sm="6">

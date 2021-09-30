@@ -6,7 +6,7 @@ import { Input, Form, Media, Button, Row, Col } from 'reactstrap';
 import { useContext } from 'react';
 import { useRouter } from 'next/router';
 import toast from 'react-hot-toast';
-
+import Image from 'next/image';
 import { firestore, auth, serverTimestamp } from '../../lib/firebase';
 function NewComment(slug) {
 	const { username } = useContext(UserContext);
@@ -48,6 +48,7 @@ function NewComment(slug) {
 				<Media className="align-items-center">
 					{auth.currentUser ? (
 						<img
+							layout="fill"
 							alt="..."
 							className="avatar avatar-lg rounded-circle mr-4"
 							src={auth.currentUser.photoURL}

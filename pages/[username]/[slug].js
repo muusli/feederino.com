@@ -164,7 +164,7 @@ export default function Post(props) {
       </div>
 			<section>
 				{/* <HeartButton postRef={postRef}></HeartButton> */}
-				<RecipeContent getMoreComments={getMoreComments}recipe={recipe} comments={props.comments}recipeRef={postRef}/>
+				<RecipeContent currentUser={currentUser} getMoreComments={getMoreComments}recipe={recipe} comments={props.comments}recipeRef={postRef}/>
 				
 			</section>
 		</main>

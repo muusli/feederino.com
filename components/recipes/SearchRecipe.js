@@ -2,6 +2,9 @@ import React from 'react';
 import classnames from 'classnames';
 import { useUserData } from '../../lib/hooks';
 import axios from 'axios';
+import Image from 'next/image'
+import firebase from 'firebase';
+import router from 'next/router';
 import ReactDatetime from 'react-datetime';
 import TagsInput from 'components/Inputs/TagsInput.js';
 import {  Dropdown, DropdownToggle,  DropdownItem, DropdownMenu, Input, InputGroupAddon, InputGroupText, FormGroup, Form, InputGroup ,Card,
@@ -42,47 +45,27 @@ function SearchRecipe({ theme, closeSearch, openSearch }) {
 	const [ recipeSearch, setRecipeSearch ] = React.useState();
 	const [ recipeOpen, setRecipeOpen ] = React.useState(false);
 	const [ recipe, setRecipe ] = React.useState([]);
-	const recipeImages = [
-		{
-			src     :
-				'https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Zm9vZHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-			altText : 'Slide 1',
-			caption : '',
-			header  : '',
-			key     : '1'
-		},
-		{
-			src     :
-				'https://images.unsplash.com/photo-1482049016688-2d3e1b311543?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Zm9vZHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-			altText : 'Slide 2',
-			caption : '',
-			header  : '',
-			key     : '2'
-		},
-		{
-			src     :
-				'https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8Zm9vZHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-			altText : 'Slide 3',
-			caption : '',
-			header  : '',
-			key     : '3'
-		}
-	];
+	
 	const searchRecipe = debounce(async (string) => {			
-		const response = await axios.get('http://localhost:5000/recipes', {
-			params : {
-				query  : string,
-			
-			}
-		});
-		setRecipeSearch(response.data);
-		console.log(recipeSearch);
+		const searchRecipes = firebase.functions().httpsCallable('meilisearchQuery');
+  searchRecipes({ query: string })
+  .then((result) => {
+	  console.log(result)
+	//   const recipesSearchResult = result.data.recipes.hits.map((r)=>r['recipe'])
+	  const recipesSearchResult = result.data.recipes.hits
+
+	//   const recipesSearchResult = result.data.recipes.map((r)=>r['_source'])
+    setRecipeSearch(recipesSearchResult)
+    console.log(recipesSearchResult)
+  });
 	}, 500);
 
 	const handleSelect = (recipe) => {
 		// props.updateRecipe(string, recipe)
-		setRecipeOpen(true)
+		// setRecipeOpen(true)
 		setRecipe(recipe)
+		console.log(recipe)
+		router.push(`/${recipe.username}/${recipe.slug}`)
 	};
 	const userData = useUserData();
 	const addMeal = (event) => {
@@ -100,7 +83,7 @@ function SearchRecipe({ theme, closeSearch, openSearch }) {
 			
 		};
 console.log(meal)
-		axios.post('http://localhost:5000/meal/add', meal).then((res) => console.log(res.data));
+		// axios.post('http://localhost:5000/meal/add', meal).then((res) => console.log(res.data));
 	};
 	return (<><Dropdown isOpen={dropdownOpen} toggle={toggle} direction={'down'}>
         <DropdownToggle color='#000'>
@@ -139,16 +122,24 @@ console.log(meal)
             > */}
                 {recipeSearch ? 
                     recipeSearch.map((item) =>(<> 
-                    <DropdownItem onClick={()=> handleSelect(item) }>{item.title}</DropdownItem> </>)
+                    <DropdownItem onClick={()=> handleSelect(item) }>
+               
+                  <img
+                    alt="..."
+					className=" avatar rounded-circle mr-3"
+                    src={item.image}
+                  ></img>
+            
+            {item.title}</DropdownItem> </>)
                 ) : (
-                    <DropdownItem >Some Action</DropdownItem>
+                    <DropdownItem >Suche ein Rezept</DropdownItem>
                 )}
             </DropdownMenu>
        
         </Dropdown>
-		<Modal className="modal-lg" toggle={() => setRecipeOpen(!recipeOpen)} isOpen={recipeOpen}>
+		{/* <Modal className="modal-lg" toggle={() => setRecipeOpen(!recipeOpen)} isOpen={recipeOpen}>
 				<ModalBody>
-					<Row>
+					{/* <Row>
 						<Col md="6" className="mx-auto">
 							<UncontrolledCarousel items={recipeImages} />
 						</Col>
@@ -245,7 +236,7 @@ console.log(meal)
 						<Col md="12">
 							<div className="mb-1">
 								<Media className="media-comment">
-									<img
+									<Image
 										alt="..."
 										className="avatar avatar-lg media-comment-avatar rounded-circle"
 										src={require('assets/img/theme/team-1.jpg')}
@@ -275,7 +266,7 @@ console.log(meal)
 									</Media>
 								</Media>
 								<Media className="media-comment">
-									<img
+									<Image
 										alt="..."
 										className="avatar avatar-lg media-comment-avatar rounded-circle"
 										src={require('assets/img/theme/team-2.jpg')}
@@ -307,7 +298,7 @@ console.log(meal)
 								</Media>
 								<hr />
 								<Media className="align-items-center">
-									<img
+									<Image
 										alt="..."
 										className="avatar avatar-lg rounded-circle mr-4"
 										src={require('assets/img/theme/team-3.jpg')}
@@ -320,9 +311,8 @@ console.log(meal)
 								</Media>
 							</div>
 						</Col>{' '}
-					</Row>
-				</ModalBody>
-			</Modal>
+					</Row> */}
+				
 		</>
         
     )

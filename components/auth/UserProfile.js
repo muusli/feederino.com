@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Card, CardImg, Row, Col, CardHeader, CardBody, Button } from 'reactstrap';
 export default function UserProfile({ user }) {
 	return (
@@ -8,7 +9,12 @@ export default function UserProfile({ user }) {
 					<Col className="order-lg-2" lg="3">
 						<div className="card-profile-image">
 							<a href="#pablo" onClick={(e) => e.preventDefault()}>
-								<img alt="..." className="rounded-circle" src={user.photoURL || '/hacker.png'} />
+								<img
+									layout="fill"
+									alt="..."
+									className="rounded-circle"
+									src={user.photoURL || '/hacker.png'}
+								/>
 							</a>
 						</div>
 					</Col>

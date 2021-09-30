@@ -9,29 +9,29 @@ import { Row, Container, Card, CardBody, CardHeader, Button, Col } from 'reactst
 const LIMIT = 10;
 
 export async function getServerSideProps(context) {
-	const recipeQuery = firestore
+	const messageQuery = firestore
 		.collectionGroup('messages')
 		.where('status', '==', 'unsolved')
 		.orderBy('createdAt', 'desc')
 		.limit(LIMIT);
 
-	const recipes = (await recipeQuery.get()).docs.map(recipeToJSON);
+	const messages = (await messageQuery.get()).docs.map(recipeToJSON);
 
 	return {
-		props : { recipes } // will be passed to the page component as props
+		props : { messages } // will be passed to the page component as props
 	};
 }
 
 export default function Home(props) {
-	const [ recipes, setRecipes ] = useState(props.recipes);
+	const [ messages, setMessages ] = useState(props.messages);
 	const [ loading, setLoading ] = useState(false);
 
-	const [ recipesEnd, setRecipesEnd ] = useState(false);
+	const [ messagesEnd, setMessagesEnd ] = useState(false);
 
 	// Get next page in pagination query
 	const getMorePosts = async () => {
 		setLoading(true);
-		const last = recipes[recipes.length - 1];
+		const last = messages[messages.length - 1];
 
 		const cursor = typeof last.createdAt === 'number' ? fromMillis(last.createdAt) : last.createdAt;
 
@@ -42,30 +42,30 @@ export default function Home(props) {
 			.startAfter(cursor)
 			.limit(LIMIT);
 
-		const newRecipes = (await query.get()).docs.map((doc) => doc.data());
+		const newMessages = (await query.get()).docs.map((doc) => doc.data());
 
-		setRecipes(recipes.concat(newRecipes));
+		setRecipes(messages.concat(newMessages));
 		setLoading(false);
 
 		if (newRecipes.length < LIMIT) {
-			setRecipesEnd(true);
+			setMessagesEnd(true);
 		}
 	};
 
 	return (
 		<main>
-			<Metatags title="Feed" description="Get the latest recipe on our site" />
+			<Metatags title="Feed" description="Get the latest message on our site" />
 			<NewsHeader name="Rezepte" parentName="Home" style={{ position: 'center' }} />
 			<Container justify="center">
 				<Card style={{ position: 'relative', bottom: '4.5rem' }}>
 					<CardBody>
 						<Row className="justify-content-md-center">
-							<RecipeFeed posts={recipes} />
+							<RecipeFeed posts={messages} />
 						</Row>
 						<Row className="justify-content-md-center">
 							<Col md="2" className="justify-content-md-center">
 								{!loading &&
-								!recipesEnd && (
+								!messagesEnd && (
 									<Button
 										justify-self="center"
 										className="justify-content-md-center"
@@ -74,7 +74,7 @@ export default function Home(props) {
 										Mehr laden
 									</Button>
 								)}
-								{recipesEnd && 'Du hast das Ende erreicht!'}
+								{messagesEnd && 'Du hast das Ende erreicht!'}
 							</Col>
 						</Row>
 					</CardBody>

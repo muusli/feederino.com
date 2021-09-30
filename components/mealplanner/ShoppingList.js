@@ -5,7 +5,8 @@ import { ListGroupItem, ListGroup, Card, CardHeader, CardBody, Button} from "rea
 import axios from 'axios';
 import { useEffect } from 'react';
 function ShoppingList(props) {
-  const [ listItems, setListItems ] = React.useState(props.shoppingList.shoppingList);
+  
+  const [ listItems, setListItems ] = React.useState(props.shoppingList);
  
   // const getServerSideProps =  () => {
   //   axios.get('http://localhost:5000/meal').then((res) => {

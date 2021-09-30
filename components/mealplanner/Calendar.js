@@ -1,5 +1,5 @@
 /*!
-
+import Image from 'next/image'
 =========================================================
 * NextJS Argon Dashboard PRO - v1.1.0
 =========================================================
@@ -12,8 +12,9 @@
 =========================================================
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
+import Image from 'next/image'
 */
+import firebase from "firebase";
 import React from "react";
 // nodejs library that concatenates classes
 import classnames from "classnames";
@@ -21,10 +22,11 @@ import classnames from "classnames";
 import { Calendar } from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interaction from "@fullcalendar/interaction";
-
+import  Select2  from "react-select2-wrapper";
 // react component used to create sweet alerts
 import ReactBSAlert from "react-bootstrap-sweetalert";
 // reactstrap components
+import Image from 'next/image'
 import {
   Button,
   ButtonGroup,
@@ -35,6 +37,7 @@ import {
   Form,
   Input,
   Modal,
+  Dropdown, DropdownToggle,  DropdownItem, DropdownMenu, InputGroupAddon, InputGroupText, InputGroup , CardImg, CardImgOverlay, CardTitle, CardText,
   Container,
   Row,
   Col,
@@ -45,69 +48,145 @@ import {
 } from "reactstrap";
 import axios from 'axios';
 import {serverTimestamp, mealToJSON, getUserWithUsername} from '../../lib/firebase'
+import toast from "react-hot-toast";
+import SearchRecipe from "../recipes/SearchRecipe";
 // layout for this page
 // import Admin from "layouts/Admin.js";
 // core components
 
 // import { events as eventsVariables } from "variables/general.js";
+const debounce = (func, delay = 1000) => {
+	let timeoutId;
+	// ..args keeps track of how many arguments are passed into the function
+	return (...args) => {
+		//wenn es bereits Input mit Timer gibt timer löschen
+		if (timeoutId) {
+			clearTimeout(timeoutId);
+		}
 
+		//Neuen Timout setzen
+		timeoutId = setTimeout(() => {
+			func.apply(null, args);
+		}, delay);
+	};
+};
 let calendar
-
+const options = {
+  placeholder: "Select"
+};
 function CalendarView (props) {
   const [ recipeOpen, setRecipeOpen ] = React.useState(false);
-	const [ recipe, setRecipe ] = React.useState([]);
-  const [events, setEvents] = React.useState(props.meals);
+	const [ recipe, setRecipe ] = React.useState(null);
+  const [events, setEvents] = React.useState();
   const [alert, setAlert] = React.useState(null);
   const [modalAdd, setModalAdd] = React.useState(false);
   const [modalChange, setModalChange] = React.useState(false);
   const [startDate, setStartDate] = React.useState(null);
   const [endDate, setEndDate] = React.useState(null);
-  const [radios, setRadios] = React.useState(null);
+  
   const [eventId, setEventId] = React.useState(null);
   const [eventTitle, setEventTitle] = React.useState(null);
-  const [eventDescription, setEventDescription] = React.useState(null);
+  const [dropdownOpen, setDropdownOpen] = React.useState(false);
+ 	const toggle = () => setDropdownOpen(prevState => !prevState);
   // eslint-disable-next-line
   const [event, setEvent] = React.useState(null);
   const [currentDate, setCurrentDate] = React.useState(null);
   const calendarRef = React.useRef(null);
-
- 
-
+  const [ recipeSearch, setRecipeSearch ] = React.useState();
+	const openSearch = () => {
+		document.body.classList.add('g-navbar-search-showing');
+		setTimeout(function() {
+			document.body.classList.remove('g-navbar-search-showing');
+			document.body.classList.add('g-navbar-search-show');
+		}, 150);
+		setTimeout(function() {
+			document.body.classList.add('g-navbar-search-shown');
+		}, 300);
+	};
+	// function that on mobile devices makes the search close
+	const closeSearch = () => {
+		document.body.classList.remove('g-navbar-search-shown');
+		setTimeout(function() {
+			document.body.classList.remove('g-navbar-search-show');
+			document.body.classList.add('g-navbar-search-hiding');
+		}, 150);
+		setTimeout(function() {
+			document.body.classList.remove('g-navbar-search-hiding');
+			document.body.classList.add('g-navbar-search-hidden');
+		}, 300);
+		setTimeout(function() {
+			document.body.classList.remove('g-navbar-search-hidden');
+		}, 500);
+	};
+	const handleSelect = (recipe) => {
+		// props.updateRecipe(string, recipe)
+		// setRecipeOpen(true)
+		setRecipe(recipe)
+    // console.log(recipeSelect)
+		console.log(recipe)
+		
+	};
+	const searchRecipe = debounce(async (string) => {			
+		const searchRecipes = firebase.functions().httpsCallable('meilisearchQuery');
+  searchRecipes({ query: string })
+  .then((result) => {
+    const recipesSearchResult = result.data.recipes.hits
+	  // const recipesSearchResult = result.data.recipes.map((r)=>r['_source'])
+    setRecipeSearch(recipesSearchResult)
+    console.log(recipesSearchResult)
+  });
+	}, 500);
+  // const searchRecipes = firebase.functions().httpsCallable('searchRecipes');
+  // searchRecipes({ query: 'Neu' })
+  // .then((result) => {
+  //   const recipes = result.data.recipes;
+  //   setRecipe(recipes)
+  //   console.log('done')
+  // });
   React.useEffect(() => {
+ 
+    
     createCalendar();
     
     // eslint-disable-next-line
   }, []);
   
   const createCalendar = () => {
- 
-      console.log(events)
+
+      
      calendar = new Calendar(calendarRef.current, {
       plugins: [interaction, dayGridPlugin],
       initialView: "dayGridWeek",
       selectable: true,
       editable: true,
-      events: events,
+      
+      events: props.meals,
       headerToolbar: "",
       // Add new event
       select: (info) => {
         setModalAdd(true);
         setStartDate(info.startStr);
+        setRecipe(undefined)
         setEndDate(info.endStr);
-        setRadios("bg-info");
-      // },
+        
+      },
       // Edit calendar event action
       eventClick: ({ event }) => {
+       
         setEventId(event.id);
         setEventTitle(event.title);
-        setEventDescription(event.extendedProps.description);
-        setRadios("bg-info");
+        setRecipe(event.extendedProps.recipe)
+        console.log(event)
         setEvent(event);
         setModalChange(true);
         
+      },
+      eventDrop: (info) => {
+        changeTime(info.event.startStr, info.event.endStr,info.event.id)
       }
-     }}
+     }
     );
+    setEvents(props.meals)
     calendar.render();
     setCurrentDate(calendar.view.title);
     // )
@@ -119,64 +198,22 @@ function CalendarView (props) {
     calendar.changeView(newView);
     setCurrentDate(calendar.view.title);
   };
-  const items = [
-		{
-			src     :
-				'https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Zm9vZHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-			altText : 'Slide 1',
-			caption : '',
-			header  : '',
-			key     : '1'
-		},
-		{
-			src     :
-				'https://images.unsplash.com/photo-1482049016688-2d3e1b311543?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Zm9vZHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-			altText : 'Slide 2',
-			caption : '',
-			header  : '',
-			key     : '2'
-		},
-		{
-			src     :
-				'https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8Zm9vZHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-			altText : 'Slide 3',
-			caption : '',
-			header  : '',
-			key     : '3'
-		}
-	];
+  
+  
   const addNewEvent = async () => {
     
     var newEvents = events;
-    newEvents.push({
-      title: eventTitle,
-      start: startDate,
-      end: endDate,
-      className: radios,
-      id: events[events.length - 1] + 1,
-    });
-    calendar.addEvent({
-      title: eventTitle,
-      start: startDate,
-      end: endDate,
-      className: radios,
-      id: events[events.length - 1] + 1,
-    });
-   
-  
-  
     const data = {
-      title: eventTitle,
+      recipe: recipe,
+      title: eventTitle || recipe.title,
       start: startDate,
       end: endDate,
-      className: radios,
+      className: 'bg-info',
       createdAt      : serverTimestamp(),
       updatedAt      : serverTimestamp(),
-      id: events[events.length - 1] + 1
-    
-    }
-    console.log(data)
-      const userDoc = await getUserWithUsername(props.username);
+      }
+   
+    const userDoc = await getUserWithUsername(props.username);
    
     if (userDoc) {
       const mealsRef = userDoc.ref.collection('calendar');
@@ -184,16 +221,31 @@ function CalendarView (props) {
         
       }
       else {
-        await mealsRef.add(data);
+        await mealsRef.add(data).then((docRef) => {
+          const datawithId = {
+            ...data,
+             id:docRef.id
+             }
+          docRef.update({id: docRef.id})
+          
+          newEvents.push(datawithId);
+          calendar.addEvent(datawithId);
+      })
+      .catch((error) => {
+          console.error("Error adding document: ", error);
+      });;
         
     }};
+       
     setModalAdd(false);
     setEvents(newEvents);
     setStartDate(undefined);
     setEndDate(undefined);
-    setRadios("bg-info");
+   setRecipe(undefined)
     setEventTitle(undefined);
+    
   };
+  // const ShoppingList = events.forEach(event => event.recipe.ingredients.map((e) =>  <p>{e.name}</p>))
   const changeEvent = () => {
    
     var newEvents = events.map((prop, key) => {
@@ -204,16 +256,20 @@ function CalendarView (props) {
         let saveNewEvent = {
           ...prop,
           title: eventTitle,
-          className: radios,
-          description: eventDescription,
+          recipe
+          
         };
-        // saveToFirestore(saveNewEvent)
+        saveToFirestore({title: eventTitle,
+         recipe, updatedAt      : serverTimestamp(),
+         
+        }, eventId)
         calendar.addEvent(saveNewEvent);
         return {
           ...prop,
           title: eventTitle,
-          className: radios,
-          description: eventDescription,
+          recipe
+         
+          
         };
       } else {
         return prop;
@@ -222,22 +278,23 @@ function CalendarView (props) {
     
     setModalChange(false);
     setEvents(newEvents);
-    setRadios("bg-info");
+    
     setEventTitle(undefined);
-    setEventDescription(undefined);
+    setRecipe(undefined)
     setEventId(undefined);
     setEvent(undefined);
+    
   };
-  const saveToFirestore= async (data)=>{
+  const saveToFirestore= async (data, id)=>{
     const userDoc = await getUserWithUsername(props.username);
    
     if (userDoc) {
-      const mealsRef = userDoc.ref.collection('calendar').doc(data.id);
+      const mealsRef = userDoc.ref.collection('calendar').doc(id);
       if (!mealsRef) {
         
       }
       else {
-        await mealsRef.set(data);
+        await mealsRef.update({...data});
         
     }};
   }
@@ -249,9 +306,9 @@ function CalendarView (props) {
         title="Are you sure?"
         onConfirm={() => {
           setAlert(false);
-          setRadios("bg-info");
+         
           setEventTitle(undefined);
-          setEventDescription(undefined);
+          
           setEventId(undefined);
         }}
         onCancel={() => deleteEvent()}
@@ -266,8 +323,32 @@ function CalendarView (props) {
       </ReactBSAlert>
     );
   };
-  const deleteEvent = () => {
+  const changeTime = async(startStr, endStr, id) =>{
+
+const userDoc = await getUserWithUsername(props.username);
+   
+if (userDoc) {
+  const mealsRef = userDoc.ref.collection('calendar').doc(id);
+  if (!mealsRef) {
+    
+  }
+  else {
+    await mealsRef.update({start:startStr, end:endStr}).then(() => {
+      toast.success('Datum updated')
+     
+      
+  })
+  .catch((error) => {
+      console.error("Error adding document: ", error);
+  });;
+
+  }}}
+  const deleteEvent = async () => {
     var newEvents = events.filter((prop) => prop.id + "" !== eventId);
+    
+    setEvents(newEvents)
+    
+    calendar.getEventById(eventId).remove();
     setEvent(undefined);
     setAlert(
       <ReactBSAlert
@@ -284,17 +365,35 @@ function CalendarView (props) {
       </ReactBSAlert>
     );
     setModalChange(false);
-    setEvents(newEvents);
-    setRadios("bg-info");
+    
+  
+    const userDoc = await getUserWithUsername(props.username);
+   
+    if (userDoc) {
+      const mealsRef = userDoc.ref.collection('calendar').doc(eventId);
+      if (!mealsRef) {
+        
+      }
+      else {
+        await mealsRef.delete().then(() => {
+          toast.success('Event erfolgreich gelöscht')
+         
+          
+      })
+      .catch((error) => {
+          console.error("Error adding document: ", error);
+      });;
+    
+         
+    }};
+   
     setEventTitle(undefined);
-    setEventDescription(undefined);
+    setRecipe(undefined)
     setEventId(undefined);
     setEvent(undefined);
+   
   };
-	// const mealplanRef = firestore.doc('IknQq295DIaUvN1dDqmyLUgrXm52');
-	// const [ realtimeMealplan ] = useDocumentData(mealplanRef);
-	// // auth.currentUser.uid
-	// const meals = realtimeMealplan || mealplan;
+  
   return (
     <>
      {alert}
@@ -306,8 +405,8 @@ function CalendarView (props) {
       <Container className="mt--12" fluid >
         <Row>
           <div className="col"> */}
-            <Card className="card-calendar">
-            
+            <Card className="card-calendar" style={{ position: 'relative', bottom: '4.5rem' }}>
+            {/* {events&&<ShoppingList></ShoppingList>} */}
            <CardHeader>
                 <div className="row">
               <Col lg="6">
@@ -318,7 +417,8 @@ function CalendarView (props) {
                   className="fullcalendar-btn-prev btn-neutral"
                   color="default"
                   onClick={() => {
-                    calendar.next();
+                    
+                    calendar.prev();
                   }}
                   size="sm"
                 >
@@ -328,7 +428,7 @@ function CalendarView (props) {
                   className="fullcalendar-btn-next btn-neutral"
                   color="default"
                   onClick={() => {
-                    calendar.prev();
+                    calendar.next();
                   }}
                   size="sm"
                 >
@@ -352,18 +452,7 @@ function CalendarView (props) {
                 >
                   Week
                 </Button></Col></div></CardHeader>
-                {/* <Button
-                  className="btn-neutral"
-                  color="default"
-                  data-calendar-view="basicDay"
-                  onClick={() => changeView("dayGridDay")}
-                  size="sm"
-                >
-                  Day
-                </Button>
-              </Col>
-              </div>
-              </CardHeader> */}
+               
               <CardBody className="p-0">
                 <div
                   className="calendar"
@@ -380,77 +469,103 @@ function CalendarView (props) {
               toggle={() => setModalAdd(false)}
               className="modal-dialog-centered modal-secondary"
             >
-              <div className="modal-body">
+              
                 <form className="new-event--form">
+              <Card className="bg-dark text-white border-0">{recipe?(
+        <CardImg
+          alt="..."
+          src={recipe.image}
+        ></CardImg>):(<CardImg
+       max-height ="50"
+          alt="..."
+          src={require("assets/img/theme/img-1-1000x600.jpg")}
+        ></CardImg>)}
+        <CardImgOverlay className="d-flex align-items-center">
+          <div>
+           {recipe?( <CardTitle className="h2 text-white mb-2">{recipe.title} </CardTitle>):(<CardTitle className="h2 text-white mb-2">Wähle ein Rezept </CardTitle>)}
+            <CardText>
+            <Dropdown isOpen={dropdownOpen} toggle={toggle} direction={'down'}>
+        <DropdownToggle color='#000'>
+		<Form
+			className={classnames(
+				'navbar-search form-inline mr-sm-3',
+				{ 'navbar-search-light': props.theme === 'dark' },
+				{ 'navbar-search-dark': props.theme === 'light' }
+			)}
+		>
+			<FormGroup className="mb-0">
+				<InputGroup className="input-group-alternative input-group-merge">
+					<InputGroupAddon addonType="prepend">
+						<InputGroupText>
+							<i className="fas fa-search" />
+						</InputGroupText>
+					</InputGroupAddon>
+          
+					<Input placeholder="Search" type="text" onChange={(event) => searchRecipe(event.target.value)} />
+				</InputGroup>
+			</FormGroup>
+			<button aria-label="Close" className="close" type="button" onClick={closeSearch}>
+				<span aria-hidden={true}>×</span>
+			</button>
+            
+		</Form>
+        </DropdownToggle>
+             <DropdownMenu
+             className="dropdown-menu-lg dropdown-menu-light "
+            
+           >
+            {/* <Input
+                id="ingredientDropdown"
+                // onChange={(event) => {setRecipe(event.target.value)}}
+                multiple="multiple"
+                type="select"
+            > */}
+                {recipeSearch ? 
+                    recipeSearch.map((item) =>(<> 
+                    <DropdownItem onClick={()=> handleSelect(item) }>  <img
+                    alt="..."
+					className=" avatar rounded-circle mr-3"
+                    src={item.image}
+                  ></img>{item.title}</DropdownItem> </>)
+                ) : (
+                    <DropdownItem >Suche ein Rezept</DropdownItem>
+                )}
+            </DropdownMenu>
+       
+        </Dropdown>
+            </CardText>
+            
+            {recipe?( <CardText className="text-sm font-weight-bold">by {recipe.username}</CardText>):('')}
+            
+          </div>
+        </CardImgOverlay></Card>
+      <div className="modal-body">
+                <Card>
+                  <CardBody>
                   <FormGroup>
                     <label className="form-control-label">Event title</label>
                     <Input
                       className="form-control-alternative new-event--title"
                       placeholder="Event Title"
                       type="text"
+                      // onChange={(event) => searchRecipe(event.target.value)}
                       onChange={(e) => setEventTitle(e.target.value)}
                     />
-                  </FormGroup>
-                  <FormGroup className="mb-0">
-                    <label className="form-control-label d-block mb-3">
-                      Status color
-                    </label>
-                    <ButtonGroup
-                      className="btn-group-toggle btn-group-colors event-tag"
-                      data-toggle="buttons"
-                    >
-                      <Button
-                        className={classnames("bg-info", {
-                          active: radios === "bg-info",
-                        })}
-                        color=""
-                        type="button"
-                        onClick={() => setRadios("bg-info")}
-                      />
-                      <Button
-                        className={classnames("bg-warning", {
-                          active: radios === "bg-warning",
-                        })}
-                        color=""
-                        type="button"
-                        onClick={() => setRadios("bg-warning")}
-                      />
-                      <Button
-                        className={classnames("bg-danger", {
-                          active: radios === "bg-danger",
-                        })}
-                        color=""
-                        type="button"
-                        onClick={() => setRadios("bg-danger")}
-                      />
-                      <Button
-                        className={classnames("bg-success", {
-                          active: radios === "bg-success",
-                        })}
-                        color=""
-                        type="button"
-                        onClick={() => setRadios("bg-success")}
-                      />
-                      <Button
-                        className={classnames("bg-default", {
-                          active: radios === "bg-default",
-                        })}
-                        color=""
-                        type="button"
-                        onClick={() => setRadios("bg-default")}
-                      />
-                      <Button
-                        className={classnames("bg-primary", {
-                          active: radios === "bg-primary",
-                        })}
-                        color=""
-                        type="button"
-                        onClick={() => setRadios("bg-primary")}
-                      />
-                    </ButtonGroup>
-                  </FormGroup>
+                  </FormGroup><hr/><Row>
+                  {recipe?(recipe.ingredients.map((ingredient)=>(<Col md="3">
+                <a
+                  className="avatar rounded-circle mr-3"
+                  href="#pablo"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  <img
+                    alt="..."
+                    src={ingredient.url}
+                  ></img>
+                </a><p>{ingredient.name}</p></Col>))):null}</Row></CardBody>
+                  </Card></div>
                 </form>
-              </div>
+              
               <div className="modal-footer">
                 <Button
                   className="new-event--add"
@@ -470,14 +585,14 @@ function CalendarView (props) {
                 </Button>
               </div>
             </Modal>
-            {/* <Modal
+            <Modal
               isOpen={modalChange}
               toggle={() => setModalChange(false)}
               className="modal-dialog-centered modal-secondary"
             >
-              <div className="modal-body">
+              {/* <div className="modal-body"> */}
                 <Form className="edit-event--form">
-                  <FormGroup>
+                  {/* <FormGroup>
                     <label className="form-control-label">Event title</label>
                     <Input
                       className="form-control-alternative edit-event--title"
@@ -487,78 +602,109 @@ function CalendarView (props) {
                       onChange={(e) => setEventTitle(e.target.value)}
                     />
                   </FormGroup>
-                  <FormGroup>
-                    <label className="form-control-label d-block mb-3">
-                      Status color
-                    </label>
-                    <ButtonGroup
-                      className="btn-group-toggle btn-group-colors event-tag mb-0"
-                      data-toggle="buttons"
-                    >
-                      <Button
-                        className={classnames("bg-info", {
-                          active: radios === "bg-info",
-                        })}
-                        color=""
-                        type="button"
-                        onClick={() => setRadios("bg-info")}
-                      />
-                      <Button
-                        className={classnames("bg-warning", {
-                          active: radios === "bg-warning",
-                        })}
-                        color=""
-                        type="button"
-                        onClick={() => setRadios("bg-warning")}
-                      />
-                      <Button
-                        className={classnames("bg-danger", {
-                          active: radios === "bg-danger",
-                        })}
-                        color=""
-                        type="button"
-                        onClick={() => setRadios("bg-danger")}
-                      />
-                      <Button
-                        className={classnames("bg-success", {
-                          active: radios === "bg-success",
-                        })}
-                        color=""
-                        type="button"
-                        onClick={() => setRadios("bg-success")}
-                      />
-                      <Button
-                        className={classnames("bg-default", {
-                          active: radios === "bg-default",
-                        })}
-                        color=""
-                        type="button"
-                        onClick={() => setRadios("bg-default")}
-                      />
-                      <Button
-                        className={classnames("bg-primary", {
-                          active: radios === "bg-primary",
-                        })}
-                        color=""
-                        type="button"
-                        onClick={() => setRadios("bg-primary")}
-                      />
-                    </ButtonGroup>
-                  </FormGroup>
-                  <FormGroup>
-                    <label className="form-control-label">Description</label>
-                    <Input
-                      className="form-control-alternative edit-event--description textarea-autosize"
-                      placeholder="Event Desctiption"
-                      type="textarea"
-                      defaultValue={eventDescription}
-                      onChange={(e) => setEventDescription(e.target.value)}
-                    />
-                    <i className="form-group--bar" />
-                  </FormGroup>
+                  {recipe?(recipe.ingredients.map((ingredient)=>(
+                <a
+                  className=" avatar rounded-circle mr-3"
+                  href="#pablo"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  <Image
+                    alt="..."
+                    src={ingredient.url}
+                  ></img>
+                </a>))):null} */}<Card className="bg-dark text-white border-0">{recipe?(
+        <CardImg
+        alt="..."
+        src={recipe.image}
+      ></CardImg>):(<CardImg
+     max-height ="50"
+        alt="..."
+        src={require("assets/img/theme/img-1-1000x600.jpg")}
+      ></CardImg>)}
+      <CardImgOverlay className="d-flex align-items-center">
+        <div>
+         {recipe?( <CardTitle className="h2 text-white mb-2">{recipe.title} </CardTitle>):(<CardTitle className="h2 text-white mb-2">Wähle ein Rezept </CardTitle>)}
+          <CardText>
+          <Dropdown isOpen={dropdownOpen} toggle={toggle} direction={'down'}>
+      <DropdownToggle color='#000'>
+  <Form
+    className={classnames(
+      'navbar-search form-inline mr-sm-3',
+      { 'navbar-search-light': props.theme === 'dark' },
+      { 'navbar-search-dark': props.theme === 'light' }
+    )}
+  >
+    <FormGroup className="mb-0">
+      <InputGroup className="input-group-alternative input-group-merge">
+        <InputGroupAddon addonType="prepend">
+          <InputGroupText>
+            <i className="fas fa-search" />
+          </InputGroupText>
+        </InputGroupAddon>
+        
+        <Input placeholder="Search" type="text" onChange={(event) => searchRecipe(event.target.value)} />
+      </InputGroup>
+    </FormGroup>
+    <button aria-label="Close" className="close" type="button" onClick={closeSearch}>
+      <span aria-hidden={true}>×</span>
+    </button>
+          
+  </Form>
+      </DropdownToggle>
+           <DropdownMenu
+           className="dropdown-menu-lg dropdown-menu-light "
+          
+         >
+          {/* <Input
+              id="ingredientDropdown"
+              // onChange={(event) => {setRecipe(event.target.value)}}
+              multiple="multiple"
+              type="select"
+          > */}
+              {recipeSearch ? 
+                  recipeSearch.map((item) =>(<> 
+                  <DropdownItem onClick={()=> handleSelect(item) }>{item.title}</DropdownItem> </>)
+              ) : (
+                  <DropdownItem >Suche ein Rezept</DropdownItem>
+              )}
+          </DropdownMenu>
+     
+      </Dropdown>
+          </CardText>
+          
+          {recipe?( <CardText className="text-sm font-weight-bold">by {recipe.username}</CardText>):('')}
+          
+        </div>
+      </CardImgOverlay></Card>
+    <div className="modal-body">
+              <Card>
+                <CardBody>
+                <FormGroup>
+                  <label className="form-control-label">Event title</label>
+                  <Input
+                    className="form-control-alternative new-event--title"
+                    placeholder="Event Title"
+                    type="text"
+                    // onChange={(event) => searchRecipe(event.target.value)}
+                    onChange={(e) => setEventTitle(e.target.value)}
+                  />
+                </FormGroup><hr/><Row>
+                {recipe?(recipe.ingredients.map((ingredient)=>(<Col md="3">
+              <a
+                className="avatar rounded-circle mr-3"
+                href="#pablo"
+                onClick={(e) => e.preventDefault()}
+              >
+                <img
+                  alt="..."
+                  src={ingredient.url}
+                ></img>
+              </a><p>{ingredient.name}</p></Col>))):null}</Row></CardBody>
+                </Card></div>
+              
                   <input className="edit-event--id" type="hidden" />
                 </Form> 
-                <ModalBody>
+                {/* <ModalBody>
 					<Row>
 						<Col md="6" className="mx-auto">
 							<UncontrolledCarousel items={items} />
@@ -648,7 +794,7 @@ function CalendarView (props) {
 						<Col md="12">
 							<div className="mb-1">
 								<Media className="media-comment">
-									<img
+									<Image
 										alt="..."
 										className="avatar avatar-lg media-comment-avatar rounded-circle"
 										src={require('assets/img/theme/team-1.jpg')}
@@ -678,7 +824,7 @@ function CalendarView (props) {
 									</Media>
 								</Media>
 								<Media className="media-comment">
-									<img
+									<Image
 										alt="..."
 										className="avatar avatar-lg media-comment-avatar rounded-circle"
 										src={require('assets/img/theme/team-2.jpg')}
@@ -710,7 +856,7 @@ function CalendarView (props) {
 								</Media>
 								<hr />
 								<Media className="align-items-center">
-									<img
+									<Image
 										alt="..."
 										className="avatar avatar-lg rounded-circle mr-4"
 										src={require('assets/img/theme/team-3.jpg')}
@@ -723,9 +869,54 @@ function CalendarView (props) {
 								</Media>
 							</div>
 						</Col>{' '}
-					</Row>
-				</ModalBody>
-              </div>
+					</Row><
+				</ModalBody> */}
+        {/* {recipe&&(<p>{recipe.title}</p>)}
+        <Dropdown isOpen={dropdownOpen} toggle={toggle} direction={'down'}>
+        <DropdownToggle color='#000'>
+		<Form
+			className={classnames(
+				'navbar-search form-inline mr-sm-3',
+				{ 'navbar-search-light': props.theme === 'dark' },
+				{ 'navbar-search-dark': props.theme === 'light' }
+			)}
+		>
+			<FormGroup className="mb-0">
+				<InputGroup className="input-group-alternative input-group-merge">
+					<InputGroupAddon addonType="prepend">
+						<InputGroupText>
+							<i className="fas fa-search" />
+						</InputGroupText>
+					</InputGroupAddon>
+					<Input placeholder="Search" type="text" onChange={(event) => searchRecipe(event.target.value)} />
+				</InputGroup>
+			</FormGroup>
+			<button aria-label="Close" className="close" type="button" onClick={closeSearch}>
+				<span aria-hidden={true}>×</span>
+			</button>
+            
+		</Form>
+        </DropdownToggle>
+             <DropdownMenu
+             className="dropdown-menu-lg dropdown-menu-light "
+            
+           >
+            {/* <Input
+                id="ingredientDropdown"
+                // onChange={(event) => {setRecipe(event.target.value)}}
+                multiple="multiple"
+                type="select"
+            > */}{/*}
+                {recipeSearch ? 
+                    recipeSearch.map((item) =>(<> 
+                    <DropdownItem onClick={()=> handleSelect(item) }>{item.title}</DropdownItem> </>)
+                ) : (
+                    <DropdownItem >Some Action</DropdownItem>
+                )}
+            </DropdownMenu>
+       
+        </Dropdown> */}
+              {/* </div> */}
               <div className="modal-footer">
                 <Button color="primary" onClick={changeEvent}>
                   Update
@@ -747,7 +938,7 @@ function CalendarView (props) {
                   Close
                 </Button>
               </div>
-            </Modal> */}
+            </Modal>
         </div>
             {/* </div>
         </Row>

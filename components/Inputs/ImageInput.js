@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import Image from 'next/image';
 import { ListGroup, ListGroupItem, Row, Col, Button } from 'reactstrap';
 import { auth, storage, STATE_CHANGED } from '../../lib/firebase';
 import { Input, Progress } from 'reactstrap';
@@ -114,7 +115,7 @@ function ImageInput({ register, setImage, defaultImage }) {
 				</div>
 				<div className="dz-preview dz-preview-single">
 					<div className="dz-preview-cover">
-						<img alt="..." className="dz-preview-img" data-dz-thumbnail="" />
+						<img layout="fill" alt="..." className="dz-preview-img" data-dz-thumbnail="" />
 					</div>
 				</div>
 			</div>
@@ -139,7 +140,7 @@ function ImageInput({ register, setImage, defaultImage }) {
 						<Row className=" align-items-center">
 							<Col className=" col-auto">
 								<div className=" avatar">
-									<img
+									<Image
 										alt="..."
 										className=" avatar-img rounded"
 										data-dz-thumbnail

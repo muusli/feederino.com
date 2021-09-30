@@ -1,29 +1,35 @@
 
-import Default from '../../../layouts/Default'
-import EditRecipe from '../../../components/recipes/EditRecipe2'
-import EditHeader from '../../../components/Headers/EditHeader'
+import Default from '../../../../layouts/Default'
+import EditRecipe from '../../../../components/recipes/EditRecipe2'
+import EditHeader from '../../../../components/Headers/EditHeader'
 import { Row, Container, Card, CardBody,Col } from 'reactstrap';
-import AuthCheck from '../../../components/auth/AuthCheck';
-import { firestore, auth, } from '../../../lib/firebase';
+import AuthCheck from '../../../../components/auth/AuthCheck';
+import { firestore, auth, postToJSON, getUserWithUsername } from '../../../../lib/firebase';
 import { useState } from 'react';
-import { useRouter } from 'next/router';
-import { useDocumentData } from 'react-firebase-hooks/firestore';
 
-export default function AdminPostEdit() {
+import { useRouter } from 'next/router';
+import { useDocumentData, useDocumentDataOnce } from 'react-firebase-hooks/firestore';
+
+export default function AdminPostEdit({recipe,recipeRef}) {
+  console.log(recipe)
   return (
     <AuthCheck>
-        <PostManager />
+        <PostManager recipe={recipe}/>
     </AuthCheck>
   );
 }
 
 AdminPostEdit.layout = Default
-function PostManager() {
+function PostManager () {
   const [preview, setPreview] = useState(false);
+
   const router = useRouter();
   const { slug } = router.query;
   const recipeRef = firestore.collection('users').doc(auth.currentUser.uid).collection('recipes').doc(slug);
-  const [recipe] = useDocumentData(recipeRef);
+ const [recipe] = useDocumentData(recipeRef)
+
+
+  
   return (
     <main >
       {recipe && (

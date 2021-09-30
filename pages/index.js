@@ -34,6 +34,7 @@ import {
   CardBody,
   Container,
   Row,
+  Media,
   Col,
   UncontrolledTooltip,
 } from "reactstrap";
@@ -41,7 +42,7 @@ import {
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import IndexHeader from "components/Headers/IndexHeader.js";
 import AuthFooter from "components/Footers/AuthFooter.js";
-
+import Image from 'next/image'
 function Index() {
   return (
     <>
@@ -156,6 +157,7 @@ function Index() {
             <Row className="row-grid align-items-center">
               <Col className="order-md-2" md="6">
                 <img
+                layout="fill"
                   alt="..."
                   className="img-fluid"
                   src={require("assets/img/theme/landing-1.png")}
@@ -295,13 +297,174 @@ function Index() {
                 target="_blank"
               >
                 <div className="icons-container blur-item mt-5">
-                  <i className="icon ni ni-diamond" />
+                  {/* <i className="icon ni ni-diamond" />
 
                   <i className="icon icon-sm ni ni-album-2" />
                   <i className="icon icon-sm ni ni-app" />
-                  <i className="icon icon-sm ni ni-atom" />
-
-                  <i className="icon ni ni-bag-17" />
+                  <i className="icon icon-sm ni ni-atom" style={{backgroundImage: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1400&q=80"}}/>
+                  <a
+                  className=" avatar  mr-3"
+                  href="#pablo"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  <Image
+                    alt="..."
+                    src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1400&q=80"
+                  ></img>
+                </a>
+                <a
+                  className=" icon avatar"
+                  href="#pablo"
+                  onClick={(e) => e.preventDefault()}
+                >
+                   <Media src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1400&q=80" alt="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1400&q=80" />
+                </a> */}
+                <i
+                  className="icon"
+                  href="#pablo"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  <img
+                    alt="..."
+                    className=""
+                    style={{maxWidth:"250px", maxHeight:"130px"}}
+                    src="https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+                  ></img>
+                </i>
+                <i
+                  className="icon"
+                  href="#pablo"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  <img
+                    alt="..."
+                    className=""
+                    style={{maxWidth:"180px", maxHeight:"100px"}}
+                    src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                  ></img>
+                </i><i
+                  className="icon"
+                  href="#pablo"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  <img
+                    alt="..."
+                    className=""
+                    style={{maxWidth:"250px", maxHeight:"130px"}}
+                    src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+                  ></img>
+                </i><i
+                  className="icon"
+                  href="#pablo"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  <img
+                    alt="..."
+                    className=""
+                    style={{maxWidth:"250px", maxHeight:"100px"}}
+                    src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1400&q=80"
+                  ></img>
+                </i><i
+                  className="icon"
+                  href="#pablo"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  <img
+                    alt="..."
+                    className=""
+                    style={{maxWidth:"180px", maxHeight:"120px"}}
+                    src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                  ></img>
+                </i><i
+                  className="icon"
+                  href="#pablo"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  <img
+                    alt="..."
+                    className=""
+                    style={{maxWidth:"200px", maxHeight:"200px"}}
+                    src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80"
+                  ></img>
+                </i><i
+                  className="icon"
+                  href="#pablo"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  <img
+                    alt="..."
+                    className=""
+                    style={{maxWidth:"250px", maxHeight:"150px"}}
+                    src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                  ></img>
+                </i><i
+                  className="icon"
+                  href="#pablo"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  <img
+                    alt="..."
+                    className=""
+                    style={{maxWidth:"250px", maxHeight:"120px"}}
+                    src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=714&q=80"
+                  ></img>
+                </i><i
+                  className="icon"
+                  href="#pablo"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  <img
+                    alt="..."
+                    className=""
+                    style={{maxWidth:"250px", maxHeight:"120px"}}
+                    src="https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80"
+                  ></img>
+                </i><i
+                  className="icon"
+                  href="#pablo"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  <img
+                    alt="..."
+                    className=""
+                    style={{maxWidth:"150px", maxHeight:"125px"}}
+                    src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                  ></img>
+                </i><i
+                  className="icon"
+                  href="#pablo"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  <img
+                    alt="..."
+                    className=""
+                    style={{maxWidth:"3000px", maxHeight:"220px"}}
+                    src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+                  ></img>
+                </i><i
+                  className="icon"
+                  href="#pablo"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  <img
+                    alt="..."
+                    className=""
+                    style={{maxWidth:"150px", maxHeight:"125px"}}
+                    src="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                  ></img>
+                </i><i
+                  className="icon"
+                  href="#pablo"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  <img
+                    alt="..."
+                    className=""
+                    style={{maxWidth:"150px", maxHeight:"250px"}}
+                    src="https://images.unsplash.com/photo-1484980972926-edee96e0960d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+                  ></img>
+                </i>
+                  {/* <i className="icon ni ni-bag-17" />
                   <i className="icon ni ni-bell-55" />
                   <i className="icon ni ni-credit-card" />
 
@@ -311,10 +474,10 @@ function Index() {
 
                   <i className="icon ni ni-calendar-grid-58" />
                   <i className="icon ni ni-camera-compact" />
-                  <i className="icon ni ni-chart-bar-32" />
+                  <i className="icon ni ni-chart-bar-32" /> */}
                 </div>
                 <span className="blur-hidden h5 text-success">
-                  Entdecke unsere Ernährungsvielfalt
+                  Entdecke deine Ernährung neu
                 </span>
               </a>
             </div>

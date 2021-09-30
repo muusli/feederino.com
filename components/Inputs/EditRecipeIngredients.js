@@ -20,22 +20,24 @@ const debounce = (func, delay = 1000) => {
 	};
 };
 function AddIngredients(props) {
-	const [ingredients, setIngredients] = React.useState()
-	if (!ingredients) {
-		setIngredients(props.ingredients || []);
-	}
+	// const [ingredients, setIngredients] = React.useState(props.ingredients)
 	const [ ingredientAddSearchTerm, setIngredientAddSearchTerm ] = React.useState();
 	const [ ingredientAddSearch, setIngredientAddSearch ] = React.useState();
 	const searchIngredient = debounce(async (string) => {
 		setIngredientAddSearchTerm(string);
 		const searchIngredient = functions.httpsCallable(`autocompleteIngredient`);
-		const response = await searchIngredient({ string: string })	
+
+		const response = await searchIngredient({ string: string })
+
+		// const response = fetch(`http://localhost:5000/muusli/us-central1/api/ingredients/search/${string}`)
+	
+		console.log(response)
 		setIngredientAddSearch(response.data);
 	
 	}, 500);
 	
 	const Search = (props) => {
-		const [ingredients, setIngredients] = React.useState(props.ingredients)
+		
 		const [ ingredientSearchTerm, setIngredientSearchTerm ] = React.useState();
 		const [ ingredientSearch, setIngredientSearch ] = React.useState();
 		const researchIngredient = debounce(async (string) => {
@@ -107,45 +109,92 @@ function AddIngredients(props) {
 //Searches in the API for that ingredient and gives back an object with an id
 const addIngredient = async (string) =>{
 	const ingredient = await findIngredient(string)
-	props.addIngredient(ingredient)
+	
+    const addIngredient = {
+        id       : ingredient.id,
+        name     : ingredient.name,
+        position : props.ingredients.length,
+        unit     : '',
+        quantity : null,
+        url      : 'https://spoonacular.com/cdn/ingredients_100x100/' + ingredient.image
+    };
+   
+    let updatedIngredients = [ ...props.ingredients, addIngredient ];
+    
+    props.setIngredients(updatedIngredients);
 	setIngredientAddSearchTerm('')
 	document.querySelector('#addIngredient').value = '';
 	
 }
 const findIngredient = async (string)=> {
+	// const response = await axios.get('https://api.spoonacular.com/food/ingredients/search', {
+	// 			params : {
+	// 				apiKey : '89dd28dd4eb64e3db2f407e5ba20a32a',
+	// 				query  : string,
+	// 				number : 1,
+					
+	// 			}
+	// 		});
+
 	const searchIngredient = functions.httpsCallable(`searchIngredient`);
+
 	const response = await searchIngredient({ string : string})
-	return(response.data.results[0])
+
+			// const response = fetch(`http://localhost:5000/muusli/us-central1/api/ingredients/search/${string}`)
+		
+		console.log(response)
+			return(response.data.results[0])
 	
 }
 const updateUnit = (string, ingredient) => {
 	let updatedIngredient = ingredient
 	updatedIngredient.unit=string
-	props.updateIngredients(updatedIngredient, ingredient)
+updateIngredients(updatedIngredient, ingredient)
 
 }
 const updateQuantity = (number, ingredient) => {
 	let updatedIngredient = ingredient
 	updatedIngredient.quantity=number
-	props.updateIngredients(updatedIngredient, ingredient)
+	
+updateIngredients(updatedIngredient, ingredient)
 
 }
 const updateIngredient = async (string, ingredient) => {
 	const newIngredient = await findIngredient(string)
+	
+	// let updatedIngredient = ingredient
+	// updatedIngredient.id = newIngredient.id,
+	// updatedIngredient.name = newIngredient.name
+	// updatedIngredient.url = 'https://spoonacular.com/cdn/ingredients_100x100/' + newIngredient.image
 	let updatedIngredient = {
 		quantity: ingredient.quantity,
 		unit: ingredient.unit,
 	id : newIngredient.id,
 	name :newIngredient.name,
 	url : `https://spoonacular.com/cdn/ingredients_100x100/${newIngredient.image}`}
-	props.updateIngredients(updatedIngredient, ingredient)
+	updateIngredients(updatedIngredient, ingredient)
+	
 	
 }
-	
-const deleteIngredient = (ingredient)=>{
-	const updatedIngredients = props.deleteIngredient(ingredient)
-	setIngredients(updatedIngredients)
-}
+
+
+const updateIngredients = (ingredient) => {
+    let updatedIngredients = props.ingredients;
+    updatedIngredients.splice(ingredient.position, 1, ingredient);
+    props.setIngredients(updatedIngredients);
+    // useFieldArray('ingredients', updatedIngredients);
+};
+const deleteIngredient = (ingredient) => {
+    let updatedIngredients = props.ingredients;
+    // let index = ingredients.indexOf(ingredient);
+    updatedIngredients.splice(props.ingredients.indexOf(ingredient), 1);
+    props.setIngredients(updatedIngredients);
+    // console.log(ingredients);
+    // useFieldArray('ingredients', updatedIngredients);
+};	
+// const deleteIngredient = (ingredient)=>{
+// 	deleteIngredient(ingredient)
+// }
 
 
 	return (

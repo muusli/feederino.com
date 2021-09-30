@@ -13,80 +13,115 @@
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
+
 */
-const routes = [
-	{
-		collapse : false,
+import { auth } from './lib/firebase';
 
-		icon     : 'far fa-newspaper text-success',
-		state    : 'formsCollapse',
+const routes = (username) => {
+	return [
+		{
+			collapse : false,
 
-		path     : '/recipes',
-		name     : 'Neuste Rezepte',
-		miniName : 'N',
-		layout   : ''
-	},
-	{
-		collapse : false,
+			icon     : 'far fa-newspaper text-success',
+			state    : 'formsCollapse',
 
-		icon     : 'ni ni-single-copy-04 text-primary',
-		state    : 'formsCollapse',
+			path     : '/recipes',
+			name     : 'Neuigkeiten',
+			miniName : 'N',
+			layout   : ''
+		},
+		{
+			collapse : false,
 
-		path     : '/recipes/myRecipes',
-		name     : 'Meine Rezepte',
-		miniName : 'M',
-		layout   : ''
-	},
+			icon     : 'far fa-calendar-alt text-default',
+			state    : 'formsCollapse',
 
-	// {
-	// 	collapse : false,
+			path     : `/${username}/calendar`,
+			name     : 'Kalendar',
+			miniName : 'N',
+			layout   : ''
+		},
+		{
+			collapse : false,
 
-	// 	icon     : 'far fa-bookmark text-blue',
-	// 	state    : 'formsCollapse',
+			icon     : 'fas fa-shopping-basket text-warning',
+			state    : 'formsCollapse',
 
-	// 	path     : '/collection/saved',
-	// 	name     : 'Merkzettel',
-	// 	miniName : 'S',
-	// 	layout   : ''
-	// },
-	{
-		collapse : false,
+			path     : `/${username}/shoppingList`,
+			name     : 'Einkauf',
+			miniName : 'N',
+			layout   : ''
+		},
+		{
+			collapse : true,
+			name     : 'Sammlung',
+			icon     : 'ni ni-books text-info',
+			state    : 'dashboardsCollapse',
+			views    : [
+				{
+					collapse : false,
 
-		icon     : 'far fa-heart  text-danger',
-		state    : 'formsCollapse',
+					icon     : 'ni ni-single-copy-04 text-primary',
+					state    : 'formsCollapse',
 
-		path     : '/recipes/favorites',
-		name     : 'Lieblingsrezepte',
-		miniName : 'L',
-		layout   : ''
-	}
+					path     : '/recipes/myRecipes',
+					name     : 'Uploads',
+					miniName : 'M',
+					layout   : ''
+				},
 
-	// {
-	// 	collapse : true,
-	// 	name     : 'Kochbücher',
-	// 	icon     : 'ni ni-books text-info',
-	// 	state    : 'dashboardsCollapse',
-	// 	views    : [
-	// 		{
-	// 			path     : '/collection',
-	// 			name     : 'Alle Kochbücher',
-	// 			miniName : 'A',
-	// 			layout   : ''
-	// 		},
-	// 		{
-	// 			path     : '/collection/collection1',
-	// 			name     : 'Kochbuch 1',
-	// 			miniName : 'B',
-	// 			layout   : ''
-	// 		},
-	// 		{
-	// 			path     : '/collection/collection2',
-	// 			name     : 'Kochbuch 2',
-	// 			miniName : 'C',
-	// 			layout   : ''
-	// 		}
-	// 	]
-	// }
-];
+				// {
+				// 	collapse : false,
+
+				// 	icon     : 'far fa-bookmark text-blue',
+				// 	state    : 'formsCollapse',
+
+				// 	path     : '/collection/saved',
+				// 	name     : 'Merkzettel',
+				// 	miniName : 'S',
+				// 	layout   : ''
+				// },
+				{
+					collapse : false,
+
+					icon     : 'far fa-heart  text-danger',
+					state    : 'formsCollapse',
+
+					path     : '/recipes/favorites',
+					name     : 'Lieblingsrezepte',
+					miniName : 'L',
+					layout   : ''
+				}
+			]
+		}
+
+		// {
+		// 	collapse : true,
+		// 	name     : 'Kochbücher',
+		// 	icon     : 'ni ni-books text-info',
+		// 	state    : 'dashboardsCollapse',
+		// 	views    : [
+		// 		{
+		// 			path     : '/collection',
+		// 			name     : 'Alle Kochbücher',
+		// 			miniName : 'A',
+		// 			layout   : ''
+		// 		},
+		// 		{
+		// 			path     : '/collection/collection1',
+		// 			name     : 'Kochbuch 1',
+		// 			miniName : 'B',
+		// 			layout   : ''
+		// 		},
+		// 		{
+		// 			path     : '/collection/collection2',
+		// 			name     : 'Kochbuch 2',
+		// 			miniName : 'C',
+		// 			layout   : ''
+		// 		}
+		// 	]
+		// }
+	];
+};
 
 export default routes;
