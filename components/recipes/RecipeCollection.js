@@ -2,8 +2,6 @@
 // import ReactDatetime from 'react-datetime';
 // import TagsInput from 'components/TagsInput/TagsInput.js';
 import React from 'react';
-import axios from 'axios';
-import { useUserData } from '../../lib/hooks';
 import AuthCheck from '../auth/AuthCheck';
 import {
 	Card,

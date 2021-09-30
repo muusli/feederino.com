@@ -2,11 +2,9 @@ import React from 'react';
 import classnames from 'classnames';
 import { useUserData } from '../../lib/hooks';
 import axios from 'axios';
-import Image from 'next/image'
 import firebase from 'firebase';
 import router from 'next/router';
-import ReactDatetime from 'react-datetime';
-import TagsInput from 'components/Inputs/TagsInput.js';
+
 import {  Dropdown, DropdownToggle,  DropdownItem, DropdownMenu, Input, InputGroupAddon, InputGroupText, FormGroup, Form, InputGroup ,Card,
 	
 	CardBody,

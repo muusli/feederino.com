@@ -1,7 +1,5 @@
 import Link from 'next/link';
-import HeartButton from '../Inputs/HeartButton';
-import { firestore, getUserWithUsername } from '../../lib/firebase';
-import Image from 'next/Image';
+
 import {
 	Card,
 	CardImg,
