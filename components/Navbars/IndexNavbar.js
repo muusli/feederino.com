@@ -73,7 +73,7 @@ function AdminNavbar() {
               <Row>
                 <Col className="collapse-brand" xs="6">
                   <Link href="/recipes">
-                    <img alt="..." src={require("assets/img/brand/blue.png")} />
+                    <img alt="..." src={require("assets/img/brand/muusli.png")} />
                   </Link>
                 </Col>
                 <Col className="collapse-close" xs="6">

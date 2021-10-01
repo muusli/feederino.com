@@ -117,12 +117,12 @@ function DefaultNavbar({ theme, sidenavOpen, toggleSidenav }) {
 
 
                
-{/*              
+             
               <NavItem className="d-sm-none">
                 <NavLink onClick={openSearch}>
                   <i className="ni ni-zoom-split-in" />
                 </NavLink>
-              </NavItem> */}
+              </NavItem>
 
 
 
