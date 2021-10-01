@@ -196,11 +196,11 @@ const deleteIngredient = (ingredient)=>{
 										<Col sm="12"md="6" >
 											<FormGroup>
 												<Row>
-													<Col sm="3" md="3">
+													<Col xs="3" sm="3" md="3">
 														<Input 				key={`quantity${props.ingredients.indexOf(ingredient) + 1}`}
  name={`quantity${props.ingredients.indexOf(ingredient) + 1}`} defaultValue={ingredient.quantity} innerRef={props.innerRef} placeholder="Menge" onChange={(event)=>updateQuantity(event.target.value, ingredient)} />
 													</Col>
-													<Col sm="3"md="3">
+													<Col xs="3"sm="3"md="3">
 														<Input 		defaultValue={ingredient.unit}		key={`unit${props.ingredients.indexOf(ingredient) + 1}`}
 name={`unit${props.ingredients.indexOf(ingredient) + 1}`} placeholder="Einheit" type="select" innerRef={props.innerRef}onChange={(event)=>updateUnit(event.target.value, ingredient)}>
 															{ingredient.unit ? (
@@ -218,7 +218,7 @@ name={`unit${props.ingredients.indexOf(ingredient) + 1}`} placeholder="Einheit" 
 													{ingredient.id&& <input name={`id${props.ingredients.indexOf(ingredient) + 1}`} ref={props.innerRef} defaultValue={ingredient.id} hidden></input>}	
 													{ingredient.url&& <input name={`url${props.ingredients.indexOf(ingredient) + 1}`} ref={props.innerRef} defaultValue={ingredient.url} hidden></input>}	
 													</Col>
-													<Col sm="6"md="6">
+													<Col xs="6"sm="6"md="6">
 														<InputGroup>
 														<Search updateIngredient={updateIngredient} innerRef={props.innerRef} ingredients={props.ingredients}ingredient={ingredient}></Search><InputGroupAddon addonType="append"><InputGroupText><i className='fas fa-trash-alt text-danger'onClick={(e)=> deleteIngredient(ingredient)}/></InputGroupText></InputGroupAddon>
 													</InputGroup></Col>
