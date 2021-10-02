@@ -437,6 +437,13 @@ if (userDoc) {
                 <Button
                   className="btn-neutral"
                   color="default"
+                  data-calendar-view="day"
+                  onClick={() => changeView("dayGridDay")}
+                  size="sm"
+                >Day</Button>
+                <Button
+                  className="btn-neutral"
+                  color="default"
                   data-calendar-view="month"
                   onClick={() => changeView("dayGridMonth")}
                   size="sm"

@@ -97,6 +97,7 @@ function DefaultNavbar({ theme, sidenavOpen, toggleSidenav }) {
             {/* <SearchRecipe theme={theme} openSearch={openSearch} closeSearch={closeSearch}></SearchRecipe> */}
             <SearchRecipe theme={theme} openSearch={openSearch} closeSearch={closeSearch}></SearchRecipe>
             <Nav className="align-items-center ml-md-auto" navbar>
+            
               <NavItem className="d-xl-none">
                 <div
                   className={classnames(
@@ -115,6 +116,7 @@ function DefaultNavbar({ theme, sidenavOpen, toggleSidenav }) {
 
                 </NavItem>
 
+                
 
                
              
@@ -123,7 +125,6 @@ function DefaultNavbar({ theme, sidenavOpen, toggleSidenav }) {
                   <i className="ni ni-zoom-split-in" />
                 </NavLink>
               </NavItem>
-
 
 
 {/* 
