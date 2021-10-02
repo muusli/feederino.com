@@ -440,7 +440,7 @@ if (userDoc) {
                   data-calendar-view="day"
                   onClick={() => changeView("dayGridDay")}
                   size="sm"
-                >Day</Button>
+                >Tag</Button>
                 <Button
                   className="btn-neutral"
                   color="default"
@@ -448,7 +448,7 @@ if (userDoc) {
                   onClick={() => changeView("dayGridMonth")}
                   size="sm"
                 >
-                  Month
+                  Monat
                 </Button>
                 <Button
                   className="btn-neutral"
@@ -457,7 +457,7 @@ if (userDoc) {
                   onClick={() => changeView("dayGridWeek")}
                   size="sm"
                 >
-                  Week
+                  Woche
                 </Button></Col></div></CardHeader>
                
               <CardBody className="p-0">

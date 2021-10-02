@@ -34,7 +34,7 @@ export default function Page({}) {
 			categories     : null,
 			published      : false,
 			image          :
-				'https://firebasestorage.googleapis.com/v0/b/muusli.appspot.com/o/uploads%2FgQwzcfIqJ6g7pAd3SU5jaaYeNK92%2F1630736988712.png?alt=media&token=9ec3080f-824f-46a4-b1a9-b7b0766b2a65',
+				'https://firebasestorage.googleapis.com/v0/b/muusli.appspot.com/o/uploads%2FgQwzcfIqJ6g7pAd3SU5jaaYeNK92%2F1633192040629.png?alt=media&token=0c8bd811-c917-4540-8009-587a159e4d50',
 			createdAt      : serverTimestamp(),
 			updatedAt      : serverTimestamp(),
 			heartCount     : 0
