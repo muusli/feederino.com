@@ -18,7 +18,8 @@ const credentials = functions.config().spoonacular;
 
 
 const client = new MeiliSearch({
-    host: 'http://164.90.175.92/',
+    // host: 'http://164.90.175.92/',
+    host: 'http://46.101.167.4/',
     apiKey: '793c93af9e13c8380ed364b042268dba4466fae33f79d636fbdb2d2275c450dd',
 });
 // const client = new Client({
@@ -193,5 +194,6 @@ export const sendText = functions.https.onCall(async (data, context:any) => {
         id,
         ...recipe
    }])
+
 	});
 	
