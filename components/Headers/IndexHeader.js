@@ -29,16 +29,16 @@ function IndexHeader() {
               <Col lg="6">
                 <div className="pr-5">
                   <h1 className="display-2 text-white font-weight-bold mb-0">
-                    Muusli
+                    Feederino
                   </h1>
                   <h2 className="display-4 text-white font-weight-light">
                     {/* Dein Community-Ernährungsassistent.
                     Für dich und deinen Genuss */}
                     Gemeinsam. Individuell. Genießen.
                   </h2>
-                  <p className="text-white mt-4">
+                  {/* <p className="text-white mt-4">
                    Muuslimedia soll ein Beginn sein.
-                  </p>
+                  </p> */}
                   <div className="mt-5">
                     <Link href="/recipes">
                       <Button className="btn-neutral my-2" color="default">
