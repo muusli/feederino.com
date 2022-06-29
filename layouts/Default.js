@@ -59,7 +59,7 @@ function Default({ router, children }) {
 					sidenavOpen={sidenavOpen}
 					logo={{
 						innerLink : '/',
-						imgSrc    : require('assets/img/brand/muusli.png'),
+						imgSrc    : require('assets/img/brand/feederino.png'),
 						imgAlt    : '...'
 					}}
 				/>

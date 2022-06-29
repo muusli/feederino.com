@@ -42,15 +42,15 @@ function IndexHeader() {
                   <div className="mt-5">
                     <Link href="/recipes">
                       <Button className="btn-neutral my-2" color="default">
-                        Erkunde den Feed
+                        Feed
                       </Button>
                     </Link>
                     <Button
                       className="my-2"
                       color="default"
-                      href="/auth/register"
+                      href="https://www.feederino.store"
                     >
-                      Registrieren
+                     Store
                     </Button>
                   </div>
                 </div>
@@ -58,26 +58,27 @@ function IndexHeader() {
               <Col lg="6">
                 <Row className="pt-5">
                   <Col md="6">
-                    <Card>
-                      <CardBody>
-                        <div className="icon icon-shape bg-gradient-red text-white rounded-circle shadow mb-4">
-                          <i className="ni ni-active-40" />
-                        </div>
-                        <h5 className="h3">Leichtigkeit</h5>
-                        <p>Ohne Stress zum Knabberglück.</p>
-                      </CardBody>
-                    </Card>
-                    <Card>
+                  <Card>
                       <CardBody>
                         <div className="icon icon-shape bg-gradient-info text-white rounded-circle shadow mb-4">
                           <i className="ni ni-active-40" />
                         </div>
                         <h5 className="h3">Freiheit</h5>
                         <p>
-                          Soll doch jeder essen wie er es will.
+                         Damit du machen kannst, was du willst
                         </p>
                       </CardBody>
                     </Card>
+                    <Card>
+                      <CardBody>
+                        <div className="icon icon-shape bg-gradient-red text-white rounded-circle shadow mb-4">
+                          <i className="ni ni-active-40" />
+                        </div>
+                        <h5 className="h3">Leichtigkeit</h5>
+                        <p>Ohne Stress zum Genuss</p>
+                      </CardBody>
+                    </Card>
+                    
                   </Col>
                   <Col className="pt-lg-5 pt-4" md="6">
                     <Card className="mb-4">
@@ -85,9 +86,9 @@ function IndexHeader() {
                         <div className="icon icon-shape bg-gradient-success text-white rounded-circle shadow mb-4">
                           <i className="ni ni-active-40" />
                         </div>
-                        <h5 className="h3">Transparenz</h5>
+                        <h5 className="h3">Gemeinschaft</h5>
                         <p>
-                         Wer weiß schon was man da isst?
+                        Gemeinsam macht ist das Leben schöner
                         </p>
                       </CardBody>
                     </Card>

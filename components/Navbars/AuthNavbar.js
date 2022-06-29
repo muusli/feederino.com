@@ -47,7 +47,7 @@ function AdminNavbar() {
                 // layout="fill"
                   alt="..."
                   style={{height:'3rem'}}
-                  src={require("assets/img/brand/muusli.png")}
+                  src={require("assets/img/brand/feederino.png")}
                 />
               </NavbarBrand>
             </span>

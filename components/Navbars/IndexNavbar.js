@@ -47,7 +47,7 @@ function AdminNavbar() {
                 // layout="fill"
                   alt="..."
                   style={{height:'3rem'}}
-                  src={require("assets/img/brand/muusli.png")}
+                  src={require("assets/img/brand/feederino.png")}
                 />
               </NavbarBrand>
             </span>
@@ -73,7 +73,7 @@ function AdminNavbar() {
               <Row>
                 <Col className="collapse-brand" xs="6">
                   <Link href="/recipes">
-                    <img alt="..." src={require("assets/img/brand/muusli.png")} />
+                    <img alt="..." src={require("assets/img/brand/feederino.png")} />
                   </Link>
                 </Col>
                 <Col className="collapse-close" xs="6">
@@ -94,58 +94,38 @@ function AdminNavbar() {
               </Row>
             </div>
             <Nav className="mr-auto" navbar>
-              <NavItem>
+              {/* Wenn eingeloggt */}
+              {/* <NavItem>
                 <Link href="/recipes">
                   <NavLink href="#pablo">
-                    <span className="nav-link-inner--text">Rezepte</span>
+                    <span className="nav-link-inner--text">Neuigkeiten</span>
                   </NavLink>
                 </Link>
               </NavItem>
               <NavItem>
                 <Link href="/aboutus">
                   <NavLink href="#pablo">
-                    <span className="nav-link-inner--text">About</span>
+                    <span className="nav-link-inner--text">Kalendar</span>
                   </NavLink>
                 </Link>
               </NavItem>
-              {/* <NavItem>
+              <NavItem>
                 <Link href="/license">
                   <NavLink href="#pablo">
-                    <span className="nav-link-inner--text">AGB</span>
+                    <span className="nav-link-inner--text">Einkauf</span>
                   </NavLink>
                 </Link>
               </NavItem> */}
-              <NavItem>
-                <Link href="/auth/login">
-                  <NavLink href="#pablo">
-                    <span className="nav-link-inner--text">Login</span>
-                  </NavLink>
-                </Link>
-              </NavItem>
+             
              
               </Nav>
             <hr className="d-lg-none" />
             <Nav className="align-items-lg-center ml-lg-auto" navbar>
+          
               <NavItem>
                 <NavLink
                   className="nav-link-icon"
-                  href="https://www.pinterest.de/muuslimedia/_saved/"
-                  id="tooltip601201423"
-                  target="_blank"
-                >
-                  <i className="fab fa-pinterest" />
-                  <span className="nav-link-inner--text d-lg-none">
-                    Pinterest
-                  </span>
-                </NavLink>
-                <UncontrolledTooltip delay={0} target="tooltip601201423">
-                  Like us on Pinterest
-                </UncontrolledTooltip>
-              </NavItem>
-              <NavItem>
-                <NavLink
-                  className="nav-link-icon"
-                  href="https://www.instagram.com/muusli.io/"
+                  href="https://www.instagram.com/feederino_official/?hl=de"
                   id="tooltip871243015"
                   target="_blank"
                 >
@@ -159,49 +139,50 @@ function AdminNavbar() {
                 </UncontrolledTooltip>
                 
               </NavItem>
-              {/* {/* <NavItem>
-                <NavLink
-                  className="nav-link-icon"
-                  href="https://twitter.com/creativetim?ref=creative-tim"
-                  id="tooltip366258619"
-                  target="_blank"
-                >
-                  <i className="fab fa-twitter-square" />
-                  <span className="nav-link-inner--text d-lg-none">
-                    Twitter
-                  </span>
-                </NavLink>
-                <UncontrolledTooltip delay={0} target="tooltip366258619">
-                  Follow us on Twitter
-                </UncontrolledTooltip>
-              </NavItem> */}
-              {/* <NavItem> */}
-                {/* <NavLink
-                  className="nav-link-icon"
-                  href="https://github.com/creativetimofficial?ref=creative-tim"
-                  id="tooltip931502898"
-                  target="_blank"
-                >
-                  <i className="fab fa-youtube" />
-                  <span className="nav-link-inner--text d-lg-none">Youtube</span>
-                </NavLink>
-                <UncontrolledTooltip delay={0} target="tooltip931502898">
-                  Abonniere uns auf Youtube
-                </UncontrolledTooltip>
-              </NavItem>  */}
-              <NavItem className="d-none d-lg-block ml-lg-4">
+            
+           <NavItem className="d-none d-lg-block ml-lg-4">
                 <Button
+                outline
                   className="btn-neutral btn-icon"
-                  color="default"
-                  href="/contact"
+                  // color="default"
+                  href="/auth/login"
                   
                 >
                   <span className="btn-inner--icon">
                     <i className="fas fa-shopping-cart mr-2" />
                   </span>
-                  <span className="nav-link-inner--text">Kontakt</span>
+                  <span className="nav-link-inner--text">Login</span>
                 </Button>
               </NavItem>
+              <NavItem className="d-none d-lg-block ml-lg-4">
+                <Button
+                
+                  className="btn-neutral btn-icon"
+                  color="default"
+                  href="/auth register"
+                  
+                >
+                  <span className="btn-inner--icon">
+                    <i className="fas fa-shopping-cart mr-2" />
+                  </span>
+                  <span className="nav-link-inner--text">Registrieren</span>
+                </Button>
+              </NavItem>
+              {/* Wenn eingeloggt */}
+              {/* <NavItem className="d-none d-lg-block ml-lg-4">
+                <Button
+                
+                  className="btn-neutral btn-icon"
+                  color="default"
+                  href="/auth/register"
+                  
+                >
+                  <span className="btn-inner--icon">
+                    <i className="fas fa-shopping-cart mr-2" />
+                  </span>
+                  <span className="nav-link-inner--text">Store</span>
+                </Button>
+              </NavItem> */}
             </Nav>
           </UncontrolledCollapse>
         </Container>

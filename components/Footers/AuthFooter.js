@@ -33,7 +33,7 @@ function AuthFooter() {
                   href="/aboutus"
                   // target="_blank"
                 >
-                  Muusli
+                  Feederino
                 </a>
               </div>
             </Col>

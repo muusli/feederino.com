@@ -275,13 +275,7 @@ function Index() {
                  Probiere dich gern durch die ständig wachsende Rezeptvielfalt
                 </p>
                 <div className="btn-wrapper">
-                  <Button
-                    color="info"
-                    href="/recipes"
-                  >
-                    Rezeptfeed
-                  </Button>
-                  <Button
+                                    <Button
                     className="mt-3 mt-md-0"
                     color="default"
                     href="/recipes/myRecipes"
@@ -293,8 +287,7 @@ function Index() {
             </Row>
             <div className="blur--hover">
               <a
-                href="https://www.creative-tim.com/learning-lab/nextjs/icons/argon-dashboard?ref=njsadp-index-page"
-                target="_blank"
+                href="/recipes"
               >
                 <div className="icons-container blur-item mt-5">
                   {/* <i className="icon ni ni-diamond" />
@@ -497,14 +490,7 @@ function Index() {
                   Egal ob du ein Rezept hochlädst. Die Autoren unterstützt. Feedback hast. Oder aktiv das Projekt mitgestalten willst. Jeder Beitrag zählt. Kontaktiere uns gerne, wir freuen uns über jede Nachricht.
                 </p>
                 <div className="btn-wrapper">
-                  <Button
-                    className="btn-neutral mb-3 mb-sm-0"
-                    color="default"
-                    href="https://www.creative-tim.com/product/nextjs-argon-dashboard?ref=njsadp-index-page"
-                    target="_blank"
-                  >
-                    <span className="btn-inner--text">Unterstütze uns auf Patreon</span>
-                  </Button>
+                  
                   <Button
                     className="btn-icon mb-3 mb-sm-0"
                     color="info"
