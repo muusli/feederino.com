@@ -26,7 +26,7 @@ const routes = (username) => {
 			state    : 'formsCollapse',
 
 			path     : '/recipes',
-			name     : 'Neuigkeiten',
+			name     : 'Feed',
 			miniName : 'N',
 			layout   : ''
 		},
