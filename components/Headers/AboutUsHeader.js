@@ -58,7 +58,7 @@ function Header5() {
                 
                   alt="..."
                   className="ml-lg-5"
-                  src={require("assets/img/brand/muusli.png")}
+                  src={require("assets/img/brand/feederino.png")}
                   width="100%"
                 ></img>
               </Col>
