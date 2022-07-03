@@ -43,7 +43,7 @@ function SignInButton() {
 
 // Sign out button
 function SignOutButton() {
-	return <button onClick={() => auth.signOut()}>Sign Out</button>;
+	return <Button color="danger" onClick={() => auth.signOut()}>Sign Out</Button>;
 }
 
 // Username form

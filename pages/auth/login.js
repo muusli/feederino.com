@@ -41,6 +41,7 @@ import GoogleAuth from '../../components/auth/GoogleAuth'
 import { useForm } from 'react-hook-form';
 import firebase from 'firebase'
 import router from "next/router";
+import { UserContext } from '../../lib/context';
 import toast from "react-hot-toast";
 function Login() {
     const [modalOpen, setModalOpen] = React.useState(false);
@@ -50,7 +51,7 @@ function Login() {
     const { isValid, isDirty } = formState;
   const [focusedEmail, setfocusedEmail] = React.useState(false);
   const [focusedPassword, setfocusedPassword] = React.useState(false);
-
+	const { user, username } = React.useContext(UserContext);
   const signIn = async ({email, password} )=> {
     firebase.auth().signInWithEmailAndPassword(email, password)
     .then((userCredential) => {
@@ -68,8 +69,8 @@ function Login() {
   return (
     <>
       <AuthHeader
-        title="Welcome!"
-        lead="Use these awesome forms to login or create new account in your project for free."
+        title="Willkommen!"
+        lead=""
       />
       <Container className="mt--8 pb-5">
         <Row className="justify-content-center">
@@ -80,10 +81,10 @@ function Login() {
                   <small>Sign in with</small>
                 </div>
                 <div className="btn-wrapper text-center">
-                  
                   <GoogleAuth></GoogleAuth>
                 </div>
               </CardHeader>
+              {!user ? 
               <CardBody className="px-lg-5 py-lg-5">
                 <div className="text-center text-muted mb-4">
                   <small>Or sign in with credentials</small>
@@ -131,7 +132,7 @@ function Login() {
                       />
                     </InputGroup>
                   </FormGroup>
-                  <div className="custom-control custom-control-alternative custom-checkbox">
+                  {/* <div className="custom-control custom-control-alternative custom-checkbox">
                     <input
                       className="custom-control-input"
                       id=" customCheckLogin"
@@ -143,15 +144,16 @@ function Login() {
                     >
                       <span className="text-muted">Remember me</span>
                     </label>
-                  </div>
+                  </div> */}
                   <div className="text-center">
                     <Button className="my-4" color="info" type="submit">
                       Sign in
                     </Button>
                   </div>
                 </Form>
-              </CardBody>
+              </CardBody> : ''}
             </Card>
+            {!user ? 
             <Row className="mt-3">
               <Col xs="6">
                 {/* <a
@@ -171,6 +173,7 @@ function Login() {
                 </a>
               </Col>
             </Row>
+            : ''}
           </Col>
         </Row>
       </Container>

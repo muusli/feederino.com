@@ -180,7 +180,7 @@ function Sidebar({
                 // layout="fill"
                   alt={logo.imgAlt}
                   className="navbar-brand-img"
-                  style={{maxHeight:'4rem'}}
+                  style={{maxHeight:'24rem'}}
                   src={logo.imgSrc}
                 />
               </NavbarBrand>

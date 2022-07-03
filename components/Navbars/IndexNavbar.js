@@ -159,7 +159,7 @@ function AdminNavbar() {
                 
                   className="btn-neutral btn-icon"
                   color="default"
-                  href="/auth register"
+                  href="/auth/register"
                   
                 >
                   <span className="btn-inner--icon">

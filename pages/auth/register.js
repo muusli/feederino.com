@@ -41,6 +41,7 @@ import GoogleAuth from 'components/auth/GoogleAuth'
 import { useForm } from 'react-hook-form';
 import firebase from 'firebase'
 import router from "next/router";
+import { UserContext } from '../../lib/context';
 import toast from "react-hot-toast";
 function Register() {
   const { register, handleSubmit, reset, watch, formState, errors} = useForm({
@@ -50,6 +51,8 @@ function Register() {
   const [focusedName, setfocusedName] = React.useState(false);
   const [focusedEmail, setfocusedEmail] = React.useState(false);
   const [focusedPassword, setfocusedPassword] = React.useState(false);
+  const { user, username } = React.useContext(UserContext);
+
   const signUp = async ({email, password}) => {
     console.log(email)
   console.log(password)
@@ -69,8 +72,8 @@ function Register() {
   return (
     <>
       <AuthHeader
-        title="Create an account"
-        lead="Use these awesome forms to login or create new account in your project for free."
+        title="Werde Teil der Community"
+        lead=""
       />
       <Container className="mt--8 pb-5">
         <Row className="justify-content-center">
@@ -85,6 +88,7 @@ function Register() {
                   <GoogleAuth></GoogleAuth>
                 </div>
               </CardHeader>
+              {!user? 
               <CardBody className="px-lg-5 py-lg-5">
                 <div className="text-center text-muted mb-4">
                   <small>Or sign up with credentials</small>
@@ -182,7 +186,7 @@ function Register() {
                     </Button>
                   </div>
                 </Form>
-              </CardBody>
+              </CardBody>:''}
             </Card>
           </Col>
         </Row>

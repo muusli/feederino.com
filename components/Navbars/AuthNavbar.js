@@ -30,7 +30,6 @@ import {
   UncontrolledTooltip,
   Button,
 } from "reactstrap";
-
 function AdminNavbar() {
   return (
     <>
@@ -93,68 +92,14 @@ function AdminNavbar() {
                 </Col>
               </Row>
             </div>
-            <Nav className="mr-auto" navbar>
-              
-              <NavItem>
-                <Link href="/recipes">
-                  <NavLink href="#pablo">
-                    <span className="nav-link-inner--text">Rezepte</span>
-                  </NavLink>
-                </Link>
-              </NavItem>
-              <NavItem>
-                <Link href="/aboutus">
-                  <NavLink href="#pablo">
-                    <span className="nav-link-inner--text">About</span>
-                  </NavLink>
-                </Link>
-              </NavItem>
-              {/* <NavItem>
-                <Link href="/license">
-                  <NavLink href="#pablo">
-                    <span className="nav-link-inner--text">AGB</span>
-                  </NavLink>
-                </Link>
-              </NavItem> */}
-              <NavItem>
-                <Link href="/auth/login">
-                  <NavLink href="#pablo">
-                    <span className="nav-link-inner--text">Login</span>
-                  </NavLink>
-                </Link>
-              </NavItem>
-              {/* <NavItem>
-                <Link href="/auth/register">
-                  <NavLink href="#pablo">
-                    <span className="nav-link-inner--text">Contact Us</span>
-                  </NavLink>
-                </Link>
-              </NavItem> */}
-              
+            <Nav className="mr-auto" navbar>            
             </Nav>
             <hr className="d-lg-none" />
-            <Nav className="align-items-lg-center ml-lg-auto" navbar>
-            
+            <Nav className="align-items-lg-center ml-lg-auto" navbar>          
               <NavItem>
                 <NavLink
                   className="nav-link-icon"
-                  href="https://www.facebook.com/creativetim?ref=creative-tim"
-                  id="tooltip601201423"
-                  target="_blank"
-                >
-                  <i className="fab fa-pinterest" />
-                  <span className="nav-link-inner--text d-lg-none">
-                    Pinterest
-                  </span>
-                </NavLink>
-                <UncontrolledTooltip delay={0} target="tooltip601201423">
-                  Like us on Pinterest
-                </UncontrolledTooltip>
-              </NavItem>
-              <NavItem>
-                <NavLink
-                  className="nav-link-icon"
-                  href="https://www.instagram.com/creativetimofficial?ref=creative-tim"
+                  href="https://www.instagram.com/feederino_official/?hl=de"
                   id="tooltip871243015"
                   target="_blank"
                 >
@@ -166,22 +111,7 @@ function AdminNavbar() {
                 <UncontrolledTooltip delay={0} target="tooltip871243015">
                   Follow us on Instagram
                 </UncontrolledTooltip>
-                
               </NavItem>
-              {/* <NavItem>
-                <NavLink
-                  className="nav-link-icon"
-                  href="https://github.com/creativetimofficial?ref=creative-tim"
-                  id="tooltip931502898"
-                  target="_blank"
-                >
-                  <i className="fab fa-github" />
-                  <span className="nav-link-inner--text d-lg-none">Github</span>
-                </NavLink>
-                <UncontrolledTooltip delay={0} target="tooltip931502898">
-                  Star us on Github
-                </UncontrolledTooltip>
-              </NavItem> */}
               <NavItem className="d-none d-lg-block ml-lg-4">
                 <Button
                   className="btn-neutral btn-icon"

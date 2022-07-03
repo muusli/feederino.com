@@ -15,7 +15,7 @@ class MyDocument extends Document {
           <link
             rel="apple-touch-icon"
             sizes="76x76"
-            href={require("assets/img/brand/logo.png")}
+            href={require("assets/img/brand/nurbild.png")}
           />
           {/* Fonts and icons */}
           <link
