@@ -67,6 +67,7 @@ export default function Home(props) {
 								{!loading &&
 								!recipesEnd && (
 									<Button
+									color="primary"
 										justify-self="center"
 										className="justify-content-md-center"
 										onClick={getMorePosts}

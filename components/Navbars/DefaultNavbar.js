@@ -353,7 +353,7 @@ function DefaultNavbar({ theme, sidenavOpen, toggleSidenav }) {
             {!username && (
         <>
       <Link href="/auth/login">
-                      <Button className="btn-neutral my-2" size="sm"color="white">
+                      <Button className="btn-neutral my-2" size="sm"color="secondary">
                         Login
                       </Button>
                     </Link>

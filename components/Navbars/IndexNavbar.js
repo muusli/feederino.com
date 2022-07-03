@@ -142,9 +142,9 @@ function AdminNavbar() {
             
            <NavItem className="d-none d-lg-block ml-lg-4">
                 <Button
-                outline
+               
                   className="btn-neutral btn-icon"
-                  // color="default"
+                  color="secondary"
                   href="/auth/login"
                   
                 >
@@ -157,8 +157,8 @@ function AdminNavbar() {
               <NavItem className="d-none d-lg-block ml-lg-4">
                 <Button
                 
-                  className="btn-neutral btn-icon"
-                  color="default"
+                  className="btn-icon"
+                  color="primary"
                   href="/auth/register"
                   
                 >

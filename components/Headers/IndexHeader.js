@@ -40,13 +40,13 @@ function IndexHeader() {
                   </p> */}
                   <div className="mt-5">
                     <Link href="/recipes">
-                      <Button className="btn-neutral my-2" color="default">
+                      <Button className="btn-neutral my-2" color="secondary">
                         Feed
                       </Button>
                     </Link>
                     <Button
                       className="my-2"
-                      color="default"
+                      color="primary"
                       href="https://www.feederino.store"
                     >
                      Store

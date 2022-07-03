@@ -257,7 +257,7 @@ function Index() {
                     Wissen ist Macht. Oder so? 
                   </p>
                   <Link href="/recipes">
-                    <a className="font-weight-bold text-info mt-5">
+                    <a className="font-weight-bold text-default mt-5">
                       Explore widgets
                     </a>
                   </Link>
@@ -277,7 +277,7 @@ function Index() {
                 <div className="btn-wrapper">
                                     <Button
                     className="mt-3 mt-md-0"
-                    color="default"
+                    color="primary"
                     href="/recipes/myRecipes"
                   >
                     Meine Rezepte
@@ -469,7 +469,7 @@ function Index() {
                   <i className="icon ni ni-camera-compact" />
                   <i className="icon ni ni-chart-bar-32" /> */}
                 </div>
-                <span className="blur-hidden h5 text-success">
+                <span className="blur-hidden h5 text-warning">
                   Entdecke deine Ernährung neu
                 </span>
               </a>
@@ -482,7 +482,7 @@ function Index() {
               <Col className="text-center" lg="8">
                 <h2 className="display-3">
                   Du hast Lust dich einzubringen?{" "}
-                  <span className="text-success">
+                  <span className="text-warning">
                     Du wirst gebraucht!
                   </span>
                 </h2>
@@ -493,14 +493,14 @@ function Index() {
                   
                   <Button
                     className="btn-icon mb-3 mb-sm-0"
-                    color="info"
+                    color="primary"
                     href="/contact"
                     target="_blank"
                   >
                     <span className="btn-inner--icon">
-                      <i className="ni ni-basket" />
+                      <i className="ni ni-send" />
                     </span>
-                    <span className="btn-inner--text">Kontaktiere uns</span>
+                    <span className="btn-inner--text">Kontakt</span>
                   </Button>
                 </div>
                 
