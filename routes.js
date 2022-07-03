@@ -15,7 +15,7 @@
 
 
 */
-import { auth } from './lib/firebase';
+
 
 const routes = (username) => {
 	return [
@@ -33,7 +33,7 @@ const routes = (username) => {
 		{
 			collapse : false,
 
-			icon     : 'far fa-calendar-alt text-default',
+			icon     : 'far fa-calendar-alt text-primary',
 			state    : 'formsCollapse',
 
 			path     : `/${username}/calendar`,
@@ -55,13 +55,13 @@ const routes = (username) => {
 		{
 			collapse : true,
 			name     : 'Sammlung',
-			icon     : 'ni ni-books text-info',
+			icon     : 'ni ni-books text-danger',
 			state    : 'dashboardsCollapse',
 			views    : [
 				{
 					collapse : false,
 
-					icon     : 'ni ni-single-copy-04 text-primary',
+					icon     : 'ni ni-single-copy-04 text-info',
 					state    : 'formsCollapse',
 
 					path     : '/recipes/myRecipes',

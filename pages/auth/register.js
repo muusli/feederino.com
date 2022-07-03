@@ -181,7 +181,7 @@ function Register() {
                     </Col>
                   </Row>
                   <div className="text-center">
-                    <Button className="mt-4" color="info" type="submit">
+                    <Button className="mt-4" color="primary" type="submit">
                       Create account
                     </Button>
                   </div>

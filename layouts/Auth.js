@@ -27,10 +27,10 @@ import routes from "routes.js";
 
 function Auth({ children }) {
   React.useEffect(() => {
-    document.body.classList.add("bg-default");
+    document.body.classList.add("bg-primary");
     // Specify how to clean up after this effect:
     return function cleanup() {
-      document.body.classList.remove("bg-default");
+      document.body.classList.remove("bg-primary");
     };
   });
   const userData = useUserData();

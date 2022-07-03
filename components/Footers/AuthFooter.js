@@ -32,6 +32,7 @@ function AuthFooter() {
                   className="font-weight-bold ml-1"
                   href="/aboutus"
                   // target="_blank"
+                  color="secondary"
                 >
                   Feederino
                 </a>

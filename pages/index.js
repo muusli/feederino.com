@@ -49,7 +49,7 @@ function Index() {
       <IndexNavbar />
       <div className="main-content">
         <IndexHeader />
-        <section className="py-6 pb-9 bg-default">
+        <section className="py-6 pb-9 bg-primary">
           <Container fluid>
             <Row className="justify-content-center text-center">
               <Col md="6">
