@@ -165,7 +165,7 @@ function Index() {
               </Col>
               <Col className="order-md-1" md="6">
                 <div className="pr-md-5">
-                  <h1>Gemeinsam</h1>
+                  <h1>Einfach</h1>
                   <p>
 				 Wie schaffen wir es uns so zu ernähren wie wir wollen? Wir wollen deinem Geschmack eine Plattform bieten. Teile deine Erfahrung und hilf weiter
                     

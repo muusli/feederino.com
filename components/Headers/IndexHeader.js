@@ -33,7 +33,7 @@ function IndexHeader() {
                   </h1>
                   <h2 className="display-4 text-white font-weight-light">
                   
-                    Gemeinsam. Individuell. Genießen.
+                    Einfach. Individuell. Genießen.
                   </h2>
                   {/* <p className="text-white mt-4">
                   
