@@ -49,16 +49,17 @@ function Index() {
       <IndexNavbar />
       <div className="main-content">
         <IndexHeader />
-        <section className="py-6 pb-9 bg-primary">
+        <section className="py-6 pb-9 bg-info">
           <Container fluid>
             <Row className="justify-content-center text-center">
               <Col md="6">
                 <h2 className="display-3 text-white">
-                  Wie bekommst du deine Butter aufs Brot?
+                  Wie bekommen wir unsere Butter aufs Brot?
                 </h2>
                 <p className="lead text-white">
-				Ernährung ist ein Grundbedürfniss. Ohne Essen sterben wir. Der Weg vom Feld auf den Teller ist allerdings nicht ganz klar.
-				Da kann man schnell die Lust verlieren. Feederino möchte einen Beitrag leisten, damit die Lebensmittelzubereitung wieder zur Freude wird. Damit du dich einfach so ernähren kannst wie du es willst.
+				Vor diesem Problem stehen wir täglich. Die richtige Antwort hängt von Vielem ab. Welche Lebensmittel sind verfügbar? Mit wem möchte man zusammen essen? Wieviel Zeit hat man? Was darf es kosten und Vieles mehr. Feederino möchte dich dabei unterstützen, dass du dich so ernähren kannst wie du willst.
+        
+        
                 </p>
               </Col>
             </Row>
@@ -79,7 +80,7 @@ function Index() {
                           Community
                         </h4>
                         <p className="description mt-3">
-                          Alleine essen macht dick. Gemeinsam können wir das besser
+                          Denn gemeinsam können wir mehr erreichen.
                         </p>
                         {/* <div>
                           <Badge color="info" pill>
@@ -108,7 +109,7 @@ function Index() {
                         Tools
                         </h4>
                         <p className="description mt-3">
-                          Deine Ernährung sollte so sein wie du sie haben willst. Einfach und Praktikabel.
+                          Damit du deine Ziele erreichst
                         </p>
                         {/* <div>
                           <Badge color="success" pill>
@@ -131,7 +132,7 @@ function Index() {
                           Know How
                         </h4>
                         <p className="description mt-3">
-                          Wissen ist macht. Also lasst uns das vermitteln, was wir wissen
+                         Profitiere von dem Wissen Anderer
                         </p>
                         {/* <div>
                           <Badge color="warning" pill>
@@ -167,7 +168,7 @@ function Index() {
                 <div className="pr-md-5">
                   <h1>Einfach</h1>
                   <p>
-				 Wie schaffen wir es uns so zu ernähren wie wir wollen? Wir wollen deinem Geschmack eine Plattform bieten. Teile deine Erfahrung und hilf weiter
+                    Alles unter einen Hut zu bekommen, kann überfordern. Feederino möchte dich von dieser Frustration befreien und durch intuitive Werkzeuge deine Ernährung erleichtern
                     
                   </p>
                   <ul className="list-unstyled mt-5">
@@ -191,7 +192,7 @@ function Index() {
                           </Badge>
                         </div>
                         <div>
-                          <h4 className="mb-0">Austausch</h4>
+                          <h4 className="mb-0">Planung</h4>
                         </div>
                       </div>
                     </li>
@@ -203,7 +204,7 @@ function Index() {
                           </Badge>
                         </div>
                         <div>
-                          <h4 className="mb-0">Unterstützung</h4>
+                          <h4 className="mb-0">Umsetzung</h4>
                         </div>
                       </div>
                     </li>
@@ -227,8 +228,7 @@ function Index() {
                 <div className="pr-md-5">
                   <h1>Individuell</h1>
                   <p>
-					  Ein Plan ist nichts, Planung ist alles. Doch wie kommt das Gericht am leichtesten vom Feld auf den Teller? Es ist das Ziel Werkzeuge zu entwickeln, mit denen du einfach zu deiner Ernährung kommst
-                    
+                    Deine Bedürfnisse sind wichtig und sollten nicht vernachlässigt werden. Damit das nicht passiert kann Technik unterstützen.                    
                   </p>
                   <Link href="/recipes">
                     <a className="font-weight-bold text-warning mt-5">
@@ -254,7 +254,7 @@ function Index() {
                 <div className="pr-md-5">
                   <h1>Genießen</h1>
                   <p>
-                    Wissen ist Macht. Oder so? 
+                    Darum geht es am Ende. Oder nicht? Lasst uns gemeinsam Momente kreieren, für die es sich lohnt zu leben.
                   </p>
                   <Link href="/recipes">
                     <a className="font-weight-bold text-default mt-5">
@@ -487,7 +487,7 @@ function Index() {
                   </span>
                 </h2>
                 <p className="lead">
-                  Egal ob du ein Rezept hochlädst. Die Autoren unterstützt. Feedback hast. Oder aktiv das Projekt mitgestalten willst. Jeder Beitrag zählt. Kontaktiere uns gerne, wir freuen uns über jede Nachricht.
+                  Egal ob du ein Rezept hochlädst. Die Autoren unterstützt. Feedback hast. Oder aktiv das Projekt mitgestalten willst. Jeder Beitrag zählt. Nutze gern das Kontaktformular, wir freuen uns über jede Nachricht.
                 </p>
                 <div className="btn-wrapper">
                   
