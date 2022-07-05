@@ -43,7 +43,7 @@ function AuthHeader({ title, lead }) {
             x="0"
             y="0"
           >
-            <polygon className="fill-primary" points="2560 0 2560 100 0 100" />
+            <polygon className="fill-default" points="2560 0 2560 100 0 100" />
           </svg>
         </div>
       </div>

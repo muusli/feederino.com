@@ -22,7 +22,7 @@ import { Button, Card, CardBody, Container, Row, Col } from "reactstrap";
 function IndexHeader() {
   return (
     <>
-      <div className="header bg-info pt-5 pb-7">
+      <div className="header bg-default pt-5 pb-7">
         <Container>
           <div className="header-body">
             <Row className="align-items-center">
@@ -64,7 +64,7 @@ function IndexHeader() {
                         </div>
                         <h5 className="h3">Freiheit</h5>
                         <p>
-                         Damit du machen kannst, was du willst
+                        Mach doch was du willst
                         </p>
                       </CardBody>
                     </Card>
@@ -74,7 +74,7 @@ function IndexHeader() {
                           <i className="ni ni-active-40" />
                         </div>
                         <h5 className="h3">Leichtigkeit</h5>
-                        <p>Ohne Stress zum Genuss</p>
+                        <p>Ohne Stress zum Knabberglück</p>
                       </CardBody>
                     </Card>
                     
@@ -87,7 +87,7 @@ function IndexHeader() {
                         </div>
                         <h5 className="h3">Gemeinschaft</h5>
                         <p>
-                        Gemeinsam macht ist das Leben schöner
+                        Allein essen macht dick
                         </p>
                       </CardBody>
                     </Card>
@@ -97,7 +97,7 @@ function IndexHeader() {
                           <i className="ni ni-active-40" />
                         </div>
                         <h5 className="h3">Anerkennung</h5>
-                        <p>Jeder der möchte sollte beitragen dürfen und davon etwas haben</p>
+                        <p>Dein Beitrag soll sich lohnen</p>
                       </CardBody>
                     </Card>
                   </Col>
@@ -115,7 +115,7 @@ function IndexHeader() {
             x="0"
             y="0"
           >
-            <polygon className="fill-primary" points="2560 0 2560 100 0 100" />
+            <polygon className="fill-info" points="2560 0 2560 100 0 100" />
           </svg>
         </div>
       </div>
